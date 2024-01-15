@@ -11,7 +11,9 @@ namespace RK.Tychron.APIClient
     public class TychronSMSAPIClient
     {
         #region constants
+
         private const string smsPath = "/sms";
+
         #endregion
 
         #region fields
@@ -60,16 +62,19 @@ namespace RK.Tychron.APIClient
                 throw new TychronAPIException(xcdrid, (int)response.StatusCode, responseContent);
             }
 
-            using var responseStream = await response.Content.ReadAsStreamAsync();
+            await using var responseStream = await response.Content.ReadAsStreamAsync();
 
-            var document = JsonNode.Parse(responseStream, nodeOptions: new JsonNodeOptions() { PropertyNameCaseInsensitive = false });
+            var document = await JsonNode.ParseAsync(responseStream, nodeOptions: new JsonNodeOptions
+            {
+                PropertyNameCaseInsensitive = false
+            });
 
             var messages = document?.AsObject()
                 .Where(x => x.Value != null)
                 .Select(x => x.Value?.GetValue<SmsMessageResponseModel>()!)
                 .ToList();
 
-            return new SendSMSResponse()
+            return new SendSMSResponse
             {
                 XCDRID = xcdrid,
                 Messages = messages,
@@ -80,7 +85,8 @@ namespace RK.Tychron.APIClient
         #endregion
 
         #region validation
-        private void ValidateSMSRequestModel(SendSmsRequest request)
+
+        private static void ValidateSMSRequestModel(SendSmsRequest request)
         {
             var errors = new List<TychronValidationError>();
 
@@ -128,6 +134,7 @@ namespace RK.Tychron.APIClient
         public const string BodyRequiredErrorCode = "SendSMS_Body_Required";
 
         public const string FromRequiredErrorCode = "SendSMS_From_Required";
+
         #endregion
     }
 }
