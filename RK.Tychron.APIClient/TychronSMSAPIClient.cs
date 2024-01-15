@@ -22,6 +22,7 @@ namespace RK.Tychron.APIClient
             _httpClient = httpClient;
             ArgumentNullException.ThrowIfNull(settings, nameof(settings));
             _config = settings.Value;
+
         }
 
         #endregion
