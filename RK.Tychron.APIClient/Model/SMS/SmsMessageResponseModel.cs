@@ -3,9 +3,9 @@
 namespace RK.Tychron.APIClient.Model.SMS;
 
 /// <summary>
-/// Response SMS via HTTP
+/// This object represents single SMS delivered response from Tychron API.
 /// </summary>
-public class SmsResponseModel
+public class SmsMessageResponseModel
 {
     [JsonPropertyName("id")]
     public string? Id { get; set; }
@@ -26,7 +26,7 @@ public class SmsResponseModel
     public int Priority { get; set; }
 
     [JsonPropertyName("parts")]
-    public List<Part>? Parts { get; set; }
+    public List<SmsPart>? Parts { get; set; }
 
     [JsonPropertyName("body")]
     public string? Body { get; set; }
@@ -38,7 +38,7 @@ public class SmsResponseModel
     public string? RequestDeliveryReport { get; set; }
 
     [JsonPropertyName("udh")]
-    public Udh? Udh { get; set; }
+    public SmsUdh? Udh { get; set; }
 
     [JsonPropertyName("inserted_at")]
     public DateTime InsertedAt { get; set; }
@@ -74,32 +74,5 @@ public class SmsResponseModel
     public bool RemoteMessagingEnabled { get; set; }
 
     [JsonPropertyName("csp_campaign")]
-    public CspCampaign? CspCampaign { get; set; }
-}
-
-public class CspCampaign
-{
-    [JsonPropertyName("id")]
-    public string? Id { get; set; }
-
-    [JsonPropertyName("tcr_brand_id")]
-    public string? TcrBrandId { get; set; }
-
-    [JsonPropertyName("tcr_campaign_id")]
-    public string? TcrCampaignId { get; set; }
-}
-
-public class Part
-{
-    [JsonPropertyName("id")]
-    public string? Id { get; set; }
-}
-
-public class Udh
-{
-    [JsonPropertyName("ref_num")]
-    public int RefNum { get; set; }
-
-    [JsonPropertyName("count")]
-    public int Count { get; set; }
+    public SmsCspCampaign? CspCampaign { get; set; }
 }

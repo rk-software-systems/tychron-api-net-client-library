@@ -1,23 +1,27 @@
-﻿using System.Text.Json.Serialization;
+﻿using RK.Tychron.APIClient.Error;
+using System.Text.Json.Serialization;
 
 namespace RK.Tychron.APIClient.Model.SMS;
 
 /// <summary>
 /// Request SMS via HTTP
 /// </summary>
-public class SmsRequestModel
+public class SendSmsRequest
 {
+    /// <summary>
+    /// The ID used to identify the message.
+    /// </summary>
     [JsonPropertyName("id")]
     public string? Id { get; set; }
 
     [JsonPropertyName("body")]
-    public string? Body { get; set; }
+    public required string Body { get; set; }
 
     [JsonPropertyName("from")]
-    public string? From { get; set; }
+    public required string From { get; set; }
 
     [JsonPropertyName("to")]
-    public List<string>? To { get; set; }
+    public required List<string> To { get; set; }
 
     [JsonPropertyName("priority")]
     public int Priority { get; set; }
