@@ -3,6 +3,7 @@ using RK.Tychron.APIClient.Model.SMS;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
 using System.Text.Json.Nodes;
+using System.Net.Http;
 
 namespace RK.Tychron.APIClient
 {
@@ -11,18 +12,14 @@ namespace RK.Tychron.APIClient
         #region fields
 
         private readonly HttpClient _httpClient;
-        private readonly TychronSettings _config;
 
         #endregion
 
         #region ctors
 
-        public TychronSMSAPIClient(HttpClient httpClient, IOptions<TychronSettings> settings)
+        public TychronSMSAPIClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            ArgumentNullException.ThrowIfNull(settings, nameof(settings));
-            _config = settings.Value;
-
         }
 
         #endregion
@@ -31,8 +28,9 @@ namespace RK.Tychron.APIClient
 
         public async Task<List<SmsResponseModel?>> SendSms(SmsRequestModel request)
         {
+            
             var response =
-                await _httpClient.PostAsync(_config.BaseUrl, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8));
+                await _httpClient.PostAsync(_httpClient.BaseAddress, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8));
 
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
