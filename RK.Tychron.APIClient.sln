@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RK.Tychron.APIClient", "RK.Tychron.APIClient\RK.Tychron.APIClient.csproj", "{341035B5-0E19-4309-8BC0-34D1B15B4017}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{341035B5-0E19-4309-8BC0-34D1B15B4017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{341035B5-0E19-4309-8BC0-34D1B15B4017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341035B5-0E19-4309-8BC0-34D1B15B4017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{341035B5-0E19-4309-8BC0-34D1B15B4017}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D52BF326-F660-468E-9C51-BD93DB8F24A1}
+	EndGlobalSection
+EndGlobal
