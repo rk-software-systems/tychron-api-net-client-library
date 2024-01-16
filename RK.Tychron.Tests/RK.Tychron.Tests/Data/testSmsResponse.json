@@ -1,0 +1,80 @@
+{
+  "12003004001": {
+    "id": "01EYVMW463NZSY6E26NMNN7H2N",
+    "direction": "outbound",
+    "from": "12003004000",
+    "to": "12003004001",
+    "type": "sms",
+    "priority": 1,
+    "parts": [
+      {
+        "id": "01EYVMVWJQ9F3VYAJ833W9GZJ9"
+      },
+      {
+        "id": "01EYVMWDE5ZW9X85D8QX9F3MHN"
+      }
+    ],
+    "body": "Hello, World",
+    "encoding": 0,
+    "request_delivery_report": "always",
+    "udh": {
+      "ref_num": 34,
+      "count": 2
+    },
+    "inserted_at": "2021-02-18T22:39:43Z",
+    "updated_at": "2021-02-18T22:39:43Z",
+    "processed_at": "2021-02-18T22:39:43Z",
+    "delivered_at": "2021-02-18T22:39:43Z",
+    "scheduled_at": "2021-02-19T00:00:00Z",
+    "expires_at": "2021-02-19T06:00:00Z",
+    "remote_service_provider": "ACME Corp.",
+    "remote_reference_id": "us_acme",
+    "remote_country": "United States",
+    "remote_country_code": "US",
+    "remote_messaging_enabled": true,
+    "csp_campaign": {
+      "id": "9558525b-694a-4858-bf4d-45502c71041d",
+      "tcr_brand_id": "B123456",
+      "tcr_campaign_id": "B123456"
+    }
+  },
+  "12003004002": {
+    "id": "01EYVMW463NZSY6E26NMNN7H2J",
+    "direction": "outbound",
+    "from": "12003004000",
+    "to": "12003004002",
+    "type": "sms",
+    "priority": 1,
+    "parts": [
+      {
+        "id": "01EYVMVWJQ9F3VYAJ833W9GZJ91"
+      },
+      {
+        "id": "01EYVMWDE5ZW9X85D8QX9F3MHN1"
+      }
+    ],
+    "body": "Hello, World",
+    "encoding": 0,
+    "request_delivery_report": "always",
+    "udh": {
+      "ref_num": 34,
+      "count": 2
+    },
+    "inserted_at": "2021-02-18T22:39:43Z",
+    "updated_at": "2021-02-18T22:39:43Z",
+    "processed_at": "2021-02-18T22:39:43Z",
+    "delivered_at": "2021-02-18T22:39:43Z",
+    "scheduled_at": "2021-02-19T00:00:00Z",
+    "expires_at": "2021-02-19T06:00:00Z",
+    "remote_service_provider": "ACME Corp.",
+    "remote_reference_id": "us_acme",
+    "remote_country": "United States",
+    "remote_country_code": "US",
+    "remote_messaging_enabled": true,
+    "csp_campaign": {
+      "id": "9558525b-694a-4858-bf4d-45502c71041d",
+      "tcr_brand_id": "B123456",
+      "tcr_campaign_id": "B123456"
+    }
+  }
+}
