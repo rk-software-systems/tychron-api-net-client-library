@@ -61,20 +61,26 @@ namespace RK.Tychron.APIClient
             }
 
             using var responseStream = await response.Content.ReadAsStreamAsync();
+            var document = JsonNode.Parse(responseStream, nodeOptions: new JsonNodeOptions() { PropertyNameCaseInsensitive = false })??new JsonObject();
 
-            var document = JsonNode.Parse(responseStream, nodeOptions: new JsonNodeOptions() { PropertyNameCaseInsensitive = false });
-
-            var messages = document?.AsObject()
-                .Where(x => x.Value != null)
-                .Select(x => x.Value?.GetValue<SmsMessageResponseModel>()!)
-                .ToList();
-
-            return new SendSMSResponse()
+            return new SendSMSResponse
             {
                 XCDRID = xcdrid,
-                Messages = messages,
+                Messages = GetSmsMessageResponse(document),
                 PartialFailure = response.StatusCode == HttpStatusCode.MultiStatus
             };
+        }
+        
+        #endregion
+
+        #region helpers
+
+        protected virtual List<SmsMessageResponseModel?> GetSmsMessageResponse(JsonNode document)
+        {
+            return document.AsObject()
+                .Where(x => x.Value != null)
+                .Select(x => JsonSerializer.Deserialize<SmsMessageResponseModel>(x.Value!.ToJsonString()))
+                .ToList();
         }
 
         #endregion

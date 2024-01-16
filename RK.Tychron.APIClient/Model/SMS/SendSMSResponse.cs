@@ -15,7 +15,7 @@
         /// <summary>
         /// Messages responses
         /// </summary>
-        public List<SmsMessageResponseModel>? Messages { get; set; }
+        public List<SmsMessageResponseModel?> Messages { get; set; }
 
         /// <summary>
         /// This flag is set to true when we obtain the following response from Tychron API (HTTP Status Code 207)
