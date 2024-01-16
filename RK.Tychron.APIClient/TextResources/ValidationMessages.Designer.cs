@@ -70,6 +70,15 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SMS DLR Message From is required..
+        /// </summary>
+        internal static string SendSMSFromDlrRequired {
+            get {
+                return ResourceManager.GetString("SendSMSFromDlrRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SMS Message From is required..
         /// </summary>
         internal static string SendSMSFromRequired {
@@ -79,11 +88,29 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At least one SMS message recepient required..
+        ///   Looks up a localized string similar to SMS DLR SmsId is required..
+        /// </summary>
+        internal static string SendSMSSmsIdRequired {
+            get {
+                return ResourceManager.GetString("SendSMSSmsIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one SMS message recipient is required..
         /// </summary>
         internal static string SendSMSToRequired {
             get {
                 return ResourceManager.GetString("SendSMSToRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must specify the DLR type of the SMS message..
+        /// </summary>
+        internal static string SendSMSTypeRequired {
+            get {
+                return ResourceManager.GetString("SendSMSTypeRequired", resourceCulture);
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using RK.Tychron.APIClient.Error;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace RK.Tychron.APIClient.Model.SMS;
 
@@ -15,13 +14,13 @@ public class SendSmsRequest
     public string? Id { get; set; }
 
     [JsonPropertyName("body")]
-    public required string Body { get; set; }
+    public required string Body { get; init; }
 
     [JsonPropertyName("from")]
-    public required string From { get; set; }
+    public required string From { get; init; }
 
     [JsonPropertyName("to")]
-    public required List<string> To { get; set; }
+    public required List<string>? To { get; init; }
 
     [JsonPropertyName("priority")]
     public int Priority { get; set; }

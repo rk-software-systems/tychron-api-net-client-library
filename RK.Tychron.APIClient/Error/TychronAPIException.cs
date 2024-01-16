@@ -1,5 +1,9 @@
 ﻿namespace RK.Tychron.APIClient.Error
 {
+    /// <summary>
+    /// Response Codes
+    /// <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#response-codes"/>
+    /// </summary>
     public class TychronAPIException : Exception
     {
         private readonly string? _xcdrid;

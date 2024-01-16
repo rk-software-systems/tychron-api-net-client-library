@@ -8,7 +8,7 @@ namespace RK.Tychron.Tests;
 
 public class TychronSMSAPIClientTests
 {
-    private SendSmsRequest _validPayload;
+    private SendSmsRequest _validPayload = null!;
 
     [SetUp]
     public void Setup()
@@ -16,7 +16,7 @@ public class TychronSMSAPIClientTests
         _validPayload = new SendSmsRequest
         {
             Body = "Sample body",
-            To = new List<string> { "123456789" },
+            To = ["123456777", "123456788", "123456799"],
             From = "123456789",
         };
     }
@@ -39,8 +39,11 @@ public class TychronSMSAPIClientTests
 
         //Assert
         Assert.That(result.Messages?.Count, Is.EqualTo(2));
-        Assert.That(result.Messages?.Any(x => x.To == "12003004001"), Is.True);
-        Assert.That(result.Messages?.Any(x => x.To == "12003004002"), Is.True);
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Messages?.Any(x => x.To == "12003004001"), Is.True);
+            Assert.That(result.Messages?.Any(x => x.To == "12003004002"), Is.True);
+        });
     }
 
     //Unit Test Tychron API Exception on non 200, 207 status codes
@@ -57,7 +60,7 @@ public class TychronSMSAPIClientTests
         var result = Assert.ThrowsAsync<TychronAPIException>(async () => await tychronSMSAPIClient.SendSms(_validPayload));
 
         //Assert
-        Assert.That(result.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
+        Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
     }
 
     // Unit Test that PartiallySuccessful is true when 207 status code is returned
@@ -106,6 +109,6 @@ public class TychronSMSAPIClientTests
         var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronSMSAPIClient.SendSms(payload));
 
         //Assert
-        Assert.That(result.ValidationErrors.Any(x => x.ErrorCode == messageCode), Is.EqualTo(true));
+        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == messageCode), Is.EqualTo(true));
     }
 }
