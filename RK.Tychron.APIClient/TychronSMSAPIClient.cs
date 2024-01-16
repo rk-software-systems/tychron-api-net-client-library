@@ -51,17 +51,18 @@ namespace RK.Tychron.APIClient
             var response =
                 await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
 
-            var xcdrid = response.Headers.GetValues("X-CDRID").FirstOrDefault();
+            response.Headers.TryGetValues("X-CDRID", out IEnumerable<string>? xcdrids);
+            var xcdrid = xcdrids?.FirstOrDefault();
 
             if (response.StatusCode != HttpStatusCode.OK
-                || response.StatusCode != HttpStatusCode.MultiStatus)
+                && response.StatusCode != HttpStatusCode.MultiStatus)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 throw new TychronAPIException(xcdrid, (int)response.StatusCode, responseContent);
             }
 
             using var responseStream = await response.Content.ReadAsStreamAsync();
-            var document = JsonNode.Parse(responseStream, nodeOptions: new JsonNodeOptions() { PropertyNameCaseInsensitive = false })??new JsonObject();
+            var document = JsonNode.Parse(responseStream, nodeOptions: new JsonNodeOptions() { PropertyNameCaseInsensitive = false }) ?? new JsonObject();
 
             return new SendSMSResponse
             {
@@ -70,16 +71,16 @@ namespace RK.Tychron.APIClient
                 PartialFailure = response.StatusCode == HttpStatusCode.MultiStatus
             };
         }
-        
+
         #endregion
 
         #region helpers
 
-        protected virtual List<SmsMessageResponseModel?> GetSmsMessageResponse(JsonNode document)
+        protected virtual List<SmsMessageResponseModel>? GetSmsMessageResponse(JsonNode document)
         {
             return document.AsObject()
                 .Where(x => x.Value != null)
-                .Select(x => JsonSerializer.Deserialize<SmsMessageResponseModel>(x.Value!.ToJsonString()))
+                .Select(x => JsonSerializer.Deserialize<SmsMessageResponseModel>(x.Value!.ToJsonString())!)
                 .ToList();
         }
 
