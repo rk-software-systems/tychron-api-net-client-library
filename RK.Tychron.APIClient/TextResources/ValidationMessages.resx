@@ -126,9 +126,6 @@
   <data name="SendSMSToRequired" xml:space="preserve">
     <value>At least one SMS message recipient is required.</value>
   </data>
-  <data name="SendSMSTypeRequired" xml:space="preserve">
-    <value>You must specify the DLR type of the SMS message.</value>
-  </data>
   <data name="SendSMSFromDlrRequired" xml:space="preserve">
     <value>SMS DLR Message From is required.</value>
   </data>

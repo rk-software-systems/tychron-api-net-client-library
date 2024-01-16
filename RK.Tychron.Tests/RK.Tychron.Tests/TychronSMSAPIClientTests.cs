@@ -8,16 +8,23 @@ namespace RK.Tychron.Tests;
 
 public class TychronSMSAPIClientTests
 {
-    private SendSmsRequest _validPayload = null!;
+    private SendSmsRequest _validPayloadSendSms = null!;
+    private SendSmsDlrRequest _validPayloadSendSmsDlr = null!;
 
     [SetUp]
     public void Setup()
     {
-        _validPayload = new SendSmsRequest
+        _validPayloadSendSms = new SendSmsRequest
         {
             Body = "Sample body",
             To = ["123456777", "123456788", "123456799"],
+            From = "123456789"
+        };
+
+        _validPayloadSendSmsDlr = new SendSmsDlrRequest
+        {
             From = "123456789",
+            SmsId = "01GTFCEBFR5RJG3RWXCD8QRDZN"
         };
     }
 
@@ -25,17 +32,20 @@ public class TychronSMSAPIClientTests
     public async Task TestingReceivingResponseToSmsMessagesAsCorrect()
     {
         //Arrange
-        using var stream = File.OpenRead("Data/testResponse.json");
+        using var stream = File.OpenRead("Data/testSmsResponse.json");
         var responseString = await new StreamReader(stream).ReadToEndAsync();
 
 
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(responseString) },
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(responseString)
+            },
             HttpMethod.Post);
         var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
 
         //Act
-        var result = await tychronSMSAPIClient.SendSms(_validPayload);
+        var result = await tychronSMSAPIClient.SendSms(_validPayloadSendSms);
 
         //Assert
         Assert.That(result.Messages?.Count, Is.EqualTo(2));
@@ -57,7 +67,7 @@ public class TychronSMSAPIClientTests
         var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
 
         //Act
-        var result = Assert.ThrowsAsync<TychronAPIException>(async () => await tychronSMSAPIClient.SendSms(_validPayload));
+        var result = Assert.ThrowsAsync<TychronAPIException>(async () => await tychronSMSAPIClient.SendSms(_validPayloadSendSms));
 
         //Assert
         Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
@@ -68,16 +78,19 @@ public class TychronSMSAPIClientTests
     public async Task TestingReceivingResponseToSmsMessagesAsPartiallySuccessful()
     {
         //Arrange
-        using var stream = File.OpenRead("Data/testResponse.json");
+        using var stream = File.OpenRead("Data/testSmsResponse.json");
         var responseString = await new StreamReader(stream).ReadToEndAsync();
 
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.MultiStatus) { Content = new StringContent(responseString) },
+            new HttpResponseMessage(HttpStatusCode.MultiStatus)
+            {
+                Content = new StringContent(responseString)
+            },
             HttpMethod.Post);
         var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
 
         //Act
-        var result = await tychronSMSAPIClient.SendSms(_validPayload);
+        var result = await tychronSMSAPIClient.SendSms(_validPayloadSendSms);
 
         //Assert
         Assert.That(result.PartialFailure, Is.True);
@@ -101,8 +114,8 @@ public class TychronSMSAPIClientTests
         };
 
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
-                       new HttpResponseMessage(HttpStatusCode.OK),
-                                  HttpMethod.Post);
+            new HttpResponseMessage(HttpStatusCode.OK),
+            HttpMethod.Post);
         var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
 
         //Act
@@ -110,5 +123,30 @@ public class TychronSMSAPIClientTests
 
         //Assert
         Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == messageCode), Is.EqualTo(true));
+    }
+
+    [Test]
+    public async Task TestingReceivingResponseToSmsDlrMessagesAsCorrect()
+    {
+        //Arrange
+        using var stream = File.OpenRead("Data/testSmsDlrResponse.json");
+        var responseString = await new StreamReader(stream).ReadToEndAsync();
+
+
+        var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(responseString)
+            },
+            HttpMethod.Post);
+        var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
+
+        //Act
+        var result = await tychronSMSAPIClient.SendSmsDlr(_validPayloadSendSmsDlr);
+
+        //Assert
+        Assert.That(result.Messages?.Count, Is.EqualTo(1));
+        Assert.That(result.Messages?.Any(x => x.Id == "01GTFCJRXEBPXERXET9J06FS05"), Is.True);
+        Assert.That(result.Messages?.Any(x => x.To == "12003004001"), Is.True);
     }
 }

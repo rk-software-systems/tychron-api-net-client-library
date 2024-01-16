@@ -104,14 +104,5 @@ namespace RK.Tychron.APIClient.TextResources {
                 return ResourceManager.GetString("SendSMSToRequired", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You must specify the DLR type of the SMS message..
-        /// </summary>
-        internal static string SendSMSTypeRequired {
-            get {
-                return ResourceManager.GetString("SendSMSTypeRequired", resourceCulture);
-            }
-        }
     }
 }

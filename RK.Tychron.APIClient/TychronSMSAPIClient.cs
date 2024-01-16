@@ -13,6 +13,7 @@ namespace RK.Tychron.APIClient
         #region constants
 
         private const string smsPath = "/sms";
+        private const string xcdr = "X-CDR-ID";
 
         #endregion
 
@@ -53,7 +54,7 @@ namespace RK.Tychron.APIClient
             var response =
                 await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
 
-            response.Headers.TryGetValues("X-CDR-ID", out IEnumerable<string>? xcdrids);
+            response.Headers.TryGetValues(xcdr, out IEnumerable<string>? xcdrids);
             var xcdrid = xcdrids?.FirstOrDefault();
 
             if (response.StatusCode != HttpStatusCode.OK
@@ -88,7 +89,7 @@ namespace RK.Tychron.APIClient
         /// <exception cref="TychronAPIException">Exception that is thrown on API call error.</exception>
         /// <exception cref="TychronValidationException">
         /// Exception that is thrown on incoming model validation error.
-        /// Available codes: <see cref="TypeDlrRequiredErrorCode"/>
+        /// Available codes: <see cref="FromDlrRequiredErrorCode"/>
         /// </exception>"
         public async Task<SendSmsResponse<SmsDlrMessageResponseModel>> SendSmsDlr(SendSmsDlrRequest request)
         {
@@ -97,7 +98,7 @@ namespace RK.Tychron.APIClient
             var response =
                 await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
 
-            response.Headers.TryGetValues("X-CDR-ID", out IEnumerable<string>? xcdrids);
+            response.Headers.TryGetValues(xcdr, out IEnumerable<string>? xcdrids);
             var xcdrid = xcdrids?.FirstOrDefault();
 
             if (response.StatusCode != HttpStatusCode.OK
@@ -184,17 +185,6 @@ namespace RK.Tychron.APIClient
         {
             var errors = new List<TychronValidationError>();
 
-            if (string.IsNullOrEmpty(request.Type) || request.Type != "sms_dlr")
-            {
-                // You must specify the DLR type of the SMS message
-                errors.Add(new TychronValidationError
-                {
-                    FieldName = nameof(SendSmsDlrRequest.Type),
-                    ErrorCode = TypeDlrRequiredErrorCode,
-                    Message = ValidationMessages.SendSMSTypeRequired
-                });
-            }
-
             if (string.IsNullOrEmpty(request.From))
             {
                 // Message From is required
@@ -235,11 +225,9 @@ namespace RK.Tychron.APIClient
         public const string FromRequiredErrorCode = "SendSMS_From_Required";
 
         //Send SMS DLR
-        public const string TypeDlrRequiredErrorCode = "SendSMS_DLR_Type_Required";
+        public const string FromDlrRequiredErrorCode = "SendSMS_Dlr_From_Required";
 
-        public const string FromDlrRequiredErrorCode = "SendSMS_From_Dlr_Required";
-
-        public const string SmsIdRequiredErrorCode = "SendSMS_SmsId_Dlr_Required";
+        public const string SmsIdRequiredErrorCode = "SendSMS_Dlr_SmsId_Required";
 
         #endregion
     }

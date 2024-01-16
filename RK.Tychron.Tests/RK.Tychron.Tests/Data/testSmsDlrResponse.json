@@ -1,0 +1,17 @@
+{
+  "01GTFCEBFR5RJG3RWXCD8QRDZN": {
+    "id": "01GTFCJRXEBPXERXET9J06FS05",
+    "direction": "outbound",
+    "from": "12003004000",
+    "to": "12003004001",
+    "type": "sms_dlr",
+    "body": "id:01GTFCEBFR5RJG3RWXCD8QRDZN sub:000 dlvrd:000 submit date:2303012007 done date:2303012008 stat:DELIVRD err:000 text:",
+    "encoding": 0,
+    "inserted_at": "2021-02-18T22:39:43Z",
+    "updated_at": "2021-02-18T22:39:43Z",
+    "processed_at": "2021-02-18T22:39:43Z",
+    "expires_at": "2020-04-18T11:30:00Z",
+    "submitted_at": "2020-04-18T11:30:00Z",
+    "done_at": "2020-04-18T11:30:00Z"
+  }
+}

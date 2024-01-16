@@ -17,7 +17,7 @@ public class SendSmsDlrRequest
     /// Must be set to "sms_dlr".
     /// </summary>
     [JsonPropertyName("type")]
-    public required string Type { get; init; }
+    public const string Type = "sms_dlr";
 
     /// <summary>
     /// The sending number that will appear in the DLR.
