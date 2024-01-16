@@ -29,7 +29,7 @@ public class TychronSMSAPIClientTests
     }
 
     [Test]
-    public async Task TestingReceivingResponseToSmsMessagesAsCorrect()
+    public async Task TychronSMSAPIClient_SendSMS_Deserialization_OK()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -58,7 +58,7 @@ public class TychronSMSAPIClientTests
 
     //Unit Test Tychron API Exception on non 200, 207 status codes
     [Test]
-    public void TestingReceivingResponseToSmsMessagesAsException()
+    public void TychronSMSAPIClient_SendSMS_FailOnNonSuccessHttpResponse()
     {
         //Arrange
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
@@ -75,7 +75,7 @@ public class TychronSMSAPIClientTests
 
     // Unit Test that PartiallySuccessful is true when 207 status code is returned
     [Test]
-    public async Task TestingReceivingResponseToSmsMessagesAsPartiallySuccessful()
+    public async Task TychronSMSAPIClient_SendSMS_PartialFailOn207HttpResponse()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -103,7 +103,7 @@ public class TychronSMSAPIClientTests
     [TestCase("123", "123", "", TychronSMSAPIClient.BodyRequiredErrorCode)]
     [TestCase("123", null, "123", TychronSMSAPIClient.FromRequiredErrorCode)]
     [TestCase("123", "", "", TychronSMSAPIClient.FromRequiredErrorCode)]
-    public void TestingReceivingResponseToSmsMessagesAsTychronValidationException(string to, string from, string body, string messageCode)
+    public void TychronSMSAPIClient_SendSMS_FailOnValidation(string to, string from, string body, string errorMessageCode)
     {
         //Arrange
         var payload = new SendSmsRequest
@@ -122,11 +122,11 @@ public class TychronSMSAPIClientTests
         var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronSMSAPIClient.SendSms(payload));
 
         //Assert
-        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == messageCode), Is.EqualTo(true));
+        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == errorMessageCode), Is.EqualTo(true));
     }
 
     [Test]
-    public async Task TestingReceivingResponseToSmsDlrMessagesAsCorrect()
+    public async Task TychronSMSAPIClient_SendSmsDlr_Deserialization_Deserialization_OK()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsDlrResponse.json");

@@ -13,7 +13,7 @@ namespace RK.Tychron.APIClient
         #region constants
 
         private const string smsPath = "/sms";
-        private const string xcdr = "X-CDR-ID";
+        private const string xcdrHeaderName = "X-CDR-ID";
 
         #endregion
 
@@ -54,7 +54,7 @@ namespace RK.Tychron.APIClient
             var response =
                 await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
 
-            response.Headers.TryGetValues(xcdr, out IEnumerable<string>? xcdrids);
+            response.Headers.TryGetValues(xcdrHeaderName, out IEnumerable<string>? xcdrids);
             var xcdrid = xcdrids?.FirstOrDefault();
 
             if (response.StatusCode != HttpStatusCode.OK
@@ -98,7 +98,7 @@ namespace RK.Tychron.APIClient
             var response =
                 await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
 
-            response.Headers.TryGetValues(xcdr, out IEnumerable<string>? xcdrids);
+            response.Headers.TryGetValues(xcdrHeaderName, out IEnumerable<string>? xcdrids);
             var xcdrid = xcdrids?.FirstOrDefault();
 
             if (response.StatusCode != HttpStatusCode.OK
