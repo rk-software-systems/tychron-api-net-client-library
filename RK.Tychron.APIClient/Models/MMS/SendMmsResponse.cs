@@ -13,9 +13,9 @@ public class SendMmsResponse<T>
     public string? XRequestID { get; set; }
 
     /// <summary>
-    /// Messages responses
+    /// Message responses
     /// </summary>
-    public List<T>? Messages { get; init; }
+    public T? Messages { get; init; }
 
     /// <summary>
     /// This flag is set to true when we obtain the following response from Tychron API (HTTP Status Code 207)

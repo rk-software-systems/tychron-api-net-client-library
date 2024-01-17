@@ -81,17 +81,13 @@ namespace RK.Tychron.APIClient
             };
         }
 
-
         #endregion
 
         #region helpers
 
-        private static List<T> GetMmsMessageResponse<T>(JsonNode document)
+        private static T? GetMmsMessageResponse<T>(JsonNode document)
         {
-            return document.AsObject()
-                .Where(x => x.Value != null)
-                .Select(x => JsonSerializer.Deserialize<T>(x.Value!.ToJsonString())!)
-                .ToList();
+            return document.Deserialize<T>();
         }
 
         #endregion

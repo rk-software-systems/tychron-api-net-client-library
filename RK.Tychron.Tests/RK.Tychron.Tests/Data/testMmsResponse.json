@@ -1,0 +1,16 @@
+{
+  "records": [
+    {
+      "id": "01EYVMW463NZSY6E26NMNN7H2N",
+      "type": "mms_forward_request",
+      "reference_id": "my_message_id",
+      "inserted_at": "2021-02-18T22:39:43Z",
+      "from": "12003004000",
+      "to": [ "12003004001", "12003004002", "12003004003" ],
+      "request_delivery_report": true,
+      "request_read_reply_report": true
+    }
+  ],
+  "errors": [
+  ]
+}
