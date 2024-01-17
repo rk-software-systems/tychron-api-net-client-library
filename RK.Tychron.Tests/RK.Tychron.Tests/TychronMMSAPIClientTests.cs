@@ -91,29 +91,6 @@ public class TychronMMSAPIClientTests
         Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
     }
 
-    // Unit Test that PartiallySuccessful is true when 207 status code is returned
-    [Test]
-    public async Task TychronSMSAPIClient_SendSMS_PartialFailOn207HttpResponse()
-    {
-        //Arrange
-        using var stream = File.OpenRead("Data/testSmsResponse.json");
-        var responseString = await new StreamReader(stream).ReadToEndAsync();
-
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.MultiStatus)
-            {
-                Content = new StringContent(responseString)
-            },
-            HttpMethod.Post);
-        var tychronMMSAPIClient = new TychronMMSAPIClient(httpClient);
-
-        //Act
-        var result = await tychronMMSAPIClient.SendMms(_validPayloadSendMms);
-
-        //Assert
-        Assert.That(result.PartialFailure, Is.True);
-    }
-
     // Unit Test that Tychron Validation Exception is thrown when To is null or Empty Array
     [Test]
     [TestCase(null, "123", "123", TychronSMSAPIClient.ToRequiredErrorCode)]

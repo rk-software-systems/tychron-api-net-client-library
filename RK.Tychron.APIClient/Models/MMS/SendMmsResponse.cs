@@ -16,10 +16,4 @@ public class SendMmsResponse<T>
     /// Message responses
     /// </summary>
     public T? Messages { get; init; }
-
-    /// <summary>
-    /// This flag is set to true when we obtain the following response from Tychron API (HTTP Status Code 207)
-    /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#response-codes"/>
-    /// </summary>
-    public bool PartialFailure { get; init; }
 }

@@ -60,8 +60,7 @@ namespace RK.Tychron.APIClient
             response.Headers.TryGetValues(xRequestHeaderName, out IEnumerable<string>? xrequestids);
             var xrequestid = xrequestids?.FirstOrDefault();
 
-            if (response.StatusCode != HttpStatusCode.OK
-                && response.StatusCode != HttpStatusCode.MultiStatus)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 throw new TychronAPIException(xrequestid, (int)response.StatusCode, responseContent);
@@ -76,8 +75,7 @@ namespace RK.Tychron.APIClient
             return new SendMmsResponse<MmsMessageResponseModel>
             {
                 XRequestID = xrequestid,
-                Messages = GetMmsMessageResponse<MmsMessageResponseModel>(document),
-                PartialFailure = response.StatusCode == HttpStatusCode.MultiStatus
+                Messages = GetMmsMessageResponse<MmsMessageResponseModel>(document)
             };
         }
 
