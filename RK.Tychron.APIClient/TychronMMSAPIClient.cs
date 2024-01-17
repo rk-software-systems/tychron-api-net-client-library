@@ -2,8 +2,9 @@
 using System.Text.Json;
 using RK.Tychron.APIClient.Error;
 using RK.Tychron.APIClient.Model.MMS;
-using RK.Tychron.APIClient.Model.SMS;
 using RK.Tychron.APIClient.TextResources;
+using System.Net.Mime;
+using System.Net;
 
 namespace RK.Tychron.APIClient
 {
@@ -36,14 +37,56 @@ namespace RK.Tychron.APIClient
 
         #region methods
 
+        /// <summary>
+        /// Send MMS messages
+        /// </summary>
+        /// <param name="request">Send MMS request.</param>
+        /// <returns>
+        /// MMS Send response.
+        /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#response-codes"/>
+        /// </returns>
+        /// <exception cref="TychronAPIException">Exception that is thrown on API call error.</exception>
+        /// <exception cref="TychronValidationException">
+        /// Exception that is thrown on incoming model validation error.
+        /// Available codes: <see cref="ToRequiredErrorCode"/>
+        /// </exception>"
+        public async Task<SendMmsResponse<MmsMessageResponseModel>> SendMms(SendMmsRequest request)
+        {
+            ValidateMmsRequestModel(request);
 
+            var response =
+                await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
+
+            response.Headers.TryGetValues(xRequestHeaderName, out IEnumerable<string>? xrequestids);
+            var xrequestid = xrequestids?.FirstOrDefault();
+
+            if (response.StatusCode != HttpStatusCode.OK
+                && response.StatusCode != HttpStatusCode.MultiStatus)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                throw new TychronAPIException(xrequestid, (int)response.StatusCode, responseContent);
+            }
+
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            var document = JsonNode.Parse(responseStream, nodeOptions: new JsonNodeOptions()
+            {
+                PropertyNameCaseInsensitive = false
+            }) ?? new JsonObject();
+
+            return new SendMmsResponse<MmsMessageResponseModel>
+            {
+                XRequestID = xrequestid,
+                Messages = GetMmsMessageResponse<MmsMessageResponseModel>(document),
+                PartialFailure = response.StatusCode == HttpStatusCode.MultiStatus
+            };
+        }
 
 
         #endregion
 
         #region helpers
 
-        private static List<T> GetSmsMessageResponse<T>(JsonNode document)
+        private static List<T> GetMmsMessageResponse<T>(JsonNode document)
         {
             return document.AsObject()
                 .Where(x => x.Value != null)
@@ -55,7 +98,7 @@ namespace RK.Tychron.APIClient
 
         #region validation
 
-        private static void ValidateSmsRequestModel(SendMmsRequest request)
+        private static void ValidateMmsRequestModel(SendMmsRequest request)
         {
             var errors = new List<TychronValidationError>();
 
@@ -64,31 +107,31 @@ namespace RK.Tychron.APIClient
                 // at lease one recipient is required
                 errors.Add(new TychronValidationError
                 {
-                    FieldName = nameof(SendSmsRequest.To),
+                    FieldName = nameof(SendMmsRequest.To),
                     ErrorCode = ToRequiredErrorCode,
-                    Message = ValidationMessages.SendSMSToRequired
+                    Message = ValidationMessages.SendMMSToRequired
                 });
             }
-
-            //if (string.IsNullOrEmpty(request.Body))
-            //{
-            //    // Body required
-            //    errors.Add(new TychronValidationError
-            //    {
-            //        FieldName = nameof(SendSmsRequest.Body),
-            //        ErrorCode = BodyRequiredErrorCode,
-            //        Message = ValidationMessages.SendSMSBodyRequired
-            //    });
-            //}
 
             if (string.IsNullOrEmpty(request.From))
             {
                 // Body required
                 errors.Add(new TychronValidationError
                 {
-                    FieldName = nameof(SendSmsRequest.From),
+                    FieldName = nameof(SendMmsRequest.From),
                     ErrorCode = FromRequiredErrorCode,
                     Message = ValidationMessages.SendSMSFromRequired
+                });
+            }
+
+            if (request.Parts == null || request.Parts.Count == 0)
+            {
+                // at lease one part is required
+                errors.Add(new TychronValidationError
+                {
+                    FieldName = nameof(SendMmsRequest.Parts),
+                    ErrorCode = PartRequiredErrorCode,
+                    Message = ValidationMessages.SendMMSPartRequired
                 });
             }
 
@@ -102,17 +145,12 @@ namespace RK.Tychron.APIClient
 
         #region error validation constants
 
-        //Send SMS
-        public const string ToRequiredErrorCode = "SendSMS_To_Required";
+        //Send MMS
+        public const string ToRequiredErrorCode = "SendMMS_To_Required";
 
-        public const string BodyRequiredErrorCode = "SendSMS_Body_Required";
+        public const string PartRequiredErrorCode = "SendMMS_Part_Required";
 
-        public const string FromRequiredErrorCode = "SendSMS_From_Required";
-
-        //Send SMS DLR
-        public const string FromDlrRequiredErrorCode = "SendSMS_Dlr_From_Required";
-
-        public const string SmsIdRequiredErrorCode = "SendSMS_Dlr_SmsId_Required";
+        public const string FromRequiredErrorCode = "SendMMS_From_Required";
 
         #endregion
     }

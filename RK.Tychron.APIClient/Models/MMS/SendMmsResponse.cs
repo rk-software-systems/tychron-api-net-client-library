@@ -1,21 +1,25 @@
-﻿using System.Text.Json.Serialization;
-
-namespace RK.Tychron.APIClient.Model.MMS;
+﻿namespace RK.Tychron.APIClient.Model.MMS;
 
 /// <summary>
-/// Send Mms response model
+/// This object represents MMS message Tychron API response.
+/// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#response-format"/>
 /// </summary>
-public class SendMmsResponse
+public class SendMmsResponse<T>
 {
     /// <summary>
-    /// An array of responses
+    /// An ID used to identify the HTTP request.
+    /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#response-headers"/>
     /// </summary>
-    [JsonPropertyName("records")]
-    public List<Record>? Records { get; set; }
+    public string? XRequestID { get; set; }
 
     /// <summary>
-    /// Error data
+    /// Messages responses
     /// </summary>
-    [JsonPropertyName("errors")]
-    public List<dynamic>? Errors { get; set; }
+    public List<T>? Messages { get; init; }
+
+    /// <summary>
+    /// This flag is set to true when we obtain the following response from Tychron API (HTTP Status Code 207)
+    /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#response-codes"/>
+    /// </summary>
+    public bool PartialFailure { get; init; }
 }
