@@ -48,7 +48,7 @@ jobs:
 
     steps:
     - name: Set pull request check
-      uses: actions/github-script@0.10.0
+      uses: actions/github-script@v7
       with:
         script: |
           const status = "completed";
