@@ -39,8 +39,6 @@ namespace RK.Tychron.Tests
             //Act
             var result = await tychronSMSDLRAPIClient.SendSMSDLR(_validPayloadSendSMSDLR);
 
-            // TODO: remove after Workflow testing
-            Assert.That(true, Is.False);
             //Assert
             Assert.That(result.Messages?.Count, Is.EqualTo(1));
             Assert.That(result.Messages?.Any(x => x.Id == "01GTFCJRXEBPXERXET9J06FS05"), Is.True);
