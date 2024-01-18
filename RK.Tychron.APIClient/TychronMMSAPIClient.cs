@@ -1,10 +1,10 @@
-﻿using System.Text.Json.Nodes;
-using System.Text.Json;
-using RK.Tychron.APIClient.Error;
+﻿using RK.Tychron.APIClient.Error;
 using RK.Tychron.APIClient.Model.MMS;
 using RK.Tychron.APIClient.TextResources;
-using System.Net.Mime;
 using System.Net;
+using System.Net.Mime;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace RK.Tychron.APIClient
 {
@@ -16,7 +16,6 @@ namespace RK.Tychron.APIClient
         #region constants
 
         private const string smsPath = "/api/v1/mms";
-        private const string xRequestHeaderName = "X-Request-ID";
 
         #endregion
 
@@ -50,20 +49,20 @@ namespace RK.Tychron.APIClient
         /// Exception that is thrown on incoming model validation error.
         /// Available codes: <see cref="ToRequiredErrorCode"/>
         /// </exception>"
-        public async Task<SendMmsResponse<MmsMessageResponseModel>> SendMms(SendMmsRequest request)
+        public async Task<MMSMessageResponseModel?> SendMMS(SendMMSRequest request)
         {
             ValidateMmsRequestModel(request);
 
             var response =
                 await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
 
-            response.Headers.TryGetValues(xRequestHeaderName, out IEnumerable<string>? xrequestids);
-            var xrequestid = xrequestids?.FirstOrDefault();
+            response.Headers.TryGetValues(TychronConstants.XRequestHeaderName, out IEnumerable<string>? xRequestIds);
+            var xRequestId = xRequestIds?.FirstOrDefault();
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                throw new TychronAPIException(xrequestid, (int)response.StatusCode, responseContent);
+                throw new TychronAPIException(xRequestId, (int)response.StatusCode, responseContent);
             }
 
             using var responseStream = await response.Content.ReadAsStreamAsync();
@@ -72,11 +71,13 @@ namespace RK.Tychron.APIClient
                 PropertyNameCaseInsensitive = false
             }) ?? new JsonObject();
 
-            return new SendMmsResponse<MmsMessageResponseModel>
+            var result = GetMmsMessageResponse<MMSMessageResponseModel>(document);
+            if (result != null)
             {
-                XRequestID = xrequestid,
-                Messages = GetMmsMessageResponse<MmsMessageResponseModel>(document)
-            };
+                result.XRequestID = xRequestId;
+            }
+
+            return result;
         }
 
         #endregion
@@ -92,7 +93,7 @@ namespace RK.Tychron.APIClient
 
         #region validation
 
-        private static void ValidateMmsRequestModel(SendMmsRequest request)
+        private static void ValidateMmsRequestModel(SendMMSRequest request)
         {
             var errors = new List<TychronValidationError>();
 
@@ -101,7 +102,7 @@ namespace RK.Tychron.APIClient
                 // at lease one recipient is required
                 errors.Add(new TychronValidationError
                 {
-                    FieldName = nameof(SendMmsRequest.To),
+                    FieldName = nameof(SendMMSRequest.To),
                     ErrorCode = ToRequiredErrorCode,
                     Message = ValidationMessages.SendMMSToRequired
                 });
@@ -112,7 +113,7 @@ namespace RK.Tychron.APIClient
                 // Body required
                 errors.Add(new TychronValidationError
                 {
-                    FieldName = nameof(SendMmsRequest.From),
+                    FieldName = nameof(SendMMSRequest.From),
                     ErrorCode = FromRequiredErrorCode,
                     Message = ValidationMessages.SendSMSFromRequired
                 });
@@ -123,7 +124,7 @@ namespace RK.Tychron.APIClient
                 // at lease one part is required
                 errors.Add(new TychronValidationError
                 {
-                    FieldName = nameof(SendMmsRequest.Parts),
+                    FieldName = nameof(SendMMSRequest.Parts),
                     ErrorCode = PartRequiredErrorCode,
                     Message = ValidationMessages.SendMMSPartRequired
                 });

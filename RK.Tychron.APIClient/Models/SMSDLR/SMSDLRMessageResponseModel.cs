@@ -1,11 +1,12 @@
 ﻿using System.Text.Json.Serialization;
+using RK.Tychron.APIClient.Model.SMS;
 
-namespace RK.Tychron.APIClient.Model.SMS;
+namespace RK.Tychron.APIClient.Models.SMSDLR;
 
 /// <summary>
 /// This object represents single SMS DLR delivered response from Tychron API.
 /// </summary>
-public class SmsDlrMessageResponseModel
+public class SMSDLRMessageResponseModel
 {
     [JsonPropertyName("id")]
     public string? Id { get; set; }
@@ -62,5 +63,5 @@ public class SmsDlrMessageResponseModel
     public DateTime DoneAt { get; set; }
 
     [JsonPropertyName("csp_campaign")]
-    public SmsCspCampaign? CspCampaign { get; set; }
+    public SMSCspCampaign? CspCampaign { get; set; }
 }

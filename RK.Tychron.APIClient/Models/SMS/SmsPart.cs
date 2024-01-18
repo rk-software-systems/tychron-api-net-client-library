@@ -2,7 +2,7 @@
 
 namespace RK.Tychron.APIClient.Model.SMS
 {
-    public class SmsPart
+    public class SMSPart
     {
         [JsonPropertyName("id")]
         public string? Id { get; set; }

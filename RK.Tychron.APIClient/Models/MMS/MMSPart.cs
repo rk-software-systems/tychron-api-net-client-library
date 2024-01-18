@@ -6,7 +6,7 @@ namespace RK.Tychron.APIClient.Model.MMS;
 /// Part <br/>
 /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#request-parameters"/>
 /// </summary>
-public class Part
+public class MMSPart
 {
     /// <summary>
     /// An ID used to identify one part (one attachment) of a multipart message.
@@ -19,7 +19,7 @@ public class Part
     /// the part body should be encoded.
     /// </summary>
     [JsonPropertyName("body")]
-    public string Body { get; set; } = string.Empty;
+    public string? Body { get; set; }
 
     /// <summary>
     /// A URL to a specified resource. The content type will be determined by the file's extension.<br/>
@@ -30,10 +30,10 @@ public class Part
     /// <remarks>
     /// Please note that in some cases, carriers limit files sizes to as low as <i>500kb</i>.<br/>
     /// If you require further details regarding carrier restrictions on file sizes,<br/>
-    /// please contact <b>(support @tychron.com)</b>>.
+    /// please contact <b>(support @tychron.com)</b>.
     ///</remarks>
     [JsonPropertyName("uri")]
-    public string Uri { get; set; } = string.Empty;
+    public string? Uri { get; set; }
 
     /// <summary>
     /// An <b>encoding</b> that is applied to the message body when transferring via JSON.<br/>

@@ -6,7 +6,7 @@ namespace RK.Tychron.APIClient.Model.MMS;
 /// Send Mms request model <br/>
 /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#request-parameters"/>
 /// </summary>
-public class SendMmsRequest
+public class SendMMSRequest
 {
     /// <summary>
     /// The ID used to identify the message.
@@ -38,7 +38,7 @@ public class SendMmsRequest
     /// A list of recipient numbers each should be formatted in E.164 format.
     /// </summary>
     [JsonPropertyName("to")]
-    public required List<string>? To { get; init; }
+    public required List<string> To { get; init; }
 
     /// <summary>
     /// Used to specify if a delivery report is required.
@@ -60,8 +60,8 @@ public class SendMmsRequest
 
     /// <summary>
     /// Parts list <br/>
-    /// <see cref="Part"/>
+    /// <see cref="MMSPart"/>
     /// </summary>
     [JsonPropertyName("parts")]
-    public required List<Part> Parts { get; set; }
+    public required List<MMSPart> Parts { get; set; }
 }

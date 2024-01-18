@@ -5,7 +5,7 @@ namespace RK.Tychron.APIClient.Model.MMS;
 /// <summary>
 /// Response Record model
 /// </summary>
-public class Record
+public class MMSRecord
 {
     /// <summary>
     /// The ID supplied by the system to identify the message.
