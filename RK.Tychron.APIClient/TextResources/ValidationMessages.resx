@@ -132,4 +132,13 @@
   <data name="SendSMSSmsIdRequired" xml:space="preserve">
     <value>SMS DLR SmsId is required.</value>
   </data>
+  <data name="SendMMSToRequired" xml:space="preserve">
+    <value>At least one MMS message recipient is required.</value>
+  </data>
+  <data name="SendMMSFromRequired" xml:space="preserve">
+    <value>MMS Message From is required.</value>
+  </data>
+  <data name="SendMMSPartRequired" xml:space="preserve">
+    <value>At least one part of the MMS message is required.</value>
+  </data>
 </root>

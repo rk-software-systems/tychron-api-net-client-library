@@ -1,15 +1,17 @@
 ﻿using RK.Tychron.APIClient.Error;
-using RK.Tychron.APIClient.Model.SMS;
-using RK.Tychron.APIClient.TextResources;
 using RK.Tychron.APIClient.Extensions;
+using RK.Tychron.APIClient.Model.SMS;
+using RK.Tychron.APIClient.Models.SMSDLR;
+using RK.Tychron.APIClient.TextResources;
 using System.Net;
 using System.Net.Mime;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace RK.Tychron.APIClient
 {
-    public sealed class TychronSMSAPIClient
+    public class TychronSMSDLRClient
     {
         #region constants
 
@@ -25,7 +27,7 @@ namespace RK.Tychron.APIClient
 
         #region ctors
 
-        public TychronSMSAPIClient(HttpClient httpClient)
+        public TychronSMSDLRClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -33,26 +35,24 @@ namespace RK.Tychron.APIClient
         #endregion
 
         #region methods
-
         /// <summary>
-        /// Send SMS messages
+        /// Send SMS DLR
         /// </summary>
-        /// <param name="request">Send SMS request.</param>
+        /// <param name="request">SMS DLR request.</param>
         /// <returns>
-        /// SMS Send response.
-        /// <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#response-format"/>
+        /// SMS DLR response.
+        /// <see href="https://docs.tychron.info/sms-api/sending-sms-dlr-via-http/#request-format"/>
         /// </returns>
         /// <exception cref="TychronAPIException">Exception that is thrown on API call error.</exception>
         /// <exception cref="TychronValidationException">
         /// Exception that is thrown on incoming model validation error.
-        /// Available codes: <see cref="ToRequiredErrorCode"/>
+        /// Available codes: <see cref="FromRequiredErrorCode"/>
         /// </exception>"
-        public async Task<BaseSMSResponse<SMSMessageResponseModel>> SendSms(SendSMSRequest request)
+        public async Task<BaseSMSResponse<SMSDLRMessageResponseModel>> SendSMSDLR(SendSMSDLRRequest request)
         {
-            ValidateSmsRequestModel(request);
-
+            ValidateSmsDlrRequestModel(request);
             var response =
-                await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json));
+            await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, MediaTypeNames.Application.Json));
 
             response.Headers.TryGetValues(TychronConstants.XcdrHeaderName, out IEnumerable<string>? xcdrids);
             var xcdrid = xcdrids?.FirstOrDefault();
@@ -70,54 +70,40 @@ namespace RK.Tychron.APIClient
                 PropertyNameCaseInsensitive = false
             }) ?? new JsonObject();
 
-            return new BaseSMSResponse<SMSMessageResponseModel>
+            return new BaseSMSResponse<SMSDLRMessageResponseModel>
             {
                 XCDRID = xcdrid,
-                Messages = document.GetObjectsResponse<SMSMessageResponseModel>(),
+                Messages = document.GetObjectsResponse<SMSDLRMessageResponseModel>(),
                 PartialFailure = response.StatusCode == HttpStatusCode.MultiStatus
             };
         }
 
-        
-
         #endregion
 
         #region validation
-
-        private static void ValidateSmsRequestModel(SendSMSRequest request)
+        private static void ValidateSmsDlrRequestModel(SendSMSDLRRequest request)
         {
             var errors = new List<TychronValidationError>();
 
-            if (request.To == null || request.To.Count == 0)
-            {
-                // at lease one recipient is required
-                errors.Add(new TychronValidationError
-                {
-                    FieldName = nameof(SendSMSRequest.To),
-                    ErrorCode = ToRequiredErrorCode,
-                    Message = ValidationMessages.SendSMSToRequired
-                });
-            }
-
-            if (string.IsNullOrEmpty(request.Body))
-            {
-                // Body required
-                errors.Add(new TychronValidationError
-                {
-                    FieldName = nameof(SendSMSRequest.Body),
-                    ErrorCode = BodyRequiredErrorCode,
-                    Message = ValidationMessages.SendSMSBodyRequired
-                });
-            }
-
             if (string.IsNullOrEmpty(request.From))
             {
-                // Body required
+                // Message From is required
                 errors.Add(new TychronValidationError
                 {
-                    FieldName = nameof(SendSMSRequest.From),
+                    FieldName = nameof(SendSMSDLRRequest.From),
                     ErrorCode = FromRequiredErrorCode,
-                    Message = ValidationMessages.SendSMSFromRequired
+                    Message = ValidationMessages.SendSMSFromDlrRequired
+                });
+            }
+
+            if (string.IsNullOrEmpty(request.SmsId))
+            {
+                // The SmsId that is REQUIRED
+                errors.Add(new TychronValidationError
+                {
+                    FieldName = nameof(SendSMSDLRRequest.SmsId),
+                    ErrorCode = SmsIdRequiredErrorCode,
+                    Message = ValidationMessages.SendSMSSmsIdRequired
                 });
             }
 
@@ -126,18 +112,13 @@ namespace RK.Tychron.APIClient
                 throw new TychronValidationException(errors);
             }
         }
-
         #endregion
 
-        #region error validation constants
+        #region validation constants
+        //Send SMS DLR
+        public const string FromRequiredErrorCode = "SendSMS_DLR_From_Required";
 
-        //Send SMS
-        public const string ToRequiredErrorCode = "SendSMS_To_Required";
-
-        public const string BodyRequiredErrorCode = "SendSMS_Body_Required";
-
-        public const string FromRequiredErrorCode = "SendSMS_From_Required";
-
+        public const string SmsIdRequiredErrorCode = "SendSMS_DLR_SmsId_Required";
         #endregion
     }
 }

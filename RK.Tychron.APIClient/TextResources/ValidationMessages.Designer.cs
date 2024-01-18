@@ -61,6 +61,33 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MMS Message From is required..
+        /// </summary>
+        internal static string SendMMSFromRequired {
+            get {
+                return ResourceManager.GetString("SendMMSFromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one part of the MMS message is required..
+        /// </summary>
+        internal static string SendMMSPartRequired {
+            get {
+                return ResourceManager.GetString("SendMMSPartRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one MMS message recipient is required..
+        /// </summary>
+        internal static string SendMMSToRequired {
+            get {
+                return ResourceManager.GetString("SendMMSToRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SMS Message Body is required..
         /// </summary>
         internal static string SendSMSBodyRequired {

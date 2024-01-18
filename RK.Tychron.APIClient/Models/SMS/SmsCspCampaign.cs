@@ -2,7 +2,7 @@
 
 namespace RK.Tychron.APIClient.Model.SMS
 {
-    public class SmsCspCampaign
+    public class SMSCspCampaign
     {
         /// <summary>
         /// The Tychron issued UUID for the campaign.<br/>

@@ -5,7 +5,7 @@ namespace RK.Tychron.APIClient.Model.SMS;
 /// <summary>
 /// This object represents single SMS delivered response from Tychron API.
 /// </summary>
-public class SmsMessageResponseModel
+public class SMSMessageResponseModel
 {
     [JsonPropertyName("id")]
     public string? Id { get; set; }
@@ -26,7 +26,7 @@ public class SmsMessageResponseModel
     public int Priority { get; set; }
 
     [JsonPropertyName("parts")]
-    public List<SmsPart>? Parts { get; set; }
+    public List<SMSPart>? Parts { get; set; }
 
     [JsonPropertyName("body")]
     public string? Body { get; set; }
@@ -38,7 +38,7 @@ public class SmsMessageResponseModel
     public string? RequestDeliveryReport { get; set; }
 
     [JsonPropertyName("udh")]
-    public SmsUdh? Udh { get; set; }
+    public SMSUdh? Udh { get; set; }
 
     [JsonPropertyName("inserted_at")]
     public DateTime InsertedAt { get; set; }
@@ -74,5 +74,5 @@ public class SmsMessageResponseModel
     public bool RemoteMessagingEnabled { get; set; }
 
     [JsonPropertyName("csp_campaign")]
-    public SmsCspCampaign? CspCampaign { get; set; }
+    public SMSCspCampaign? CspCampaign { get; set; }
 }

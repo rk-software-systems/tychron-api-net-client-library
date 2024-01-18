@@ -2,7 +2,7 @@
 
 namespace RK.Tychron.APIClient.Model.SMS
 {
-    public class SmsUdh
+    public class SMSUdh
     {
         [JsonPropertyName("ref_num")]
         public int RefNum { get; set; }

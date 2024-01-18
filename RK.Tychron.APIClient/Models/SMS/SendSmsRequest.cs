@@ -5,7 +5,7 @@ namespace RK.Tychron.APIClient.Model.SMS;
 /// <summary>
 /// Request SMS via HTTP
 /// </summary>
-public class SendSmsRequest
+public class SendSMSRequest
 {
     /// <summary>
     /// The ID used to identify the message.
