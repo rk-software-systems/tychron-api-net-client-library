@@ -39,4 +39,4 @@ jobs:
       with:
         name: coverage-results
         path: |
-          ./UnitTests/RK.Tychron.Tests/coverage.xml  # Adjust the path based on your project structure
+          ./UnitTests/RK.Tychron.Tests/TestResults/**/*.xml
