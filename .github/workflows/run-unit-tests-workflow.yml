@@ -61,7 +61,7 @@ jobs:
             annotations.push({path: "path/to/file", start_line: 1, end_line: 1, annotation_level: "failure", message: "Test failed"});
           }
 
-          github.checks.create({
+          github.rest.checks.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
             name: title,
