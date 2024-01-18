@@ -40,3 +40,37 @@ jobs:
         name: coverage-results
         path: |
           ./RK.Tychron.Tests/coverage.xml  # Adjust the path based on your project structure
+  
+  update-pr-check:
+    needs: test
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+    - name: Set pull request check
+      uses: actions/github-script@0.10.0
+      with:
+        script: |
+          const status = "completed";
+          const conclusion = context.job == 'test' ? 'success' : 'failure';
+          const title = "Run Unit Tests";
+          const summary = conclusion === 'success' ? "All unit tests passed." : "Tests failed.";
+          const annotations = [];
+
+          if (conclusion === 'failure') {
+            annotations.push({path: "path/to/file", start_line: 1, end_line: 1, annotation_level: "failure", message: "Test failed"});
+          }
+
+          github.checks.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            name: title,
+            head_sha: github.sha,
+            status: status,
+            conclusion: conclusion,
+            output: {
+              title: title,
+              summary: summary,
+              annotations: annotations
+            }
+          });
