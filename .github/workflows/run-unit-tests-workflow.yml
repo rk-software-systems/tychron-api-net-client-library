@@ -57,7 +57,7 @@ jobs:
           const summary = conclusion === 'success' ? "All unit tests passed." : "Tests failed.";
           const annotations = [];
 
-          github.rest.checks.create({d
+          github.rest.checks.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
             name: title,
