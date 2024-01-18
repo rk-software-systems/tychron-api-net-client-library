@@ -57,15 +57,11 @@ jobs:
           const summary = conclusion === 'success' ? "All unit tests passed." : "Tests failed.";
           const annotations = [];
 
-          if (conclusion === 'failure') {
-            annotations.push({path: "path/to/file", start_line: 1, end_line: 1, annotation_level: "failure", message: "Test failed"});
-          }
-
-          github.rest.checks.create({
+          github.rest.checks.create({d
             owner: context.repo.owner,
             repo: context.repo.repo,
             name: title,
-            head_sha: github.sha,
+            head_sha: context.sha,
             status: status,
             conclusion: conclusion,
             output: {
