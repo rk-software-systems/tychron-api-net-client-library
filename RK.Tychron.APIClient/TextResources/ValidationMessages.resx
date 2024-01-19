@@ -170,7 +170,7 @@
   </data>
   <data name="ReceiveSMSUpdatedAtCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR UpdatedAt is required.</value>
-  </data>  
+  </data>    
   <data name="ReceiveMmsDlrIdRequired" xml:space="preserve">
     <value>MMS DLR the Id is required.</value>
   </data>
@@ -198,4 +198,29 @@
   <data name="ReceiveMmsDlrDataRequired" xml:space="preserve">
     <value>MMS DLR the Data is required.</value>
   </data>
+  <data name="ReceiveMmsIdRequired" xml:space="preserve">
+    <value>MMS the Id is required.</value>
+  </data>
+  <data name="ReceiveMmsTimestampRequired" xml:space="preserve">
+    <value>MMS the Timestamp is required.</value>
+  </data>
+  <data name="ReceiveMmsInsertedAtRequired" xml:space="preserve">
+    <value>MMS the InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveMmsKindRequired" xml:space="preserve">
+    <value>MMS the Kind is required.</value>
+  </data>
+  <data name="ReceiveMmsFromRequired" xml:space="preserve">
+    <value>MMS the From is required.</value>
+  </data>
+  <data name="ReceiveMmsToRequired" xml:space="preserve">
+    <value>MMS the To is required.</value>
+  </data>
+  <data name="ReceiveMmsMetadataRequired" xml:space="preserve">
+    <value>MMS the Metadata is required.</value>
+  </data>
+  <data name="ReceiveMmsDataRequired" xml:space="preserve">
+    <value>MMS the Data is required.</value>
+  </data>
+  
 </root>

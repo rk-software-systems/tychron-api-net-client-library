@@ -61,6 +61,15 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MMS the Data is required..
+        /// </summary>
+        internal static string ReceiveMmsDataRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MMS DLR the Data is required..
         /// </summary>
         internal static string ReceiveMmsDlrDataRequired {
@@ -138,6 +147,69 @@ namespace RK.Tychron.APIClient.TextResources {
         internal static string ReceiveMmsDlrToRequired {
             get {
                 return ResourceManager.GetString("ReceiveMmsDlrToRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the From is required..
+        /// </summary>
+        internal static string ReceiveMmsFromRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsFromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Id is required..
+        /// </summary>
+        internal static string ReceiveMmsIdRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the InsertedAt is required..
+        /// </summary>
+        internal static string ReceiveMmsInsertedAtRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsInsertedAtRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Kind is required..
+        /// </summary>
+        internal static string ReceiveMmsKindRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsKindRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Metadata is required..
+        /// </summary>
+        internal static string ReceiveMmsMetadataRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsMetadataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Timestamp is required..
+        /// </summary>
+        internal static string ReceiveMmsTimestampRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsTimestampRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the To is required..
+        /// </summary>
+        internal static string ReceiveMmsToRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsToRequired", resourceCulture);
             }
         }
         

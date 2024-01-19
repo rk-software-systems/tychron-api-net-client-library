@@ -12,7 +12,10 @@ public class MmsDlrWebhookModel : IValidationSubject
 {
     /// <summary>
     /// The ID used to identify the message.
-    /// <code>"01E7NBVFJA6GQTEEV0YAQP9EMT"</code>
+    /// <para>
+    /// Example:
+    /// <code>"01E7NBVFJA6GQTEEV0YAQP9EMT" </code>
+    /// </para>  
     /// </summary>
     [JsonPropertyName("id")]
     public string? Id { get; set; }
@@ -135,7 +138,7 @@ public class MmsDlrWebhookModel : IValidationSubject
     /// <returns></returns>
     public List<TychronValidationError> Validate()
     {
-        // id, timestamp, inserted_at, kind, from, to, status_code, metadata, data 
+        // Validate: id, timestamp, inserted_at, kind, from, to, status_code, metadata, data 
         var result = new List<TychronValidationError>();
 
         if (string.IsNullOrEmpty(Id))
@@ -227,7 +230,6 @@ public class MmsDlrWebhookModel : IValidationSubject
                 Message = ValidationMessages.ReceiveMmsDlrDataRequired
             });
         }
-
 
         return result;
     }
