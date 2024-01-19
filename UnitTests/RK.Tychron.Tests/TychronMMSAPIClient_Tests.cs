@@ -24,17 +24,17 @@ public class TychronMMSAPIClient_Tests
             Subject = null,
             Parts =
             [
-                new MMSPart
+                new MmsPart
                 {
                     Id = "text-part",
                     Body = "This is text"
                 },
-                new MMSPart
+                new MmsPart
                 {
                     Id = "text-part",
                     Uri = "https://www.pngall.com/wp-content/uploads/2016/03/Tree-Free-PNG-Image.png",
                 },
-                new MMSPart
+                new MmsPart
                 {
                     Id = "embedded-content-part",
                     Body = "BASE64DIGEST",

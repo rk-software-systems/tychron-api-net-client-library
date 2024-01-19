@@ -7,7 +7,7 @@ namespace RK.Tychron.APIClient.Models.SMSDLR.Webhook;
 /// <summary>
 /// Webhooks message request model
 /// </summary>
-public class SMSDLRModel : IValidationSubject
+public class SMSDLRWebhookModel : IValidationSubject
 {
     /// <summary>
     /// The ID used to identify the DLR.

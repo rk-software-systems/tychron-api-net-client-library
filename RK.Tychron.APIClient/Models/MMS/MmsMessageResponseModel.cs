@@ -17,7 +17,7 @@ public class MMSMessageResponseModel
     /// An array of responses
     /// </summary>
     [JsonPropertyName("records")]
-    public List<MMSRecord>? Records { get; set; }
+    public List<MmsRecord>? Records { get; set; }
 
     /// <summary>
     /// Error data
