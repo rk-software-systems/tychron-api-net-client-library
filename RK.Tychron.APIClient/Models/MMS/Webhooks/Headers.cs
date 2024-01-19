@@ -13,6 +13,6 @@ public class Headers
     [JsonPropertyName("cc")]
     public string? Cc { get; set; }
 
-    [JsonPropertyName("content-type")]
-    public string? ContentType { get; set; }
+    [JsonPropertyName("x-mms-mm-status-code")]
+    public string? XMmsMmStatusCode { get; set; }
 }
