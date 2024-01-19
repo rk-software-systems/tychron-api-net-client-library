@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System;
+using RK.Tychron.APIClient.Model.SMS;
 
 namespace RK.Tychron.APIClient;
 
@@ -35,9 +36,8 @@ public class TychronClientMiddleware
 
         var webhooksClient = scope.ServiceProvider.GetRequiredService<TychronSMSDLRWebhooksClient>();
 
+        var result = webhooksClient.ReceiveSMSDLR(new ReceiveSMSDLRRequest());
 
-
-        var result = string.Empty;
-        await context.Response.WriteAsync(result).ConfigureAwait(false);
+        await context.Response.WriteAsync(result.Result.ToString()).ConfigureAwait(false);
     }
 }
