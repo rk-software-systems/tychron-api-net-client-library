@@ -1,8 +1,6 @@
 ﻿using RK.Tychron.APIClient.Models;
-
 using System.Text.Json.Serialization;
 using RK.Tychron.APIClient.Error;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using RK.Tychron.APIClient.TextResources;
 
 namespace RK.Tychron.APIClient.Model.MMS.Webhooks;
