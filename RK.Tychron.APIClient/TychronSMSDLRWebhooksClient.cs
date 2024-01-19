@@ -8,6 +8,7 @@ using System.Text.Json.Nodes;
 using System.Text.Json;
 using System.Text;
 using RK.Tychron.APIClient.Extensions;
+using RK.Tychron.APIClient.Model.MMS;
 
 namespace RK.Tychron.APIClient;
 
@@ -38,6 +39,7 @@ public class TychronSMSDLRWebhooksClient
     #endregion
 
     #region methods
+
     /// <summary>
     /// Receiving SMS DLR via HTTP (Webhooks)
     /// </summary>
@@ -51,75 +53,156 @@ public class TychronSMSDLRWebhooksClient
     /// Exception that is thrown on incoming model validation error.
     /// Available codes: <see cref="FromRequiredErrorCode"/>
     /// </exception>"
-    public async Task<BaseSMSResponse<SMSDLRMessageResponseModel>> ReceivingSMSDLR(SendSMSDLRRequest request)
+    public async Task<HttpStatusCode> ReceiveSMSDLR(ReceiveSMSDLRRequest request)
     {
         ValidateSmsDlrRequestModel(request);
+
+        var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, MediaTypeNames.Application.Json);
+        content.Headers.Add(TychronConstants.XMessageId, request.Id);
+        content.Headers.Add(TychronConstants.XMessageFormat, TychronConstants.XMessageFormatValue);
+
         var response =
-        await _httpClient.PostAsync(smsPath, new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, MediaTypeNames.Application.Json));
+            await _httpClient.PostAsync(smsPath, content);
 
-        response.Headers.TryGetValues(TychronConstants.XcdrHeaderName, out IEnumerable<string>? xcdrids);
-        var xcdrid = xcdrids?.FirstOrDefault();
-
-        if (response.StatusCode != HttpStatusCode.OK)
-        {
-            var responseContent = await response.Content.ReadAsStringAsync();
-            throw new TychronAPIException(xcdrid, (int)response.StatusCode, responseContent);
-        }
-
-        using var responseStream = await response.Content.ReadAsStreamAsync();
-        var document = JsonNode.Parse(responseStream, nodeOptions: new JsonNodeOptions()
-        {
-            PropertyNameCaseInsensitive = false
-        }) ?? new JsonObject();
-
-        return new BaseSMSResponse<SMSDLRMessageResponseModel>
-        {
-            XCDRID = xcdrid,
-            Messages = document.GetObjectsResponse<SMSDLRMessageResponseModel>(),
-            PartialFailure = response.StatusCode == HttpStatusCode.MultiStatus
-        };
+        return response.StatusCode;
     }
 
     #endregion
 
+    #region helpers
+
+    #endregion
+
     #region validation
-    private static void ValidateSmsDlrRequestModel(SendSMSDLRRequest request)
+
+    private static void ValidateSmsDlrRequestModel(ReceiveSMSDLRRequest request)
     {
         var errors = new List<TychronValidationError>();
 
-        if (string.IsNullOrEmpty(request.From))
+        if (string.IsNullOrEmpty(request.Id))
         {
-            // Message From is required
+            // field Id is required
             errors.Add(new TychronValidationError
             {
-                FieldName = nameof(SendSMSDLRRequest.From),
-                ErrorCode = FromRequiredErrorCode,
-                Message = ValidationMessages.SendSMSFromDlrRequired
+                FieldName = nameof(ReceiveSMSDLRRequest.Id),
+                ErrorCode = IdRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSIdRequired
             });
         }
 
-        if (string.IsNullOrEmpty(request.SmsId))
+        if (string.IsNullOrEmpty(request.Type))
         {
-            // The SmsId that is REQUIRED
+            // field Type is required
             errors.Add(new TychronValidationError
             {
-                FieldName = nameof(SendSMSDLRRequest.SmsId),
-                ErrorCode = SmsIdRequiredErrorCode,
-                Message = ValidationMessages.SendSMSSmsIdRequired
+                FieldName = nameof(ReceiveSMSDLRRequest.Type),
+                ErrorCode = TypeRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSTypeRequired
             });
         }
+
+        if (string.IsNullOrEmpty(request.From))
+        {
+            // field From is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.From),
+                ErrorCode = FromRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSFromRequired
+            });
+        }
+
+        if (string.IsNullOrEmpty(request.To))
+        {
+            // field To is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.To),
+                ErrorCode = ToRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSToRequired
+            });
+        }
+
+        if (string.IsNullOrEmpty(request.Status))
+        {
+            // field Status is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.Status),
+                ErrorCode = StatusRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSSStatusRequired
+            });
+        }
+
+        if (string.IsNullOrEmpty(request.ErrorCode))
+        {
+            // field ErrorCode is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.ErrorCode),
+                ErrorCode = ErrorCodeRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSSErrorCodeRequired
+            });
+        }
+        
+        if (string.IsNullOrEmpty(request.DeliveryStatus))
+        {
+            // field DeliveryStatus is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.DeliveryStatus),
+                ErrorCode = DeliveryStatusRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSSDeliveryStatusRequired
+            });
+        }
+
+        
+        if (string.IsNullOrEmpty(request.DeliveryErrorCode))
+        {
+            // field DeliveryStatus is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.DeliveryErrorCode),
+                ErrorCode = DeliveryErrorCodeRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSSDeliveryStatusRequired
+            });
+        }
+
+
+
 
         if (errors.Count > 0)
         {
             throw new TychronValidationException(errors);
         }
     }
+
     #endregion
 
     #region validation constants
-    //Send SMS DLR
-    public const string FromRequiredErrorCode = "SendSMS_DLR_From_Required";
 
-    public const string SmsIdRequiredErrorCode = "SendSMS_DLR_SmsId_Required";
+    //Receive SMS DLR
+    public const string IdRequiredErrorCode = "ReceiveSMS_DLR_Id_Required";
+
+    public const string TypeRequiredErrorCode = "ReceiveSMS_DLR_Type_Required";
+
+    public const string FromRequiredErrorCode = "ReceiveSMS_DLR_From_Required";
+
+    public const string ToRequiredErrorCode = "ReceiveSMS_DLR_To_Required";
+
+    public const string StatusRequiredErrorCode = "ReceiveSMS_DLR_Status_Required";
+
+    public const string ErrorCodeRequiredErrorCode = "ReceiveSMS_DLR_ErrorCode_Required";
+
+    public const string ErrorStatusRequiredErrorCode = "ReceiveSMS_DLR_ErrorStatus_Required";
+
+    public const string DeliveryStatusRequiredErrorCode = "ReceiveSMS_DLR_DeliveryStatus_Required";
+
+    public const string DeliveryErrorCodeRequiredErrorCode = "ReceiveSMS_DLR_DeliveryErrorCode_Required";
+
+    public const string InsertedAtRequiredErrorCode = "ReceiveSMS_DLR_InsertedAt_Required";
+
+    public const string UpdatedAtRequiredErrorCode = "ReceiveSMS_DLR_UpdatedAt_Required";
+
     #endregion
 }

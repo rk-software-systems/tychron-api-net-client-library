@@ -141,4 +141,30 @@
   <data name="SendMMSPartRequired" xml:space="preserve">
     <value>At least one part of the MMS message is required.</value>
   </data>
+  
+  <data name="ReceiveSMSIdRequired" xml:space="preserve">
+    <value>Receive SMS DLR ID is required.</value>
+  </data>
+  <data name="ReceiveSMSTypeRequired" xml:space="preserve">
+    <value>Receive SMS DLR Type is required.</value>
+  </data>
+  <data name="ReceiveSMSFromRequired" xml:space="preserve">
+    <value>Receive SMS DLR From is required.</value>
+  </data>
+  <data name="ReceiveSMSToRequired" xml:space="preserve">
+    <value>Receive SMS DLR To is required.</value>
+  </data>
+  <data name="ReceiveSMSSStatusRequired" xml:space="preserve">
+    <value>Receive SMS DLR Status is required.</value>
+  </data>
+  <data name="ReceiveSMSSErrorCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR ErrorCode is required.</value>
+  </data>
+  <data name="ReceiveSMSSDeliveryStatusRequired" xml:space="preserve">
+    <value>Receive SMS DLR DeliveryStatus is required.</value>
+  </data>
+  <data name="ReceiveSMSSDeliveryErrorCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR DeliveryErrorCode is required.</value>
+  </data>
+  
 </root>

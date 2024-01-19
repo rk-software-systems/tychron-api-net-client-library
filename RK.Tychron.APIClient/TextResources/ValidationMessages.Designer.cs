@@ -61,6 +61,78 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR From is required..
+        /// </summary>
+        internal static string ReceiveSMSFromRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSFromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR ID is required..
+        /// </summary>
+        internal static string ReceiveSMSIdRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR DeliveryErrorCode is required..
+        /// </summary>
+        internal static string ReceiveSMSSDeliveryErrorCodeRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSSDeliveryErrorCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR DeliveryStatus is required..
+        /// </summary>
+        internal static string ReceiveSMSSDeliveryStatusRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSSDeliveryStatusRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR ErrorCode is required..
+        /// </summary>
+        internal static string ReceiveSMSSErrorCodeRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSSErrorCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR Status is required..
+        /// </summary>
+        internal static string ReceiveSMSSStatusRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSSStatusRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR To is required..
+        /// </summary>
+        internal static string ReceiveSMSToRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSToRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR Type is required..
+        /// </summary>
+        internal static string ReceiveSMSTypeRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MMS Message From is required..
         /// </summary>
         internal static string SendMMSFromRequired {
