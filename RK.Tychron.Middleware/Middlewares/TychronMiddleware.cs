@@ -5,7 +5,7 @@ using RK.Tychron.APIClient.Webhook;
 using System.Net.Mime;
 using System.Text.Json;
 
-namespace RK.Tychron.APIClient.Middlewares;
+namespace RK.Tychron.Middlewares;
 
 public class TychronMiddleware<T>
     where T : IValidationSubject
