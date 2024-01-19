@@ -11,47 +11,47 @@ public class SMSDLRModel : IValidationSubject
 {
     /// <summary>
     /// The ID used to identify the DLR.
-    /// </summary>
     /// <example>
     /// <code>
     /// "01E7NBVFJA6GQTEEV0YAQP9EMT"
     /// </code>
     /// </example>
+    /// </summary>
     [JsonPropertyName("id")]
     public string? Id { get; set; }
 
     /// <summary>
     /// Parameter used to specify whether the message is a SMS message or SMS Delivery Receipt.
-    /// </summary>
     /// <example>
     /// <code>
     /// "sms_dlr"
     /// </code>
     /// </example>
+    /// </summary>
     [JsonPropertyName("type")]
     public string? Type { get; set; }
 
     /// <summary>
     /// The sending number that will appear in the message.<br/>
     /// The number must be formatted in a plain format, e.g (12003004000).
-    /// </summary>
     /// <example>
     /// <code>
     /// "12003004000"
     /// </code>
     /// </example>
+    /// </summary>
     [JsonPropertyName("from")]
     public string? From { get; set; }
 
     /// <summary>
     /// The recipient number of the message. <br/>
     /// The number must be formatted in a plain format, e.g (12003004000)
-    /// </summary>
     /// <example>
     /// <code>
     /// "12003004001"
     /// </code>
     /// </example>
+    /// </summary>
     [JsonPropertyName("to")]
     public string? To { get; set; }
 
@@ -116,42 +116,82 @@ public class SMSDLRModel : IValidationSubject
         var result = new List<TychronValidationError>();
         if (string.IsNullOrEmpty(Id))
         {
-            result.Add(new TychronValidationError { ErrorCode = IdRequiredErrorCode, FieldName = nameof(Id), Message = "Id is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = IdRequiredErrorCode,
+                FieldName = nameof(Id),
+                Message = "Id is required."
+            });
         }
 
         if (string.IsNullOrEmpty(Type))
         {
-            result.Add(new TychronValidationError { ErrorCode = TypeRequiredErrorCode, FieldName = nameof(Type), Message = "Type is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = TypeRequiredErrorCode,
+                FieldName = nameof(Type),
+                Message = "Type is required."
+            });
         }
 
         if (string.IsNullOrEmpty(From))
         {
-            result.Add(new TychronValidationError { ErrorCode = FromRequiredErrorCode, FieldName = nameof(From), Message = "From is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = FromRequiredErrorCode,
+                FieldName = nameof(From),
+                Message = "From is required."
+            });
         }
 
         if (string.IsNullOrEmpty(To))
         {
-            result.Add(new TychronValidationError { ErrorCode = ToRequiredErrorCode, FieldName = nameof(To), Message = "To is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = ToRequiredErrorCode,
+                FieldName = nameof(To),
+                Message = "To is required."
+            });
         }
 
         if (string.IsNullOrEmpty(Status))
         {
-            result.Add(new TychronValidationError { ErrorCode = StatusRequiredErrorCode, FieldName = nameof(Status), Message = "Status is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = StatusRequiredErrorCode,
+                FieldName = nameof(Status),
+                Message = "Status is required."
+            });
         }
 
         if (string.IsNullOrEmpty(ErrorCode))
         {
-            result.Add(new TychronValidationError { ErrorCode = ErrorCodeRequiredErrorCode, FieldName = nameof(ErrorCode), Message = "ErrorCode is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = ErrorCodeRequiredErrorCode,
+                FieldName = nameof(ErrorCode),
+                Message = "ErrorCode is required."
+            });
         }
 
         if (string.IsNullOrEmpty(DeliveryStatus))
         {
-            result.Add(new TychronValidationError { ErrorCode = DeliveryStatusRequiredErrorCode, FieldName = nameof(DeliveryStatus), Message = "DeliveryStatus is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = DeliveryStatusRequiredErrorCode,
+                FieldName = nameof(DeliveryStatus),
+                Message = "DeliveryStatus is required."
+            });
         }
 
         if (string.IsNullOrEmpty(DeliveryErrorCode))
         {
-            result.Add(new TychronValidationError { ErrorCode = DeliveryErrorCodeRequiredErrorCode, FieldName = nameof(DeliveryErrorCode), Message = "DeliveryErrorCode is required." });
+            result.Add(new TychronValidationError
+            {
+                ErrorCode = DeliveryErrorCodeRequiredErrorCode,
+                FieldName = nameof(DeliveryErrorCode),
+                Message = "DeliveryErrorCode is required."
+            });
         }
 
         return result;
