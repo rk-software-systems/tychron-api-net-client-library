@@ -1,14 +1,10 @@
 ﻿using RK.Tychron.APIClient.Error;
 using RK.Tychron.APIClient.Model.SMS;
-using RK.Tychron.APIClient.Models.SMSDLR;
 using RK.Tychron.APIClient.TextResources;
 using System.Net.Mime;
 using System.Net;
-using System.Text.Json.Nodes;
 using System.Text.Json;
 using System.Text;
-using RK.Tychron.APIClient.Extensions;
-using RK.Tychron.APIClient.Model.MMS;
 
 namespace RK.Tychron.APIClient;
 
@@ -164,7 +160,7 @@ public class TychronSMSDLRWebhooksClient
             {
                 FieldName = nameof(ReceiveSMSDLRRequest.DeliveryErrorCode),
                 ErrorCode = DeliveryErrorCodeRequiredErrorCode,
-                Message = ValidationMessages.ReceiveSMSSDeliveryStatusRequired
+                Message = ValidationMessages.ReceiveSMSSDeliveryErrorCodeRequired
             });
         }
 
