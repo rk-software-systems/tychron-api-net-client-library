@@ -3,7 +3,7 @@
 namespace RK.Tychron.APIClient.Model.SMS;
 
 /// <summary>
-/// Webhooks message response model
+/// Webhooks message request model
 /// </summary>
 public class ReceiveSMSDLRRequest
 {
@@ -63,13 +63,13 @@ public class ReceiveSMSDLRRequest
     /// An ISO 8601 formatted timestamp that represents when the message was received by the API.
     /// </summary>
     [JsonPropertyName("inserted_at")]
-    public DateTime InsertedAt { get; set; }
+    public DateTime? InsertedAt { get; set; }
 
     /// <summary>
     /// An ISO 8601 formatted timestamp that represents when the message was last updated by the API.
     /// </summary>
     [JsonPropertyName("updated_at")]
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     /// <summary>
     /// An ISO 8601 formatted timestamp that represents when the message was considered delivered.

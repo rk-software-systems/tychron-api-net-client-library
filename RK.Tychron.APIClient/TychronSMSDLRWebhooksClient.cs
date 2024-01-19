@@ -126,7 +126,7 @@ public class TychronSMSDLRWebhooksClient
             {
                 FieldName = nameof(ReceiveSMSDLRRequest.Status),
                 ErrorCode = StatusRequiredErrorCode,
-                Message = ValidationMessages.ReceiveSMSSStatusRequired
+                Message = ValidationMessages.ReceiveSMSStatusRequired
             });
         }
 
@@ -137,10 +137,10 @@ public class TychronSMSDLRWebhooksClient
             {
                 FieldName = nameof(ReceiveSMSDLRRequest.ErrorCode),
                 ErrorCode = ErrorCodeRequiredErrorCode,
-                Message = ValidationMessages.ReceiveSMSSErrorCodeRequired
+                Message = ValidationMessages.ReceiveSMSErrorCodeRequired
             });
         }
-        
+
         if (string.IsNullOrEmpty(request.DeliveryStatus))
         {
             // field DeliveryStatus is required
@@ -148,24 +148,42 @@ public class TychronSMSDLRWebhooksClient
             {
                 FieldName = nameof(ReceiveSMSDLRRequest.DeliveryStatus),
                 ErrorCode = DeliveryStatusRequiredErrorCode,
-                Message = ValidationMessages.ReceiveSMSSDeliveryStatusRequired
+                Message = ValidationMessages.ReceiveSMSDeliveryStatusRequired
             });
         }
 
-        
         if (string.IsNullOrEmpty(request.DeliveryErrorCode))
         {
-            // field DeliveryStatus is required
+            // field DeliveryErrorCode is required
             errors.Add(new TychronValidationError
             {
                 FieldName = nameof(ReceiveSMSDLRRequest.DeliveryErrorCode),
                 ErrorCode = DeliveryErrorCodeRequiredErrorCode,
-                Message = ValidationMessages.ReceiveSMSSDeliveryErrorCodeRequired
+                Message = ValidationMessages.ReceiveSMSDeliveryErrorCodeRequired
             });
         }
 
+        if (request.InsertedAt == null)
+        {
+            // field InsertedAt is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.InsertedAt),
+                ErrorCode = InsertedAtRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSInsertedAtCodeRequired
+            });
+        }
 
-
+        if (request.UpdatedAt == null)
+        {
+            // field InsertedAt is required
+            errors.Add(new TychronValidationError
+            {
+                FieldName = nameof(ReceiveSMSDLRRequest.UpdatedAt),
+                ErrorCode = UpdatedAtRequiredErrorCode,
+                Message = ValidationMessages.ReceiveSMSUpdatedAtCodeRequired
+            });
+        }
 
         if (errors.Count > 0)
         {

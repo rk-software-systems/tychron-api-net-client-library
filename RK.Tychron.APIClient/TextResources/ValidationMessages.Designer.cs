@@ -61,6 +61,33 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR DeliveryErrorCode is required..
+        /// </summary>
+        internal static string ReceiveSMSDeliveryErrorCodeRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSDeliveryErrorCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR DeliveryStatus is required..
+        /// </summary>
+        internal static string ReceiveSMSDeliveryStatusRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSDeliveryStatusRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR ErrorCode is required..
+        /// </summary>
+        internal static string ReceiveSMSErrorCodeRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSErrorCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receive SMS DLR From is required..
         /// </summary>
         internal static string ReceiveSMSFromRequired {
@@ -79,38 +106,20 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receive SMS DLR DeliveryErrorCode is required..
+        ///   Looks up a localized string similar to Receive SMS DLR InsertedAt is required..
         /// </summary>
-        internal static string ReceiveSMSSDeliveryErrorCodeRequired {
+        internal static string ReceiveSMSInsertedAtCodeRequired {
             get {
-                return ResourceManager.GetString("ReceiveSMSSDeliveryErrorCodeRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Receive SMS DLR DeliveryStatus is required..
-        /// </summary>
-        internal static string ReceiveSMSSDeliveryStatusRequired {
-            get {
-                return ResourceManager.GetString("ReceiveSMSSDeliveryStatusRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Receive SMS DLR ErrorCode is required..
-        /// </summary>
-        internal static string ReceiveSMSSErrorCodeRequired {
-            get {
-                return ResourceManager.GetString("ReceiveSMSSErrorCodeRequired", resourceCulture);
+                return ResourceManager.GetString("ReceiveSMSInsertedAtCodeRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Receive SMS DLR Status is required..
         /// </summary>
-        internal static string ReceiveSMSSStatusRequired {
+        internal static string ReceiveSMSStatusRequired {
             get {
-                return ResourceManager.GetString("ReceiveSMSSStatusRequired", resourceCulture);
+                return ResourceManager.GetString("ReceiveSMSStatusRequired", resourceCulture);
             }
         }
         
@@ -129,6 +138,15 @@ namespace RK.Tychron.APIClient.TextResources {
         internal static string ReceiveSMSTypeRequired {
             get {
                 return ResourceManager.GetString("ReceiveSMSTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR UpdatedAt is required..
+        /// </summary>
+        internal static string ReceiveSMSUpdatedAtCodeRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSMSUpdatedAtCodeRequired", resourceCulture);
             }
         }
         

@@ -154,17 +154,22 @@
   <data name="ReceiveSMSToRequired" xml:space="preserve">
     <value>Receive SMS DLR To is required.</value>
   </data>
-  <data name="ReceiveSMSSStatusRequired" xml:space="preserve">
+  <data name="ReceiveSMSStatusRequired" xml:space="preserve">
     <value>Receive SMS DLR Status is required.</value>
   </data>
-  <data name="ReceiveSMSSErrorCodeRequired" xml:space="preserve">
+  <data name="ReceiveSMSErrorCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR ErrorCode is required.</value>
   </data>
-  <data name="ReceiveSMSSDeliveryStatusRequired" xml:space="preserve">
+  <data name="ReceiveSMSDeliveryStatusRequired" xml:space="preserve">
     <value>Receive SMS DLR DeliveryStatus is required.</value>
   </data>
-  <data name="ReceiveSMSSDeliveryErrorCodeRequired" xml:space="preserve">
+  <data name="ReceiveSMSDeliveryErrorCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR DeliveryErrorCode is required.</value>
   </data>
-  
+  <data name="ReceiveSMSInsertedAtCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSUpdatedAtCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR UpdatedAt is required.</value>
+  </data>
 </root>
