@@ -141,7 +141,6 @@
   <data name="SendMMSPartRequired" xml:space="preserve">
     <value>At least one part of the MMS message is required.</value>
   </data>
-  
   <data name="ReceiveSMSIdRequired" xml:space="preserve">
     <value>Receive SMS DLR ID is required.</value>
   </data>
@@ -171,5 +170,57 @@
   </data>
   <data name="ReceiveSMSUpdatedAtCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR UpdatedAt is required.</value>
+  </data>    
+  <data name="ReceiveMmsDlrIdRequired" xml:space="preserve">
+    <value>MMS DLR the Id is required.</value>
   </data>
+  <data name="ReceiveMmsDlrTimestampRequired" xml:space="preserve">
+    <value>MMS DLR the Timestamp is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrInsertedAtRequired" xml:space="preserve">
+    <value>MMS DLR the InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrKindRequired" xml:space="preserve">
+    <value>MMS DLR the Kind is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrFromRequired" xml:space="preserve">
+    <value>MMS DLR the From is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrToRequired" xml:space="preserve">
+    <value>MMS DLR the To is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrStatusCodeRequired" xml:space="preserve">
+    <value>MMS DLR the StatusCode is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrMetadataRequired" xml:space="preserve">
+    <value>MMS DLR the Metadata is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrDataRequired" xml:space="preserve">
+    <value>MMS DLR the Data is required.</value>
+  </data>
+  <data name="ReceiveMmsIdRequired" xml:space="preserve">
+    <value>MMS the Id is required.</value>
+  </data>
+  <data name="ReceiveMmsTimestampRequired" xml:space="preserve">
+    <value>MMS the Timestamp is required.</value>
+  </data>
+  <data name="ReceiveMmsInsertedAtRequired" xml:space="preserve">
+    <value>MMS the InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveMmsKindRequired" xml:space="preserve">
+    <value>MMS the Kind is required.</value>
+  </data>
+  <data name="ReceiveMmsFromRequired" xml:space="preserve">
+    <value>MMS the From is required.</value>
+  </data>
+  <data name="ReceiveMmsToRequired" xml:space="preserve">
+    <value>MMS the To is required.</value>
+  </data>
+  <data name="ReceiveMmsMetadataRequired" xml:space="preserve">
+    <value>MMS the Metadata is required.</value>
+  </data>
+  <data name="ReceiveMmsDataRequired" xml:space="preserve">
+    <value>MMS the Data is required.</value>
+  </data>
+  
 </root>

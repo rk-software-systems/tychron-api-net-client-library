@@ -60,8 +60,8 @@ public class SendMMSRequest
 
     /// <summary>
     /// Parts list <br/>
-    /// <see cref="MMSPart"/>
+    /// <see cref="MmsPart"/>
     /// </summary>
     [JsonPropertyName("parts")]
-    public required List<MMSPart> Parts { get; set; }
+    public required List<MmsPart> Parts { get; set; }
 }

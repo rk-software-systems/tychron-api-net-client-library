@@ -61,6 +61,159 @@ namespace RK.Tychron.APIClient.TextResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MMS the Data is required..
+        /// </summary>
+        internal static string ReceiveMmsDataRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the Data is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrDataRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrDataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the From is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrFromRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrFromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the Id is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrIdRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the InsertedAt is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrInsertedAtRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrInsertedAtRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the Kind is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrKindRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrKindRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the Metadata is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrMetadataRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrMetadataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the StatusCode is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrStatusCodeRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrStatusCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the Timestamp is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrTimestampRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrTimestampRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS DLR the To is required..
+        /// </summary>
+        internal static string ReceiveMmsDlrToRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsDlrToRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the From is required..
+        /// </summary>
+        internal static string ReceiveMmsFromRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsFromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Id is required..
+        /// </summary>
+        internal static string ReceiveMmsIdRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the InsertedAt is required..
+        /// </summary>
+        internal static string ReceiveMmsInsertedAtRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsInsertedAtRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Kind is required..
+        /// </summary>
+        internal static string ReceiveMmsKindRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsKindRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Metadata is required..
+        /// </summary>
+        internal static string ReceiveMmsMetadataRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsMetadataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the Timestamp is required..
+        /// </summary>
+        internal static string ReceiveMmsTimestampRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsTimestampRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMS the To is required..
+        /// </summary>
+        internal static string ReceiveMmsToRequired {
+            get {
+                return ResourceManager.GetString("ReceiveMmsToRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receive SMS DLR DeliveryErrorCode is required..
         /// </summary>
         internal static string ReceiveSMSDeliveryErrorCodeRequired {

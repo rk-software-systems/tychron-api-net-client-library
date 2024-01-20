@@ -6,7 +6,7 @@ namespace RK.Tychron.APIClient.Model.MMS;
 /// Part <br/>
 /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#request-parameters"/>
 /// </summary>
-public class MMSPart
+public class MmsPart
 {
     /// <summary>
     /// An ID used to identify one part (one attachment) of a multipart message.

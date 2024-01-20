@@ -52,4 +52,8 @@
 		<None Include="README.md" Pack="true" PackagePath="\"/>
 		<None Include="LICENSE" Pack="true" PackagePath="\"/>
 	</ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\MMSDLR\Webhooks\" />
+  </ItemGroup>
+
 </Project>

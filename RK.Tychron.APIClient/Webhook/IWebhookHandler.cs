@@ -7,7 +7,7 @@ namespace RK.Tychron.APIClient.Webhook
     /// Implement this interface and register in Middleware Creation to be able to handle webhook requests
     /// </summary>
     /// <typeparam name="T">Type of webhook request model to be handled.</typeparam>
-    public interface IWebhookHandler<T>
+    public interface IWebhookHandler<in T>
         where T: IValidationSubject
     {
         /// <summary>

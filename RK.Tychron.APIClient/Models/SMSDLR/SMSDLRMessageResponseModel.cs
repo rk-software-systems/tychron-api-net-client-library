@@ -63,5 +63,5 @@ public class SMSDLRMessageResponseModel
     public DateTime DoneAt { get; set; }
 
     [JsonPropertyName("csp_campaign")]
-    public SMSCspCampaign? CspCampaign { get; set; }
+    public SmsCspCampaign? CspCampaign { get; set; }
 }
