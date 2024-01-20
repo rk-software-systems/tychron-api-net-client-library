@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RK.Tychron.APIClient", "RK.Tychron.APIClient\RK.Tychron.APIClient.csproj", "{341035B5-0E19-4309-8BC0-34D1B15B4017}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D232F8D-BD7C-4D68-8302-A300B511490D}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\run-unit-tests-workflow.yml = .github\workflows\run-unit-tests-workflow.yml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{F40E1510-6F35-46CA-8317-3C393782470E}"
 EndProject
