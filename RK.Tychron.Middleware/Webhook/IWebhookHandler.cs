@@ -1,6 +1,6 @@
-﻿using RK.Tychron.APIClient.Models;
+﻿using RK.Tychron.Middleware.Models;
 
-namespace RK.Tychron.APIClient.Webhook
+namespace RK.Tychron.Middleware.Webhook
 {
     /// <summary>
     /// This interface is used to handle webhook requests

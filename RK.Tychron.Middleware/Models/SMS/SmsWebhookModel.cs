@@ -1,8 +1,8 @@
-﻿using RK.Tychron.APIClient.Models;
+﻿using RK.Tychron.Middleware.Error;
+using RK.Tychron.Middleware.Models;
 using System.Text.Json.Serialization;
-using RK.Tychron.APIClient.Error;
 
-namespace RK.Tychron.APIClient.Model.SMS;
+namespace RK.Tychron.Middleware.Model.SMS;
 
 /// <summary>
 /// Sms Webhook Model
@@ -83,7 +83,7 @@ public class SmsWebhookModel : IValidationSubject
     [JsonPropertyName("expires_at")]
     public DateTime ExpiresAt { get; set; }
 
-    public List<TychronValidationError> Validate()
+    public List<TychronMiddlewareValidationError> Validate()
     {
         throw new NotImplementedException();
     }

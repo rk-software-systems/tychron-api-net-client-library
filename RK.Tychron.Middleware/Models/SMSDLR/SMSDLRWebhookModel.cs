@@ -1,8 +1,8 @@
-﻿using RK.Tychron.APIClient.Error;
-using RK.Tychron.APIClient.Model.SMS;
+﻿using RK.Tychron.Middleware.Error;
+using RK.Tychron.Middleware.Model.SMS;
 using System.Text.Json.Serialization;
 
-namespace RK.Tychron.APIClient.Models.SMSDLR.Webhook;
+namespace RK.Tychron.Middleware.Models.SMSDLR;
 
 /// <summary>
 /// Webhooks message request model
@@ -111,12 +111,12 @@ public class SMSDLRWebhookModel : IValidationSubject
     [JsonPropertyName("sms")]
     public Sms? Sms { get; set; }
 
-    public List<TychronValidationError> Validate()
+    public List<TychronMiddlewareValidationError> Validate()
     {
-        var result = new List<TychronValidationError>();
+        var result = new List<TychronMiddlewareValidationError>();
         if (string.IsNullOrEmpty(Id))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = IdRequiredErrorCode,
                 FieldName = nameof(Id),
@@ -126,7 +126,7 @@ public class SMSDLRWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(Type))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = TypeRequiredErrorCode,
                 FieldName = nameof(Type),
@@ -136,7 +136,7 @@ public class SMSDLRWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(From))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = FromRequiredErrorCode,
                 FieldName = nameof(From),
@@ -146,7 +146,7 @@ public class SMSDLRWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(To))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = ToRequiredErrorCode,
                 FieldName = nameof(To),
@@ -156,7 +156,7 @@ public class SMSDLRWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(Status))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = StatusRequiredErrorCode,
                 FieldName = nameof(Status),
@@ -166,7 +166,7 @@ public class SMSDLRWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(ErrorCode))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = ErrorCodeRequiredErrorCode,
                 FieldName = nameof(ErrorCode),
@@ -176,7 +176,7 @@ public class SMSDLRWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(DeliveryStatus))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = DeliveryStatusRequiredErrorCode,
                 FieldName = nameof(DeliveryStatus),
@@ -186,7 +186,7 @@ public class SMSDLRWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(DeliveryErrorCode))
         {
-            result.Add(new TychronValidationError
+            result.Add(new TychronMiddlewareValidationError
             {
                 ErrorCode = DeliveryErrorCodeRequiredErrorCode,
                 FieldName = nameof(DeliveryErrorCode),

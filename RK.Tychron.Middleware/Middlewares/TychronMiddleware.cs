@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using RK.Tychron.APIClient.Models;
-using RK.Tychron.APIClient.Webhook;
+using RK.Tychron.Middleware.Models;
+using RK.Tychron.Middleware.Webhook;
 using System.Net.Mime;
 using System.Text.Json;
 

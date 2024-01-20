@@ -117,28 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SendSMSBodyRequired" xml:space="preserve">
-    <value>SMS Message Body is required.</value>
+  <data name="ReceiveMmsDataRequired" xml:space="preserve">
+    <value>MMS the Data is required.</value>
   </data>
-  <data name="SendSMSFromRequired" xml:space="preserve">
-    <value>SMS Message From is required.</value>
+  <data name="ReceiveMmsDlrDataRequired" xml:space="preserve">
+    <value>MMS DLR the Data is required.</value>
   </data>
-  <data name="SendSMSToRequired" xml:space="preserve">
-    <value>At least one SMS message recipient is required.</value>
+  <data name="ReceiveMmsDlrFromRequired" xml:space="preserve">
+    <value>MMS DLR the From is required.</value>
   </data>
-  <data name="SendSMSFromDlrRequired" xml:space="preserve">
-    <value>SMS DLR Message From is required.</value>
+  <data name="ReceiveMmsDlrIdRequired" xml:space="preserve">
+    <value>MMS DLR the Id is required.</value>
   </data>
-  <data name="SendSMSSmsIdRequired" xml:space="preserve">
-    <value>SMS DLR SmsId is required.</value>
+  <data name="ReceiveMmsDlrInsertedAtRequired" xml:space="preserve">
+    <value>MMS DLR the InsertedAt is required.</value>
   </data>
-  <data name="SendMMSToRequired" xml:space="preserve">
-    <value>At least one MMS message recipient is required.</value>
+  <data name="ReceiveMmsDlrKindRequired" xml:space="preserve">
+    <value>MMS DLR the Kind is required.</value>
   </data>
-  <data name="SendMMSFromRequired" xml:space="preserve">
-    <value>MMS Message From is required.</value>
+  <data name="ReceiveMmsDlrMetadataRequired" xml:space="preserve">
+    <value>MMS DLR the Metadata is required.</value>
   </data>
-  <data name="SendMMSPartRequired" xml:space="preserve">
-    <value>At least one part of the MMS message is required.</value>
+  <data name="ReceiveMmsDlrStatusCodeRequired" xml:space="preserve">
+    <value>MMS DLR the StatusCode is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrTimestampRequired" xml:space="preserve">
+    <value>MMS DLR the Timestamp is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrToRequired" xml:space="preserve">
+    <value>MMS DLR the To is required.</value>
+  </data>
+  <data name="ReceiveMmsFromRequired" xml:space="preserve">
+    <value>MMS the From is required.</value>
+  </data>
+  <data name="ReceiveMmsIdRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ReceiveMmsIdRequired1" xml:space="preserve">
+    <value>MMS the Id is required.</value>
+  </data>
+  <data name="ReceiveMmsInsertedAtRequired" xml:space="preserve">
+    <value>MMS the InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveMmsKindRequired" xml:space="preserve">
+    <value>MMS the Kind is required.</value>
+  </data>
+  <data name="ReceiveMmsMetadataRequired" xml:space="preserve">
+    <value>MMS the Metadata is required.</value>
+  </data>
+  <data name="ReceiveMmsTimestampRequired" xml:space="preserve">
+    <value>MMS the Timestamp is required.</value>
+  </data>
+  <data name="ReceiveMmsToRequired" xml:space="preserve">
+    <value>MMS the To is required.</value>
+  </data>
+  <data name="ReceiveSMSDeliveryErrorCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR DeliveryErrorCode is required.</value>
+  </data>
+  <data name="ReceiveSMSDeliveryStatusRequired" xml:space="preserve">
+    <value>Receive SMS DLR DeliveryStatus is required.</value>
+  </data>
+  <data name="ReceiveSMSErrorCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR ErrorCode is required.</value>
+  </data>
+  <data name="ReceiveSMSFromRequired" xml:space="preserve">
+    <value>Receive SMS DLR From is required.</value>
+  </data>
+  <data name="ReceiveSMSIdRequired" xml:space="preserve">
+    <value>Receive SMS DLR ID is required.</value>
+  </data>
+  <data name="ReceiveSMSInsertedAtCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSStatusRequired" xml:space="preserve">
+    <value>Receive SMS DLR Status is required.</value>
+  </data>
+  <data name="ReceiveSMSToRequired" xml:space="preserve">
+    <value>Receive SMS DLR To is required.</value>
+  </data>
+  <data name="ReceiveSMSTypeRequired" xml:space="preserve">
+    <value>Receive SMS DLR Type is required.</value>
+  </data>
+  <data name="ReceiveSMSUpdatedAtCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR UpdatedAt is required.</value>
   </data>
 </root>

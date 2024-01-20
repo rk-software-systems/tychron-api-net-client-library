@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RK.Tychron.APIClient.Model.MMS.Webhooks;
+namespace RK.Tychron.Middleware.Model.MMS;
 
 public class CspCampaign
 {

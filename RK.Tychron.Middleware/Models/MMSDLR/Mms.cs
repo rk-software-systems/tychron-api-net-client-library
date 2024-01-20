@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RK.Tychron.APIClient.Models.MMSDLR.Webhooks;
+namespace RK.Tychron.Middleware.Models.MMSDLR;
 
 public class Mms
 {

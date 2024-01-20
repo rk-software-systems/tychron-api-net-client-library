@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using RK.Tychron.APIClient.Models;
+using RK.Tychron.Middleware.Models;
+using RK.Tychron.Middlewares;
 
-namespace RK.Tychron.Middlewares.Extensions
+namespace RK.Tychron.Middleware.Extensions
 {
     public static class TychronMiddlewareExtensions
     {
