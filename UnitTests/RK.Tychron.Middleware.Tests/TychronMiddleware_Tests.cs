@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using RK.Tychron.APIClient.Model.SMS;
 using RK.Tychron.Middleware.Models;
@@ -20,7 +21,7 @@ public class Tests
 
         HttpContext ctx = new DefaultHttpContext();
 
-        RequestDelegate next = (HttpContext hc) => Task.CompletedTask;
+        //RequestDelegate next = (HttpContext hc) => Task.CompletedTask;
 
         var mw = new TychronMiddleware<SmsWebhookModel>();
 
@@ -42,7 +43,13 @@ internal class TestHandler<T> : IWebhookHandler<T> where T : IValidationSubject
 {
     public async Task Handle(T requestModel)
     {
-
+        DoIt(requestModel);
         return;
+    }
+
+    [Conditional("DEBUG")]
+    private static void DoIt(T requestModel)
+    {
+        Debug.WriteLine(requestModel.Validate().Count);
     }
 }
