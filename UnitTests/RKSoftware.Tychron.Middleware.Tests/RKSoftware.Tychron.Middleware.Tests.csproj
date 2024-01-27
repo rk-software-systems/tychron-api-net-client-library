@@ -25,11 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Factories\" />
+    <ProjectReference Include="..\..\RKSoftware.Tychron.Middleware\RKSoftware.Tychron.Middleware.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\RKSoftware.Tychron.Middleware\RKSoftware.Tychron.Middleware.csproj" />
+    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>

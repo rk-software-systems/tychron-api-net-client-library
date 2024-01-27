@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
-using RKSoftware.Tychron.Middleware.Model.SMS;
 using RKSoftware.Tychron.Middleware.Models;
 using RKSoftware.Tychron.Middleware.TextResources;
 using RKSoftware.Tychron.Middleware.Error;
 
-namespace RKSoftware.Tychron.APIClient.Model.SMS;
+namespace RKSoftware.Tychron.Middleware.Model.SMS;
 
 /// <summary>
 /// Sms Webhook Model
@@ -22,7 +21,7 @@ public class SmsWebhookModel : IValidationSubject
     public string? Id { get; set; }
 
     /// <summary>
-    /// Paramter used to specify whether the message is a SMS message or SMS Delivery Receipt.
+    /// Parameter used to specify whether the message is a SMS message or SMS Delivery Receipt.
     /// <para>
     /// Example:
     /// <code> "sms" </code>

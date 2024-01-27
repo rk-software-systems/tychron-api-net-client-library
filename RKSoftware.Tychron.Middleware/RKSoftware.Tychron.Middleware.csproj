@@ -48,7 +48,6 @@
 		<None Include="..\company-logo.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 		<None Include="LICENSE" Pack="true" PackagePath="\" />
