@@ -56,7 +56,7 @@ jobs:
         run: |
           echo "Getting latest tag from origin"
           git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-          latest_tag=$(git tag -l 'v[0-9].[0-9].[0-9].[0-9]*' --sort=-version:refname | head -n 1)
+          latest_tag=$(git tag -l 'v[0-9].[0-9].[0-9]*' --sort=-version:refname | head -n 1)
           echo "latest tag: $latest_tag"
           if tags=$(git tag --sort=-v:refname); then
             latest_tag=$(echo "$tags" | head -n 1)
