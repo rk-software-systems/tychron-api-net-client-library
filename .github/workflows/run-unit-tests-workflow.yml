@@ -22,10 +22,10 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build UnitTests/RK.Tychron.Client.Tests/RK.Tychron.Client.Tests.csproj --configuration Release
+      run: dotnet build UnitTests/RKSoftware.Tychron.Client.Tests/RKSoftware.Tychron.Client.Tests.csproj --configuration Release
 
     - name: Run tests
-      run: dotnet test UnitTests/RK.Tychron.Client.Tests/RK.Tychron.Client.Tests.csproj --configuration Release --no-build --collect "XPlat Code Coverage"
+      run: dotnet test UnitTests/RKSoftware.Tychron.Client.Tests/RKSoftware.Tychron.Client.Tests.csproj --configuration Release --no-build --collect "XPlat Code Coverage"
     - name: Check test results
       run: |
         test_exit_code=$(dotnet test --list-tests --no-build | grep -q "Total: 0 Passed:"; echo $?)
@@ -39,4 +39,4 @@ jobs:
       with:
         name: coverage-results
         path: |
-          ./UnitTests/RK.Tychron.Client.Tests/TestResults/**/*.xml
+          ./UnitTests/RKSoftware.Tychron.Client.Tests/TestResults/**/*.xml

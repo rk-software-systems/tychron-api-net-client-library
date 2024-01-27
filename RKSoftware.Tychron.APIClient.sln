@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D232F8D-BD7C-4D68-8302-A300B511490D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-package-publish-alpha.yml = .github\workflows\dotnet-package-publish-alpha.yml
+		.github\workflows\dotnet-package-publish-release.yml = .github\workflows\dotnet-package-publish-release.yml
+		.github\workflows\run-unit-tests-workflow.yml = .github\workflows\run-unit-tests-workflow.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{F40E1510-6F35-46CA-8317-3C393782470E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RKSoftware.Tychron.Client.Tests", "UnitTests\RKSoftware.Tychron.Client.Tests\RKSoftware.Tychron.Client.Tests.csproj", "{B8BD6B16-A499-470A-9A9E-C4DA3EB35322}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RKSoftware.Tychron.Middleware.Tests", "UnitTests\RKSoftware.Tychron.Middleware.Tests\RKSoftware.Tychron.Middleware.Tests.csproj", "{19093856-209D-4F36-B278-AA11EC1870E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RKSoftware.Tychron.APIClient", "RKSoftware.Tychron.APIClient\RKSoftware.Tychron.APIClient.csproj", "{20D66857-4253-4201-9817-DF2DB3C9F766}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RKSoftware.Tychron.Middleware", "RKSoftware.Tychron.Middleware\RKSoftware.Tychron.Middleware.csproj", "{10C0BD03-74DB-4C28-B731-2C2B64AB9E92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8BD6B16-A499-470A-9A9E-C4DA3EB35322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8BD6B16-A499-470A-9A9E-C4DA3EB35322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8BD6B16-A499-470A-9A9E-C4DA3EB35322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8BD6B16-A499-470A-9A9E-C4DA3EB35322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19093856-209D-4F36-B278-AA11EC1870E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19093856-209D-4F36-B278-AA11EC1870E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19093856-209D-4F36-B278-AA11EC1870E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19093856-209D-4F36-B278-AA11EC1870E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20D66857-4253-4201-9817-DF2DB3C9F766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D66857-4253-4201-9817-DF2DB3C9F766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D66857-4253-4201-9817-DF2DB3C9F766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D66857-4253-4201-9817-DF2DB3C9F766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10C0BD03-74DB-4C28-B731-2C2B64AB9E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C0BD03-74DB-4C28-B731-2C2B64AB9E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C0BD03-74DB-4C28-B731-2C2B64AB9E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C0BD03-74DB-4C28-B731-2C2B64AB9E92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B8BD6B16-A499-470A-9A9E-C4DA3EB35322} = {F40E1510-6F35-46CA-8317-3C393782470E}
+		{19093856-209D-4F36-B278-AA11EC1870E5} = {F40E1510-6F35-46CA-8317-3C393782470E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D52BF326-F660-468E-9C51-BD93DB8F24A1}
+	EndGlobalSection
+EndGlobal

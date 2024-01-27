@@ -4,6 +4,11 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Confirm to proceed'
+        required: true
 # this action pipeline is used to generate alpha packages for testing purposes
 jobs:
   build:
@@ -50,11 +55,11 @@ jobs:
           echo "Next version: $next_version"
           echo "::set-output name=NEXT_VERSION::$next_version"
 
-      - name: Install dependencies RK.Tychron.APIClient
-        run: dotnet restore RK.Tychron.APIClient
+      - name: Install dependencies RKSoftware.Tychron.APIClient
+        run: dotnet restore RKSoftware.Tychron.APIClient
 
-      - name: Build RK.Tychron.APIClient package
-        run: dotnet build RK.Tychron.APIClient --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+      - name: Build RKSoftware.Tychron.APIClient package
+        run: dotnet build RKSoftware.Tychron.APIClient --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
 
-      - name: Push generated RK.Tychron.APIClient to NuGet repository
-        run: dotnet nuget push ./RK.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      - name: Push generated RKSoftware.Tychron.APIClient to NuGet repository
+        run: dotnet nuget push ./RKSoftware.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
