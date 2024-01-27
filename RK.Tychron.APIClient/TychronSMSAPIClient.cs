@@ -1,7 +1,7 @@
 ﻿using RK.Tychron.APIClient.Error;
+using RK.Tychron.APIClient.Extensions;
 using RK.Tychron.APIClient.Model.SMS;
 using RK.Tychron.APIClient.TextResources;
-using RK.Tychron.APIClient.Extensions;
 using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
@@ -9,6 +9,10 @@ using System.Text.Json.Nodes;
 
 namespace RK.Tychron.APIClient
 {
+    /// <summary>
+    /// This is a client for Tychron SMS API.<br/>
+    /// Please check documentation for details: <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/"/>
+    /// </summary>
     public sealed class TychronSMSAPIClient
     {
         #region constants
@@ -25,6 +29,18 @@ namespace RK.Tychron.APIClient
 
         #region ctors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TychronSMSAPIClient"/> class.
+        /// </summary>
+        /// <param name="httpClient">Http Client that if going to be used to send requests to Tychron API.<br/>
+        /// Please follow the <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#authorization"/> documentation page to get more information about how to configure HttpClient.
+        /// You can also use Extension method <see cref="TychronClientsRegistrationExtensions.RegisterTychronClient{TychronSMSAPIClient}"/> to register Tychron clients in DI container.
+        /// <example>
+        /// <code>
+        /// builder.Services.RegisterTychronClient{TychronSMSAPIClient}(baseUrl, bearerKey);
+        /// </code>
+        /// </example>
+        /// </param>
         public TychronSMSAPIClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -132,10 +148,19 @@ namespace RK.Tychron.APIClient
         #region error validation constants
 
         //Send SMS
+        /// <summary>
+        /// Validation error code for <see cref="SendSMSRequest.To"/> field required.
+        /// </summary>
         public const string ToRequiredErrorCode = "SendSMS_To_Required";
 
+        /// <summary>
+        /// Validation error code for <see cref="SendSMSRequest.Body"/> field required.
+        /// </summary>
         public const string BodyRequiredErrorCode = "SendSMS_Body_Required";
 
+        /// <summary>
+        /// Validation error code for <see cref="SendSMSRequest.From"/> field required.
+        /// </summary>
         public const string FromRequiredErrorCode = "SendSMS_From_Required";
 
         #endregion

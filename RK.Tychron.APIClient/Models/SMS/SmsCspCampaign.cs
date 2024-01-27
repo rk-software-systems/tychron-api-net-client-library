@@ -2,6 +2,9 @@
 
 namespace RK.Tychron.APIClient.Model.SMS
 {
+    /// <summary>
+    /// An object containing the Campaign information of the request, if available.
+    /// </summary>
     public class SmsCspCampaign
     {
         /// <summary>

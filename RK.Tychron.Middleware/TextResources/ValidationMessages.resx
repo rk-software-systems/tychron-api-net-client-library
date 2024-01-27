@@ -171,34 +171,64 @@
   <data name="ReceiveMmsToRequired" xml:space="preserve">
     <value>MMS the To is required.</value>
   </data>
-  <data name="ReceiveSMSDeliveryErrorCodeRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRDeliveryErrorCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR DeliveryErrorCode is required.</value>
   </data>
-  <data name="ReceiveSMSDeliveryStatusRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRDeliveryStatusRequired" xml:space="preserve">
     <value>Receive SMS DLR DeliveryStatus is required.</value>
   </data>
-  <data name="ReceiveSMSErrorCodeRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRErrorCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR ErrorCode is required.</value>
   </data>
-  <data name="ReceiveSMSFromRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRFromRequired" xml:space="preserve">
     <value>Receive SMS DLR From is required.</value>
   </data>
-  <data name="ReceiveSMSIdRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRIdRequired" xml:space="preserve">
     <value>Receive SMS DLR ID is required.</value>
   </data>
-  <data name="ReceiveSMSInsertedAtCodeRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRInsertedAtCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR InsertedAt is required.</value>
   </data>
-  <data name="ReceiveSMSStatusRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRStatusRequired" xml:space="preserve">
     <value>Receive SMS DLR Status is required.</value>
   </data>
-  <data name="ReceiveSMSToRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRToRequired" xml:space="preserve">
     <value>Receive SMS DLR To is required.</value>
   </data>
-  <data name="ReceiveSMSTypeRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRTypeRequired" xml:space="preserve">
     <value>Receive SMS DLR Type is required.</value>
   </data>
-  <data name="ReceiveSMSUpdatedAtCodeRequired" xml:space="preserve">
+  <data name="ReceiveSMSDLRUpdatedAtCodeRequired" xml:space="preserve">
     <value>Receive SMS DLR UpdatedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSIdRequired" xml:space="preserve">
+    <value>Receive SMS ID is required.</value>
+  </data>
+  <data name="ReceiveSMSTypeRequired" xml:space="preserve">
+    <value>Receive SMS Type is required.</value>
+  </data>
+  <data name="ReceiveSMSFromRequired" xml:space="preserve">
+    <value>Receive SMS From is required.</value>
+  </data> 
+  <data name="ReceiveSMSToRequired" xml:space="preserve">
+    <value>Receive SMS To is required.</value>
+  </data>  
+  <data name="ReceiveSMSBodyRequired" xml:space="preserve">
+    <value>Receive SMS Body is required.</value>
+  </data>
+  <data name="ReceiveSMSPriorityRequired" xml:space="preserve">
+    <value>Receive SMS Priority is required.</value>
+  </data>
+   <data name="ReceiveSMSEncodingRequired" xml:space="preserve">
+    <value>Receive SMS Encoding is required.</value>
+  </data> 
+  <data name="ReceiveSMSInsertedAtRequired" xml:space="preserve">
+    <value>Receive SMS InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSUpdatedAtRequired" xml:space="preserve">
+    <value>Receive SMS  UpdatedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSProcessedAtRequired" xml:space="preserve">
+    <value>Receive SMS  ProcessedAt is required.</value>
   </data>
 </root>

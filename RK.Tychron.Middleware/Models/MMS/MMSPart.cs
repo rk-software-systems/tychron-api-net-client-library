@@ -3,42 +3,40 @@
 namespace RK.Tychron.Middleware.Model.MMS;
 
 /// <summary>
-/// Part <br/>
-/// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#request-parameters"/>
+/// MMS has a recursive structure, in which the root Part may have more sub parts. Typically this will be a SMIL, Text and an Image, Audio, or Video part.
 /// </summary>
-public class MmsPart
+public class MMSPart
 {
     /// <summary>
-    /// An ID used to identify one part (one attachment) of a multipart message.
+    /// A map containing header pairs, keys are downcased for easy indexing.
     /// </summary>
-    [JsonPropertyName("id")]
-    public string? Id { get; set; }
+    [JsonPropertyName("headers")]
+    public dynamic? Headers { get; set; }
 
     /// <summary>
-    /// The body of the part.If the <b>"transfer_encoding"</b> parameter is used,<br/>
-    /// the part body should be encoded.
+    /// An <see href="https://docs.tychron.info/mms-api/receiving-mms-via-http/#encoding">encodings</see> that is applied to the message part's body. The encoding can be either base64 or identity.
+    /// <example>
+    /// <code>"base64"</code>
+    /// </example>
+    /// </summary>
+    [JsonPropertyName("encoding")]
+    public string? Encoding { get; set; }
+
+    /// <summary>
+    /// A string containing the part's body or data, this will be encoded according to the value of encoding.
     /// </summary>
     [JsonPropertyName("body")]
     public string? Body { get; set; }
 
     /// <summary>
-    /// A URL to a specified resource. The content type will be determined by the file's extension.<br/>
-    /// There is a 2mb limit on any files (this includes the HTTP overhead). As a rule of thumb,<br/>
-    /// try to keep file sizes below 1mb, as most carriers will reject messages containing content<br/>
-    /// larger than 1mb.
+    /// Denotes whether the message contains more than one part, typically MMS messages will always be multipart, but in some rare instances they may just be a large text blob.
     /// </summary>
-    /// <remarks>
-    /// Please note that in some cases, carriers limit files sizes to as low as <i>500kb</i>.<br/>
-    /// If you require further details regarding carrier restrictions on file sizes,<br/>
-    /// please contact <b>(support @tychron.com)</b>.
-    ///</remarks>
-    [JsonPropertyName("uri")]
-    public string? Uri { get; set; }
+    [JsonPropertyName("is_multipart")]
+    public bool IsMultipart { get; set; }
 
     /// <summary>
-    /// An <b>encoding</b> that is applied to the message body when transferring via JSON.<br/>
-    /// The encoding can be either base64 or identity.
+    /// If this part has is_multipart set, then this field will be populated with the further sub parts of the message.
     /// </summary>
-    [JsonPropertyName("transfer_encoding")]
-    public string? TransferEncoding { get; set; }
+    [JsonPropertyName("parts")]
+    public List<MMSPart>? Parts { get; set; }
 }
