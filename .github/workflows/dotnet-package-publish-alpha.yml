@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-
+# this action pipeline is used to generate alpha packages for testing purposes
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +15,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '8.x'
+      # get the latest tag from origin
       - name: Get Latest Tag
         id: latest_tag
         run: |
@@ -28,6 +29,7 @@ jobs:
           else
             echo "::set-output name=latest_tag::v0.0.0" # Set a default tag if no tags are present
           fi
+      # extract version from tag (remove 'v' prefix if present)
       - name: Extract Version
         id: extract_version
         run: |
@@ -35,6 +37,7 @@ jobs:
           version=${latest_tag#v} # Remove 'v' prefix if present
           echo "Latest version: $version"
           echo "::set-output name=version::$version"
+      # Increment version number
       - name: Increment Version
         id: increment_version
         run: |
