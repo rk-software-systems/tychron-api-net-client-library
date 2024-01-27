@@ -62,4 +62,4 @@ jobs:
         run: dotnet build RKSoftware.Tychron.APIClient --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
 
       - name: Push generated RKSoftware.Tychron.APIClient to NuGet repository
-        run: dotnet nuget push ./RKSoftware.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ./RKSoftware.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
