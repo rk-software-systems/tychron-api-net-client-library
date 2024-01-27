@@ -2,6 +2,9 @@
 
 namespace RK.Tychron.Middleware.Model.SMS
 {
+    /// <summary>
+    /// A map containing basic information on the Campaign associated with this message.
+    /// </summary>
     public class SmsCspCampaign
     {
         /// <summary>

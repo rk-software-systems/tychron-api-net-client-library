@@ -118,7 +118,7 @@ public class MmsDlrWebhookModel : IValidationSubject
     /// only headers.
     /// </summary>
     [JsonPropertyName("data")]
-    public Data? Data { get; set; }
+    public MMSPart? Data { get; set; }
 
     /// <summary>
     /// A map containing miscellaneous information about the request.
@@ -234,13 +234,40 @@ public class MmsDlrWebhookModel : IValidationSubject
         return result;
     }
 
+    /// <summary>
+    /// Validation Error Code <see cref="Id" /> required.
+    /// </summary>
     public const string IdRequiredErrorCode = "ReceiveMMS_DLR_Id_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Timestamp" /> required.
+    /// </summary>
     public const string TimestampRequiredErrorCode = "ReceiveMMS_DLR_Timestamp_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="InsertedAt" /> required.
+    /// </summary>
     public const string InsertedAtRequiredErrorCode = "ReceiveMMS_DLR_InsertedAt_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Kind" /> required.
+    /// </summary>
     public const string KindRequiredErrorCode = "ReceiveMMS_DLR_Kind_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="From" /> required.
+    /// </summary>
     public const string FromRequiredErrorCode = "ReceiveMMS_DLR_From_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="To" /> required.
+    /// </summary>
     public const string ToRequiredErrorCode = "ReceiveMMS_DLR_To_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="StatusCode" /> required.
+    /// </summary>
     public const string StatusCodeRequiredErrorCode = "ReceiveMMS_DLR_StatusCode_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Metadata" /> required.
+    /// </summary>
     public const string MetadataRequiredErrorCode = "ReceiveMMS_DLR_Metadata_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Data" /> required.
+    /// </summary>
     public const string DataRequiredErrorCode = "ReceiveMMS_DLR_Data_Required";
 }

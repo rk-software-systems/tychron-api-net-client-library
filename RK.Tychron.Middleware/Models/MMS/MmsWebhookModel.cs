@@ -104,7 +104,7 @@ public class MmsWebhookModel : IValidationSubject
     /// Typically this will be a SMIL, Text and an Image, Audio, or Video part.
     /// </summary>
     [JsonPropertyName("data")]
-    public Data? Data { get; set; }
+    public MMSPart? Data { get; set; }
 
     /// <summary>
     /// A map containing miscellaneous information about the request.
@@ -112,6 +112,10 @@ public class MmsWebhookModel : IValidationSubject
     [JsonPropertyName("metadata")]
     public Metadata? Metadata { get; set; }
 
+    /// <summary>
+    /// Validation model.
+    /// </summary>
+    /// <returns>List of errors or empty list.</returns>
     public List<TychronMiddlewareValidationError> Validate()
     {
         // Validate: id, timestamp, inserted_at, kind, from, to, metadata, data
@@ -201,13 +205,36 @@ public class MmsWebhookModel : IValidationSubject
         return result;
     }
 
+    /// <summary>
+    /// Validation Error Code <see cref="Id"/> required.
+    /// </summary>
     public const string IdRequiredErrorCode = "ReceiveMMS_Id_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Timestamp"/> required.
+    /// </summary>
     public const string TimestampRequiredErrorCode = "ReceiveMMS_Timestamp_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="InsertedAt"/> required.
+    /// </summary>
     public const string InsertedAtRequiredErrorCode = "ReceiveMMS_InsertedAt_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Kind"/> required.
+    /// </summary>
     public const string KindRequiredErrorCode = "ReceiveMMS_Kind_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="From"/> required.
+    /// </summary>
     public const string FromRequiredErrorCode = "ReceiveMMS_From_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="To"/> required.
+    /// </summary>
     public const string ToRequiredErrorCode = "ReceiveMMS_To_Required";
-    public const string StatusCodeRequiredErrorCode = "ReceiveMMS_StatusCode_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Metadata"/> required.
+    /// </summary>
     public const string MetadataRequiredErrorCode = "ReceiveMMS_Metadata_Required";
+    /// <summary>
+    /// Validation Error Code <see cref="Data"/> required.
+    /// </summary>
     public const string DataRequiredErrorCode = "ReceiveMMS_Data_Required";
 }
