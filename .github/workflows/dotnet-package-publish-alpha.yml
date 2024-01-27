@@ -1,14 +1,10 @@
 name: NuGet Generation
 
 on:
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
-    inputs:
-      confirmation:
-        description: 'Confirm to proceed'
-        required: true
+  workflow_run:
+    workflows: ["Run Tychron Unit Tests"]
+    types:
+      - completed
 # this action pipeline is used to generate alpha packages for testing purposes
 jobs:
   build:
@@ -54,7 +50,7 @@ jobs:
           next_version="${major}.${minor}.${next_patch}-alpha.0.${{github.RUN_NUMBER}}"
           echo "Next version: $next_version"
           echo "::set-output name=NEXT_VERSION::$next_version"
-
+      # generate client library package
       - name: Install dependencies RKSoftware.Tychron.APIClient
         run: dotnet restore RKSoftware.Tychron.APIClient
 
@@ -63,3 +59,12 @@ jobs:
 
       - name: Push generated RKSoftware.Tychron.APIClient to NuGet repository
         run: dotnet nuget push ./RKSoftware.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      # generate middleware for webhooks package
+      - name: Install dependencies RKSoftware.Tychron.Middleware
+        run: dotnet restore RKSoftware.Tychron.Middleware
+
+      - name: Build RKSoftware.Tychron.Middleware package
+        run: dotnet build RKSoftware.Tychron.Middleware --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+
+      - name: Push generated RKSoftware.Tychron.Middleware to NuGet repository
+        run: dotnet nuget push ./RKSoftware.Tychron.Middleware/bin/Release/*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json

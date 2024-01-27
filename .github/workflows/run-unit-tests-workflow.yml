@@ -1,4 +1,4 @@
-name: Run Unit Tests
+name: Run Tychron Unit Tests
 
 on:
   pull_request:
