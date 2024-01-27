@@ -1,0 +1,76 @@
+name: NuGet Generation
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Update or Create NuGet package
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.x'
+      # Get that latest tag from origin
+      - name: Get Latest Tag
+        id: latest_tag
+        run: |
+          if tags=$(git tag --sort=-v:refname); then
+            latest_tag=$(echo "$tags" | head -n 1)
+            if [ -z "$latest_tag" ]; then
+              echo "::set-output name=latest_tag::v0.0.0" # Set a default tag if no tags are present
+            else
+              echo "::set-output name=latest_tag::$latest_tag"
+            fi
+          else
+            echo "::set-output name=latest_tag::v0.0.0" # Set a default tag if no tags are present
+          fi
+      # Extract version from tag (remove 'v' prefix if present)
+      - name: Extract Version
+        id: extract_version
+        run: |
+          latest_tag=${{ steps.latest_tag.outputs.latest_tag }}
+          version=${latest_tag#v} # Remove 'v' prefix if present
+          echo "Latest version: $version"
+          echo "::set-output name=version::$version"
+      # Increment version number
+      - name: Increment Version
+        id: increment_version
+        run: |
+          version=${{ steps.extract_version.outputs.version }}
+          major=$(echo $version | cut -d. -f1)
+          minor=$(echo $version | cut -d. -f2)
+          patch=$(echo $version | cut -d. -f3)
+          next_patch=$((patch + 1))
+          next_version="${major}.${minor}.${next_patch}"
+          echo "Next version: $next_version"
+          echo "::set-output name=NEXT_VERSION::$next_version"
+      # public and push client library package
+      - name: Install dependencies RKSoftware.Tychron.APIClient
+        run: dotnet restore RKSoftware.Tychron.APIClient
+
+      - name: Build RKSoftware.Tychron.APIClient package
+        run: dotnet build RKSoftware.Tychron.APIClient --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+
+      - name: Push generated RKSoftware.Tychron.APIClient to NuGet repository
+        run: dotnet nuget push ./RKSoftware.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      # build and push middleware package for webhooks
+      - name: Install dependencies RKSoftware.Tychron.Middleware
+        run: dotnet restore RKSoftware.Tychron.Middleware
+
+      - name: Build RKSoftware.Tychron.Middleware package
+        run: dotnet build RKSoftware.Tychron.Middleware --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+
+      - name: Push generated RKSoftware.Tychron.Middleware to NuGet repository
+        run: dotnet nuget push ./RKSoftware.Tychron.Middleware/bin/Release/*.nupkg --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      # Add releast tag to main branch and push it to origin
+      - name: Add tag and push
+        run: |
+          TAG_VERSION=v${{steps.increment_version.outputs.NEXT_VERSION}}
+          git tag TAG_VERSION
+          git push origin TAG_VERSION

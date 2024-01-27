@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ReceiveMmsDataRequired" xml:space="preserve">
+    <value>MMS the Data is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrDataRequired" xml:space="preserve">
+    <value>MMS DLR the Data is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrFromRequired" xml:space="preserve">
+    <value>MMS DLR the From is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrIdRequired" xml:space="preserve">
+    <value>MMS DLR the Id is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrInsertedAtRequired" xml:space="preserve">
+    <value>MMS DLR the InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrKindRequired" xml:space="preserve">
+    <value>MMS DLR the Kind is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrMetadataRequired" xml:space="preserve">
+    <value>MMS DLR the Metadata is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrStatusCodeRequired" xml:space="preserve">
+    <value>MMS DLR the StatusCode is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrTimestampRequired" xml:space="preserve">
+    <value>MMS DLR the Timestamp is required.</value>
+  </data>
+  <data name="ReceiveMmsDlrToRequired" xml:space="preserve">
+    <value>MMS DLR the To is required.</value>
+  </data>
+  <data name="ReceiveMmsFromRequired" xml:space="preserve">
+    <value>MMS the From is required.</value>
+  </data>
+  <data name="ReceiveMmsIdRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ReceiveMmsIdRequired1" xml:space="preserve">
+    <value>MMS the Id is required.</value>
+  </data>
+  <data name="ReceiveMmsInsertedAtRequired" xml:space="preserve">
+    <value>MMS the InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveMmsKindRequired" xml:space="preserve">
+    <value>MMS the Kind is required.</value>
+  </data>
+  <data name="ReceiveMmsMetadataRequired" xml:space="preserve">
+    <value>MMS the Metadata is required.</value>
+  </data>
+  <data name="ReceiveMmsTimestampRequired" xml:space="preserve">
+    <value>MMS the Timestamp is required.</value>
+  </data>
+  <data name="ReceiveMmsToRequired" xml:space="preserve">
+    <value>MMS the To is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRDeliveryErrorCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR DeliveryErrorCode is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRDeliveryStatusRequired" xml:space="preserve">
+    <value>Receive SMS DLR DeliveryStatus is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRErrorCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR ErrorCode is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRFromRequired" xml:space="preserve">
+    <value>Receive SMS DLR From is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRIdRequired" xml:space="preserve">
+    <value>Receive SMS DLR ID is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRInsertedAtCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRStatusRequired" xml:space="preserve">
+    <value>Receive SMS DLR Status is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRToRequired" xml:space="preserve">
+    <value>Receive SMS DLR To is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRTypeRequired" xml:space="preserve">
+    <value>Receive SMS DLR Type is required.</value>
+  </data>
+  <data name="ReceiveSMSDLRUpdatedAtCodeRequired" xml:space="preserve">
+    <value>Receive SMS DLR UpdatedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSIdRequired" xml:space="preserve">
+    <value>Receive SMS ID is required.</value>
+  </data>
+  <data name="ReceiveSMSTypeRequired" xml:space="preserve">
+    <value>Receive SMS Type is required.</value>
+  </data>
+  <data name="ReceiveSMSFromRequired" xml:space="preserve">
+    <value>Receive SMS From is required.</value>
+  </data> 
+  <data name="ReceiveSMSToRequired" xml:space="preserve">
+    <value>Receive SMS To is required.</value>
+  </data>  
+  <data name="ReceiveSMSBodyRequired" xml:space="preserve">
+    <value>Receive SMS Body is required.</value>
+  </data>
+  <data name="ReceiveSMSPriorityRequired" xml:space="preserve">
+    <value>Receive SMS Priority is required.</value>
+  </data>
+   <data name="ReceiveSMSEncodingRequired" xml:space="preserve">
+    <value>Receive SMS Encoding is required.</value>
+  </data> 
+  <data name="ReceiveSMSInsertedAtRequired" xml:space="preserve">
+    <value>Receive SMS InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSUpdatedAtRequired" xml:space="preserve">
+    <value>Receive SMS  UpdatedAt is required.</value>
+  </data>
+  <data name="ReceiveSMSProcessedAtRequired" xml:space="preserve">
+    <value>Receive SMS  ProcessedAt is required.</value>
+  </data>
+</root>
