@@ -20,15 +20,14 @@ jobs:
       - name: Get Latest Tag
         id: latest_tag
         run: |
-          if tags=$(git tag --sort=-v:refname); then
-            latest_tag=$(echo "$tags" | head -n 1)
-            if [ -z "$latest_tag" ]; then
-              echo "::set-output name=latest_tag::v0.0.0" # Set a default tag if no tags are present
-            else
-              echo "::set-output name=latest_tag::$latest_tag"
-            fi
-          else
+          echo "Getting latest tag from origin"
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+          latest_tag=$(git tag -l 'v[0-9].[0-9].[0-9]*' --sort=-version:refname | head -n 1)
+          echo "latest tag: $latest_tag"
+          if [ -z "$latest_tag" ]; then
             echo "::set-output name=latest_tag::v0.0.0" # Set a default tag if no tags are present
+          else
+            echo "::set-output name=latest_tag::$latest_tag"
           fi
       # Extract version from tag (remove 'v' prefix if present)
       - name: Extract Version
