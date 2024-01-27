@@ -5,9 +5,8 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D232F8D-BD7C-4D68-8302-A300B511490D}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\dotnet-package-publish-alpha.yml = .github\workflows\dotnet-package-publish-alpha.yml
 		.github\workflows\dotnet-package-publish-release.yml = .github\workflows\dotnet-package-publish-release.yml
-		.github\workflows\run-unit-tests-workflow.yml = .github\workflows\run-unit-tests-workflow.yml
+		.github\workflows\run-tests-and-push-alpha-workflow.yml = .github\workflows\run-tests-and-push-alpha-workflow.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{F40E1510-6F35-46CA-8317-3C393782470E}"

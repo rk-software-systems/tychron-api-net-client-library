@@ -1,0 +1,104 @@
+name: Run Tychron Unit Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET Core SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 8.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build UnitTests/RKSoftware.Tychron.Client.Tests/RKSoftware.Tychron.Client.Tests.csproj --configuration Release
+
+    - name: Run tests
+      run: dotnet test UnitTests/RKSoftware.Tychron.Client.Tests/RKSoftware.Tychron.Client.Tests.csproj --configuration Release --no-build --collect "XPlat Code Coverage"
+    - name: Check test results
+      run: |
+        test_exit_code=$(dotnet test --list-tests --no-build | grep -q "Total: 0 Passed:"; echo $?)
+        if [ "$test_exit_code" -eq 0 ]; then
+          echo "Tests failed. Failing the workflow."
+          exit 1
+        fi
+
+    - name: Upload code coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-results
+        path: |
+          ./UnitTests/RKSoftware.Tychron.Client.Tests/TestResults/**/*.xml
+  build-and-push:
+    runs-on: ubuntu-latest
+    name: Build projects. Update or Create NuGet package
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.x'
+      # get the latest tag from origin
+      - name: Get Latest Tag
+        id: latest_tag
+        run: |
+          if tags=$(git tag --sort=-v:refname); then
+            latest_tag=$(echo "$tags" | head -n 1)
+            if [ -z "$latest_tag" ]; then
+              echo "::set-output name=latest_tag::v0.0.0" # Set a default tag if no tags are present
+            else
+              echo "::set-output name=latest_tag::$latest_tag"
+            fi
+          else
+            echo "::set-output name=latest_tag::v0.0.0" # Set a default tag if no tags are present
+          fi
+      # extract version from tag (remove 'v' prefix if present)
+      - name: Extract Version
+        id: extract_version
+        run: |
+          latest_tag=${{ steps.latest_tag.outputs.latest_tag }}
+          version=${latest_tag#v} # Remove 'v' prefix if present
+          echo "Latest version: $version"
+          echo "::set-output name=version::$version"
+      # Increment version number
+      - name: Increment Version
+        id: increment_version
+        run: |
+          version=${{ steps.extract_version.outputs.version }}
+          major=$(echo $version | cut -d. -f1)
+          minor=$(echo $version | cut -d. -f2)
+          patch=$(echo $version | cut -d. -f3)
+          next_patch=$((patch + 1))
+          next_version="${major}.${minor}.${next_patch}-alpha.0.${{github.RUN_NUMBER}}"
+          echo "Next version: $next_version"
+          echo "::set-output name=NEXT_VERSION::$next_version"
+      # generate client library package
+      - name: Install dependencies RKSoftware.Tychron.APIClient
+        run: dotnet restore RKSoftware.Tychron.APIClient
+
+      - name: Build RKSoftware.Tychron.APIClient package
+        run: dotnet build RKSoftware.Tychron.APIClient --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+
+      - name: Push generated RKSoftware.Tychron.APIClient to NuGet repository
+        run: dotnet nuget push ./RKSoftware.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      # generate middleware for webhooks package
+      - name: Install dependencies RKSoftware.Tychron.Middleware
+        run: dotnet restore RKSoftware.Tychron.Middleware
+
+      - name: Build RKSoftware.Tychron.Middleware package
+        run: dotnet build RKSoftware.Tychron.Middleware --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+
+      - name: Push generated RKSoftware.Tychron.Middleware to NuGet repository
+        run: dotnet nuget push ./RKSoftware.Tychron.Middleware/bin/Release/*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
