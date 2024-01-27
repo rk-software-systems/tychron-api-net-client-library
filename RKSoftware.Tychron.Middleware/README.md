@@ -1,12 +1,8 @@
-## About
+### About
 This package contains Middlewares that can serve as Webhooks for Tychron SMS and MMS Delivery Reports. 
 These endpoints can also be used to Receive SMS / MMS / SMS DLR / MMS DLR messages from Tychron API.
 
-## How To Use
-### Authentication Middlewares
-According to Tychron API Documentation, you can use Basic Authentication or Bearer Authentication.
-There are to ways to use Tychron Clients.
-
+### How To Use
 - Register Middleware in Startup.cs or Program.cs
 ```
 // Register Tychron Middleware for SMS
@@ -60,3 +56,13 @@ appBuilder.UseTychronBasicAuth("username", "password");
 ```
 
 Register Tychron Authentication Middleware only in AuthConfigurator parameter of UseTychronMiddleware method to make auth affect only Tychron requests.
+
+### Handing Tychron Webhook Requests
+
+To Be able to handle Tychron Webhook requests you need to create a class that implements `IWebhookHandler<T>` interface and register it in DI container.
+
+`T` -  Incoming Webhook Model. It can be one of the following:
+- `SmsWebhookModel` - Incoming SMS Webhook Model
+- `MmsWebhookModel` - Incoming MMS Webhook Model
+- `MmsDlrWebhookModel` - Incoming MMS DLR Webhook Model
+- `SMSDLRWebhookModel` - Incoming SMS DLR Webhook Model

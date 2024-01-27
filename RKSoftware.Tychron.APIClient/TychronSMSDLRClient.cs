@@ -11,6 +11,9 @@ using System.Text.Json.Nodes;
 
 namespace RKSoftware.Tychron.APIClient
 {
+    /// <summary>
+    /// This Client is used to send SMS DLR.
+    /// </summary>
     public class TychronSMSDLRClient
     {
         #region constants
@@ -27,6 +30,10 @@ namespace RKSoftware.Tychron.APIClient
 
         #region ctors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TychronSMSDLRClient"/> class.
+        /// </summary>
+        /// <param name="httpClient">Http Client that is used to Issue requests to Tychron API.</param>
         public TychronSMSDLRClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -116,8 +123,14 @@ namespace RKSoftware.Tychron.APIClient
 
         #region validation constants
         //Send SMS DLR
+        /// <summary>
+        /// Validation error <see cref="SendSMSDLRRequest.From"/> is required.
+        /// </summary>
         public const string FromRequiredErrorCode = "SendSMS_DLR_From_Required";
 
+        /// <summary>
+        /// Validation error <see cref="SendSMSDLRRequest.SmsId"/> is required.
+        /// </summary>
         public const string SmsIdRequiredErrorCode = "SendSMS_DLR_SmsId_Required";
         #endregion
     }

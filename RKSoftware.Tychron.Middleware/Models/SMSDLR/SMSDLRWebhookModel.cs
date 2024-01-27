@@ -111,6 +111,10 @@ public class SMSDLRWebhookModel : IValidationSubject
     [JsonPropertyName("sms")]
     public Sms? Sms { get; set; }
 
+    /// <summary>
+    /// Validate if incoming request is valid.
+    /// </summary>
+    /// <returns>List of Validation errors or empty list in case of valid model.</returns>
     public List<TychronMiddlewareValidationError> Validate()
     {
         var result = new List<TychronMiddlewareValidationError>();
@@ -198,21 +202,48 @@ public class SMSDLRWebhookModel : IValidationSubject
     }
 
     //Receive SMS DLR
+    /// <summary>
+    /// Validation Error <see cref="Id"/> is required.
+    /// </summary>
     public const string IdRequiredErrorCode = "ReceiveSMS_DLR_Id_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="Type"/> is required.
+    /// </summary>
     public const string TypeRequiredErrorCode = "ReceiveSMS_DLR_Type_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="From"/> is required.
+    /// </summary>
     public const string FromRequiredErrorCode = "ReceiveSMS_DLR_From_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="To"/> is required.
+    /// </summary>
     public const string ToRequiredErrorCode = "ReceiveSMS_DLR_To_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="Status"/> is required.
+    /// </summary>
     public const string StatusRequiredErrorCode = "ReceiveSMS_DLR_Status_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="ErrorCode"/> is required.
+    /// </summary>
     public const string ErrorCodeRequiredErrorCode = "ReceiveSMS_DLR_ErrorCode_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="DeliveryStatus"/> is required.
+    /// </summary>
     public const string ErrorStatusRequiredErrorCode = "ReceiveSMS_DLR_ErrorStatus_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="DeliveryStatus"/> is required.
+    /// </summary>
     public const string DeliveryStatusRequiredErrorCode = "ReceiveSMS_DLR_DeliveryStatus_Required";
 
+    /// <summary>
+    /// Validation Error <see cref="DeliveryErrorCode"/> is required.
+    /// </summary>
     public const string DeliveryErrorCodeRequiredErrorCode = "ReceiveSMS_DLR_DeliveryErrorCode_Required";
 }
