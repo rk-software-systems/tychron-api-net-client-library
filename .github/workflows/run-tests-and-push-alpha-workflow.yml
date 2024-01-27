@@ -54,6 +54,8 @@ jobs:
       - name: Get Latest Tag
         id: latest_tag
         run: |
+          echo "Getting latest tag from origin"
+          echo $(git tag --sort=-v:refname)
           if tags=$(git tag --sort=-v:refname); then
             latest_tag=$(echo "$tags" | head -n 1)
             if [ -z "$latest_tag" ]; then
