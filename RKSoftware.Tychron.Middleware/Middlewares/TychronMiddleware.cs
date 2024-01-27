@@ -7,13 +7,24 @@ using System.Text.Json;
 
 namespace RKSoftware.Tychron.Middlewares;
 
+/// <summary>
+/// This middleware is used to receive Tychron Webhook requests.
+/// </summary>
+/// <typeparam name="T">Type of requests that are being received.</typeparam>
 public class TychronMiddleware<T>
     where T : IValidationSubject
 {
-    public TychronMiddleware()
+    private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
-    }
-
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+    /// <summary>
+    /// Execute Middleware
+    /// </summary>
+    /// <param name="context">Http request context.</param>
+    /// <param name="handler">Object that is used to Process Incoming Webhook Request.</param>
+    /// <param name="logger">Logger</param>
+    /// <returns></returns>
     public async Task InvokeAsync(HttpContext context, IWebhookHandler<T> handler, ILogger logger)
     {
         if (context.Request.Method != HttpMethods.Post)
@@ -24,10 +35,7 @@ public class TychronMiddleware<T>
             return;
         }
 
-        var content = JsonSerializer.Deserialize<T>(context.Request.Body, new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        });
+        var content = JsonSerializer.Deserialize<T>(context.Request.Body, _jsonSerializerOptions);
 
         if (content == null)
         {
@@ -63,5 +71,8 @@ public class TychronMiddleware<T>
         context.Response.StatusCode = StatusCodes.Status204NoContent;
     }
 
+    /// <summary>
+    /// Error code that is raised when the incoming request body is invalid.
+    /// </summary>
     public const string InvalidRequestBodyErrorCode = "Tychron_Middleware_Invalid_Request_Body";
 }

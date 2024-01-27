@@ -27,6 +27,11 @@ namespace RKSoftware.Tychron.APIClient
 
         #region ctors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TychronMMSAPIClient"/> class.
+        /// </summary>
+        /// <param name="httpClient">Http client that is going to be used to submit Tychron API request (please add Authorization to it.
+        /// Use <see cref="RKSoftware.Tychron.APIClient.Extensions.TychronClientsRegistrationExtensions.RegisterTychronClients"/> to register client with configured authentication.</param>
         public TychronMMSAPIClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -141,10 +146,19 @@ namespace RKSoftware.Tychron.APIClient
         #region error validation constants
 
         //Send MMS
+        /// <summary>
+        /// Validation Error <see cref="SendMMSRequest.To"/> is required.
+        /// </summary>
         public const string ToRequiredErrorCode = "SendMMS_To_Required";
 
+        /// <summary>
+        /// Validation Error at least on <see cref="SendMMSRequest.Parts"/> is required.
+        /// </summary>
         public const string PartRequiredErrorCode = "SendMMS_Part_Required";
-
+        
+        /// <summary>
+        /// Validation Error <see cref="SendMMSRequest.From"/> is required.
+        /// </summary>
         public const string FromRequiredErrorCode = "SendMMS_From_Required";
 
         #endregion

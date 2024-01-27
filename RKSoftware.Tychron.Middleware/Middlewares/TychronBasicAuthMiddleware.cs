@@ -3,6 +3,9 @@ using System.Text;
 
 namespace RKSoftware.Tychron.Middlewares
 {
+    /// <summary>
+    /// This middleware is used to authenticate requests to Tychron Webhook (Basic Authentication).
+    /// </summary>
     public class TychronBasicAuthMiddleware
     {
         private readonly RequestDelegate _next;
@@ -10,6 +13,12 @@ namespace RKSoftware.Tychron.Middlewares
         private readonly string _username;
         private readonly string _password;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TychronBasicAuthMiddleware"/> class.
+        /// </summary>
+        /// <param name="next">Next Middleware delegate.</param>
+        /// <param name="username">Basic Auth username</param>
+        /// <param name="password">Basic Auth password</param>
         public TychronBasicAuthMiddleware(RequestDelegate next, string username, string password)
         {
             _next = next;
@@ -17,6 +26,11 @@ namespace RKSoftware.Tychron.Middlewares
             _password = password;
         }
 
+        /// <summary>
+        /// Execute Middleware
+        /// </summary>
+        /// <param name="context">Http request Context</param>
+        /// <returns></returns>
         public async Task InvokeAsync(HttpContext context)
         {
             if (!context.Request.Headers.ContainsKey("Authorization"))

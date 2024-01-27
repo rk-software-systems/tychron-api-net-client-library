@@ -1,7 +1,7 @@
 # Tychron API Wrapper packages for .NET
 
 | Package  |  Current version and Downloads
-|---|---|---|
+|---|---|
 |  RKSoftware.Tychron.APIClient  | [![NuGet Badge](https://buildstats.info/nuget/RKSoftware.Tychron.APIClient)](https://www.nuget.org/packages/RKSoftware.Tychron.APIClient/)
 |  RKSoftware.Tychron.Middleware |  [![NuGet Badge](https://buildstats.info/nuget/RKSoftware.Tychron.Middleware)](https://www.nuget.org/packages/RKSoftware.Tychron.Middleware/)
 
@@ -111,3 +111,13 @@ appBuilder.UseTychronBasicAuth("username", "password");
 ```
 
 Register Tychron Authentication Middleware only in AuthConfigurator parameter of UseTychronMiddleware method to make auth affect only Tychron requests.
+
+### Handing Tychron Webhook Requests
+
+To Be able to handle Tychron Webhook requests you need to create a class that implements `IWebhookHandler<T>` interface and register it in DI container.
+
+`T` -  Incoming Webhook Model. It can be one of the following:
+- `SmsWebhookModel` - Incoming SMS Webhook Model
+- `MmsWebhookModel` - Incoming MMS Webhook Model
+- `MmsDlrWebhookModel` - Incoming MMS DLR Webhook Model
+- `SMSDLRWebhookModel` - Incoming SMS DLR Webhook Model
