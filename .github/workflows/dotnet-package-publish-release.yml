@@ -72,5 +72,5 @@ jobs:
       - name: Add tag and push
         run: |
           TAG_VERSION=v${{steps.increment_version.outputs.NEXT_VERSION}}
-          git tag TAG_VERSION
-          git push origin TAG_VERSION
+          git tag $TAG_VERSION
+          git push origin $TAG_VERSION
