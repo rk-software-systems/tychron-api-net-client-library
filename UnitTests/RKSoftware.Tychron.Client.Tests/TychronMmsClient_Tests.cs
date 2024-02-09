@@ -1,20 +1,19 @@
 ﻿using RKSoftware.Tychron.APIClient;
 using RKSoftware.Tychron.APIClient.Error;
-using RKSoftware.Tychron.APIClient.Model.MMS;
-using RKSoftware.Tychron.APIClient.Model.SMS;
+using RKSoftware.Tychron.APIClient.Model.Mms;
 using RKSoftware.Tychron.Tests.Factories;
 using System.Net;
 
 namespace RKSoftware.Tychron.Tests;
 
-public class TychronMMSAPIClient_Tests
+public class TychronMmsClient_Tests
 {
-    private SendMMSRequest _validPayloadSendMMS = null!;
+    private SendMmsRequest _validPayloadSendMMS = null!;
 
     [SetUp]
     public void Setup()
     {
-        _validPayloadSendMMS = new SendMMSRequest
+        _validPayloadSendMMS = new SendMmsRequest
         {
             Id = "my_message_id",
             TransactionId = "my_message_request@example.com",
@@ -60,7 +59,7 @@ public class TychronMMSAPIClient_Tests
             },
             HttpMethod.Post);
 
-        var tychronSMSAPIClient = new TychronMMSAPIClient(httpClient);
+        var tychronSMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
         var result = await tychronSMSAPIClient.SendMMS(_validPayloadSendMMS);
@@ -83,10 +82,10 @@ public class TychronMMSAPIClient_Tests
             new HttpResponseMessage(HttpStatusCode.BadRequest),
             HttpMethod.Post);
 
-        var tychronMMSAPIClient = new TychronMMSAPIClient(httpClient);
+        var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
-        var result = Assert.ThrowsAsync<TychronAPIException>(async () => await tychronMMSAPIClient.SendMMS(_validPayloadSendMMS));
+        var result = Assert.ThrowsAsync<TychronApiException>(async () => await tychronMMSAPIClient.SendMMS(_validPayloadSendMMS));
 
         //Assert
         Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
@@ -96,7 +95,7 @@ public class TychronMMSAPIClient_Tests
     public void SendMMS_Fail_ValidationFromRequired()
     {
         //Arrange
-        var payload = new SendMMSRequest
+        var payload = new SendMmsRequest
         {
             To = ["+12003004001", "+12003004002", "+12003004003"],
             From = "",
@@ -107,20 +106,20 @@ public class TychronMMSAPIClient_Tests
             new HttpResponseMessage(HttpStatusCode.OK),
             HttpMethod.Post);
         
-        var tychronMMSAPIClient = new TychronMMSAPIClient(httpClient);
+        var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
         var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMMS(payload));
 
         //Assert
-        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMMSAPIClient.FromRequiredErrorCode), Is.EqualTo(true));
+        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMmsClient.FromRequiredErrorCode), Is.EqualTo(true));
     }
 
     [Test]
     public void SendMMS_Fail_ValidationToRequired()
     {
         //Arrange
-        var payload = new SendMMSRequest
+        var payload = new SendMmsRequest
         {
             To = [],
             From = "+12003004000",
@@ -131,20 +130,20 @@ public class TychronMMSAPIClient_Tests
             new HttpResponseMessage(HttpStatusCode.OK),
             HttpMethod.Post);
 
-        var tychronMMSAPIClient = new TychronMMSAPIClient(httpClient);
+        var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
         var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMMS(payload));
 
         //Assert
-        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMMSAPIClient.ToRequiredErrorCode), Is.EqualTo(true));
+        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMmsClient.ToRequiredErrorCode), Is.EqualTo(true));
     }
 
     [Test]
     public void SendMMS_Fail_ValidationPartsRequired()
     {
         //Arrange
-        var payload = new SendMMSRequest
+        var payload = new SendMmsRequest
         {
             To = ["1231"],
             From = "+12003004000",
@@ -155,12 +154,12 @@ public class TychronMMSAPIClient_Tests
             new HttpResponseMessage(HttpStatusCode.OK),
             HttpMethod.Post);
 
-        var tychronMMSAPIClient = new TychronMMSAPIClient(httpClient);
+        var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
         var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMMS(payload));
 
         //Assert
-        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMMSAPIClient.PartRequiredErrorCode), Is.EqualTo(true));
+        Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMmsClient.PartRequiredErrorCode), Is.EqualTo(true));
     }
 }

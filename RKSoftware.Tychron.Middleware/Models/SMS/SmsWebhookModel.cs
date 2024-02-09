@@ -208,52 +208,52 @@ public class SmsWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(Id))
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(Id), IdRequiredErrorCode, ValidationMessages.ReceiveSMSIdRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(Id), IdRequiredErrorCode, ValidationMessages.ReceiveSmsIdRequired));
         }
 
         if (string.IsNullOrEmpty(Type))
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(Type), TypeRequiredErrorCode, ValidationMessages.ReceiveSMSTypeRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(Type), TypeRequiredErrorCode, ValidationMessages.ReceiveSmsTypeRequired));
         }
 
         if (string.IsNullOrEmpty(From))
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(From), FromRequiredErrorCode, ValidationMessages.ReceiveSMSFromRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(From), FromRequiredErrorCode, ValidationMessages.ReceiveSmsFromRequired));
         }
 
         if (string.IsNullOrEmpty(To))
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(To), ToRequiredErrorCode, ValidationMessages.ReceiveSMSToRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(To), ToRequiredErrorCode, ValidationMessages.ReceiveSmsToRequired));
         }
 
         if (string.IsNullOrEmpty(Body))
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(Body), BodyRequiredErrorCode, ValidationMessages.ReceiveSMSBodyRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(Body), BodyRequiredErrorCode, ValidationMessages.ReceiveSmsBodyRequired));
         }
 
         if (Priority == null)
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(Priority), PriorityRequiredErrorCode, ValidationMessages.ReceiveSMSPriorityRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(Priority), PriorityRequiredErrorCode, ValidationMessages.ReceiveSmsPriorityRequired));
         }
 
         if (SmsEncoding == null)
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(SmsEncoding), SmsEncodingRequiredErrorCode, ValidationMessages.ReceiveSMSEncodingRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(SmsEncoding), SmsEncodingRequiredErrorCode, ValidationMessages.ReceiveSmsEncodingRequired));
         }
 
         if (InsertedAt == null)
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(InsertedAt), InsertedAtRequiredErrorCode, ValidationMessages.ReceiveSMSInsertedAtRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(InsertedAt), InsertedAtRequiredErrorCode, ValidationMessages.ReceiveSmsInsertedAtRequired));
         }
 
         if (UpdatedAt == null)
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(UpdatedAt), UpdatedAtRequiredErrorCode, ValidationMessages.ReceiveSMSUpdatedAtRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(UpdatedAt), UpdatedAtRequiredErrorCode, ValidationMessages.ReceiveSmsUpdatedAtRequired));
         }
 
         if (ProcessedAt == null)
         {
-            result.Add(new TychronMiddlewareValidationError(nameof(ProcessedAt), ProcessedAtRequiredErrorCode, ValidationMessages.ReceiveSMSProcessedAtRequired));
+            result.Add(new TychronMiddlewareValidationError(nameof(ProcessedAt), ProcessedAtRequiredErrorCode, ValidationMessages.ReceiveSmsProcessedAtRequired));
         }
 
         return result;

@@ -55,8 +55,10 @@ public class TychronSmsDlrClient
     /// Exception that is thrown on incoming model validation error.
     /// Available codes: <see cref="FromRequiredErrorCode"/>
     /// </exception>"
-    public async Task<BaseSmsResponse<SmsDlrMessageResponse>> SendSMSDLR(SendSmsDlrRequest request)
+    public async Task<BaseSmsResponse<SmsDlrMessageResponse>> SendSmsDlr(SendSmsDlrRequest request)
     {
+        ArgumentNullException.ThrowIfNull(request, nameof(request));
+
         ValidateSmsDlrRequestModel(request);
 
         using var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, MediaTypeNames.Application.Json);
@@ -102,7 +104,7 @@ public class TychronSmsDlrClient
 
         if (string.IsNullOrEmpty(request.SmsId))
         {
-            // The SmsId that is REQUIRED
+            // The SmsId that is required
             errors.Add(new TychronValidationError(nameof(SendSmsDlrRequest.SmsId), SmsIdRequiredErrorCode, ValidationMessages.SendSmsSmsIdRequired));
         }
 

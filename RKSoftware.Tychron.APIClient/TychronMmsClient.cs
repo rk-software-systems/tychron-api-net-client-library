@@ -54,7 +54,7 @@ public sealed class TychronMmsClient
     /// Exception that is thrown on incoming model validation error.
     /// Available codes: <see cref="ToRequiredErrorCode"/>
     /// </exception>"
-    public async Task<MmsMessageResponse?> SendMMS(SendMmsRequest request)
+    public async Task<MmsMessageResponse?> SendMms(SendMmsRequest request)
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
