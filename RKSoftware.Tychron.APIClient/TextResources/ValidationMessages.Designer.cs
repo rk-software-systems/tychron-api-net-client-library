@@ -63,72 +63,72 @@ namespace RKSoftware.Tychron.APIClient.TextResources {
         /// <summary>
         ///   Looks up a localized string similar to MMS Message From is required..
         /// </summary>
-        internal static string SendMMSFromRequired {
+        internal static string SendMmsFromRequired {
             get {
-                return ResourceManager.GetString("SendMMSFromRequired", resourceCulture);
+                return ResourceManager.GetString("SendMmsFromRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to At least one part of the MMS message is required..
         /// </summary>
-        internal static string SendMMSPartRequired {
+        internal static string SendMmsPartRequired {
             get {
-                return ResourceManager.GetString("SendMMSPartRequired", resourceCulture);
+                return ResourceManager.GetString("SendMmsPartRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to At least one MMS message recipient is required..
         /// </summary>
-        internal static string SendMMSToRequired {
+        internal static string SendMmsToRequired {
             get {
-                return ResourceManager.GetString("SendMMSToRequired", resourceCulture);
+                return ResourceManager.GetString("SendMmsToRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to SMS Message Body is required..
         /// </summary>
-        internal static string SendSMSBodyRequired {
+        internal static string SendSmsBodyRequired {
             get {
-                return ResourceManager.GetString("SendSMSBodyRequired", resourceCulture);
+                return ResourceManager.GetString("SendSmsBodyRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to SMS DLR Message From is required..
         /// </summary>
-        internal static string SendSMSFromDlrRequired {
+        internal static string SendSmsFromDlrRequired {
             get {
-                return ResourceManager.GetString("SendSMSFromDlrRequired", resourceCulture);
+                return ResourceManager.GetString("SendSmsFromDlrRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to SMS Message From is required..
         /// </summary>
-        internal static string SendSMSFromRequired {
+        internal static string SendSmsFromRequired {
             get {
-                return ResourceManager.GetString("SendSMSFromRequired", resourceCulture);
+                return ResourceManager.GetString("SendSmsFromRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to SMS DLR SmsId is required..
         /// </summary>
-        internal static string SendSMSSmsIdRequired {
+        internal static string SendSmsSmsIdRequired {
             get {
-                return ResourceManager.GetString("SendSMSSmsIdRequired", resourceCulture);
+                return ResourceManager.GetString("SendSmsSmsIdRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to At least one SMS message recipient is required..
         /// </summary>
-        internal static string SendSMSToRequired {
+        internal static string SendSmsToRequired {
             get {
-                return ResourceManager.GetString("SendSMSToRequired", resourceCulture);
+                return ResourceManager.GetString("SendSmsToRequired", resourceCulture);
             }
         }
     }

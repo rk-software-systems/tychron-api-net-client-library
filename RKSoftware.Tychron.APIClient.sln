@@ -5,6 +5,7 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D232F8D-BD7C-4D68-8302-A300B511490D}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.github\workflows\dotnet-package-publish-release.yml = .github\workflows\dotnet-package-publish-release.yml
 		LICENSE = LICENSE
 		README.md = README.md

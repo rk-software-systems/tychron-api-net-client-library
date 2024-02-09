@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.MMS;
+namespace RKSoftware.Tychron.APIClient.Model.Mms;
 
 /// <summary>
 /// Part <br/>

@@ -3,10 +3,10 @@ using RKSoftware.Tychron.Middleware.Models;
 using RKSoftware.Tychron.Middleware.TextResources;
 using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Model.MMS;
+namespace RKSoftware.Tychron.Middleware.Model.Mms;
 
 /// <summary>
-/// Mms Webhook Model
+/// MMS Webhook Model
 /// </summary>
 public class MmsWebhookModel : IValidationSubject
 {
@@ -104,7 +104,7 @@ public class MmsWebhookModel : IValidationSubject
     /// Typically this will be a SMIL, Text and an Image, Audio, or Video part.
     /// </summary>
     [JsonPropertyName("data")]
-    public MMSPart? Data { get; set; }
+    public MmsPart? Data { get; set; }
 
     /// <summary>
     /// A map containing miscellaneous information about the request.
@@ -124,82 +124,42 @@ public class MmsWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(Id))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = IdRequiredErrorCode,
-                FieldName = nameof(Id),
-                Message = ValidationMessages.ReceiveMmsIdRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Id), IdRequiredErrorCode, ValidationMessages.ReceiveMmsIdRequired));
         }
 
         if (Timestamp == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = TimestampRequiredErrorCode,
-                FieldName = nameof(Timestamp),
-                Message = ValidationMessages.ReceiveMmsTimestampRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Timestamp), TimestampRequiredErrorCode, ValidationMessages.ReceiveMmsTimestampRequired));
         }
 
         if (InsertedAt == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = InsertedAtRequiredErrorCode,
-                FieldName = nameof(InsertedAt),
-                Message = ValidationMessages.ReceiveMmsInsertedAtRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(InsertedAt), InsertedAtRequiredErrorCode, ValidationMessages.ReceiveMmsInsertedAtRequired));
         }
 
         if (string.IsNullOrEmpty(Kind))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = KindRequiredErrorCode,
-                FieldName = nameof(Kind),
-                Message = ValidationMessages.ReceiveMmsKindRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Kind), KindRequiredErrorCode, ValidationMessages.ReceiveMmsKindRequired));
         }
 
         if (string.IsNullOrEmpty(From))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = FromRequiredErrorCode,
-                FieldName = nameof(From),
-                Message = ValidationMessages.ReceiveMmsFromRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(From), FromRequiredErrorCode, ValidationMessages.ReceiveMmsFromRequired));
         }
 
         if (To == null || To.Count == 0)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = ToRequiredErrorCode,
-                FieldName = nameof(To),
-                Message = ValidationMessages.ReceiveMmsToRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(To), ToRequiredErrorCode, ValidationMessages.ReceiveMmsToRequired));
         }
 
         if (Metadata == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = MetadataRequiredErrorCode,
-                FieldName = nameof(Metadata),
-                Message = ValidationMessages.ReceiveMmsMetadataRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Metadata), MetadataRequiredErrorCode, ValidationMessages.ReceiveMmsMetadataRequired));
         }
 
         if (Data == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = DataRequiredErrorCode,
-                FieldName = nameof(Data),
-                Message = ValidationMessages.ReceiveMmsDataRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Data), DataRequiredErrorCode, ValidationMessages.ReceiveMmsDataRequired));
         }
 
         return result;
@@ -208,33 +168,33 @@ public class MmsWebhookModel : IValidationSubject
     /// <summary>
     /// Validation Error Code <see cref="Id"/> required.
     /// </summary>
-    public const string IdRequiredErrorCode = "ReceiveMMS_Id_Required";
+    public const string IdRequiredErrorCode = "ReceiveMms_Id_Required";
     /// <summary>
     /// Validation Error Code <see cref="Timestamp"/> required.
     /// </summary>
-    public const string TimestampRequiredErrorCode = "ReceiveMMS_Timestamp_Required";
+    public const string TimestampRequiredErrorCode = "ReceiveMms_Timestamp_Required";
     /// <summary>
     /// Validation Error Code <see cref="InsertedAt"/> required.
     /// </summary>
-    public const string InsertedAtRequiredErrorCode = "ReceiveMMS_InsertedAt_Required";
+    public const string InsertedAtRequiredErrorCode = "ReceiveMms_InsertedAt_Required";
     /// <summary>
     /// Validation Error Code <see cref="Kind"/> required.
     /// </summary>
-    public const string KindRequiredErrorCode = "ReceiveMMS_Kind_Required";
+    public const string KindRequiredErrorCode = "ReceiveMms_Kind_Required";
     /// <summary>
     /// Validation Error Code <see cref="From"/> required.
     /// </summary>
-    public const string FromRequiredErrorCode = "ReceiveMMS_From_Required";
+    public const string FromRequiredErrorCode = "ReceiveMms_From_Required";
     /// <summary>
     /// Validation Error Code <see cref="To"/> required.
     /// </summary>
-    public const string ToRequiredErrorCode = "ReceiveMMS_To_Required";
+    public const string ToRequiredErrorCode = "ReceiveMms_To_Required";
     /// <summary>
     /// Validation Error Code <see cref="Metadata"/> required.
     /// </summary>
-    public const string MetadataRequiredErrorCode = "ReceiveMMS_Metadata_Required";
+    public const string MetadataRequiredErrorCode = "ReceiveMms_Metadata_Required";
     /// <summary>
     /// Validation Error Code <see cref="Data"/> required.
     /// </summary>
-    public const string DataRequiredErrorCode = "ReceiveMMS_Data_Required";
+    public const string DataRequiredErrorCode = "ReceiveMms_Data_Required";
 }

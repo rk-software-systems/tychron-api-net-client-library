@@ -1,13 +1,11 @@
-﻿using System.Numerics;
-using System.Text.Json.Serialization;
-using static System.Net.WebRequestMethods;
+﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.SMS;
+namespace RKSoftware.Tychron.APIClient.Model.Sms;
 
 /// <summary>
 /// Request SMS via HTTP
 /// </summary>
-public class SendSMSRequest
+public class SendSmsRequest
 {
     /// <summary>
     /// The ID used to identify the message.
@@ -40,7 +38,7 @@ public class SendSMSRequest
     /// </example>
     /// </summary>
     [JsonPropertyName("to")]
-    public required List<string>? To { get; init; }
+    public required List<string> To { get; init; }
     /// <summary>
     /// Priority affects the urgency of a message during rate limiting. The higher the priority, the more urgent a message will be.
     /// Priorities range from 0 to 2:
@@ -51,13 +49,13 @@ public class SendSMSRequest
     /// </list>
     /// </summary>
     [JsonPropertyName("priority")]
-    public int Priority { get; set; }
+    public int? Priority { get; set; }
 
     /// <summary>
     /// Used to encode messages as specified in the request. All messages are automatically encoded if this parameter is not provided. Please see the table below for the list of available <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#encodings">encodings</see>.
     /// </summary>
     [JsonPropertyName("encode_as")]
-    public int EncodeAs { get; set; }
+    public int? EncodeAs { get; set; }
 
     /// <summary>
     /// Used to specify if a delivery report is required and when it should be sent based on the request. This parameter can be specified as either:
@@ -89,7 +87,7 @@ public class SendSMSRequest
     /// </example>
     /// </summary>
     [JsonPropertyName("scheduled_at")]
-    public DateTime ScheduledAt { get; set; }
+    public DateTime? ScheduledAt { get; set; }
 
     /// <summary>
     /// Used to specify a duration of time that the message will be deemed expired after the request is made. See the table on <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#duration-strings">Duration Strings</see> below for proper formatting.
@@ -111,7 +109,7 @@ public class SendSMSRequest
     /// </example>
     /// </summary>
     [JsonPropertyName("expires_at")]
-    public DateTime ExpiresAt { get; set; }
+    public DateTime? ExpiresAt { get; set; }
 
     /// <summary>
     /// When sending to a valid TenDLC number the basic MCL data can be returned in the immediate request.
@@ -119,5 +117,5 @@ public class SendSMSRequest
     /// Note that MCL charges may apply if this flag is set to true (unless explicitly disabled by your account).
     /// </summary>
     [JsonPropertyName("request_mcl")]
-    public bool RequestMcl { get; set; }
+    public bool? RequestMcl { get; set; }
 }

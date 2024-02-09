@@ -1,19 +1,19 @@
 using RKSoftware.Tychron.APIClient;
 using RKSoftware.Tychron.APIClient.Error;
-using RKSoftware.Tychron.APIClient.Model.SMS;
+using RKSoftware.Tychron.APIClient.Model.Sms;
 using RKSoftware.Tychron.Tests.Factories;
 using System.Net;
 
 namespace RKSoftware.Tychron.Tests;
 
-public class TychronSMSAPIClient_Tests
+public class TychronSmsClient_Tests
 {
-    private SendSMSRequest _validPayloadSendSMS = null!;
+    private SendSmsRequest _validPayloadSendSMS = null!;
 
     [SetUp]
     public void Setup()
     {
-        _validPayloadSendSMS = new SendSMSRequest
+        _validPayloadSendSMS = new SendSmsRequest
         {
             Body = "Sample body",
             To = ["123456777", "123456788", "123456799"],
@@ -22,7 +22,7 @@ public class TychronSMSAPIClient_Tests
     }
 
     [Test]
-    public async Task TychronSMSAPIClient_SendSMS_OK_Deserialization()
+    public async Task SendSms_OK_Deserialization()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -35,7 +35,7 @@ public class TychronSMSAPIClient_Tests
                 Content = new StringContent(responseString)
             },
             HttpMethod.Post);
-        var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
+        var tychronSMSAPIClient = new TychronSmsClient(httpClient);
 
         //Act
         var result = await tychronSMSAPIClient.SendSms(_validPayloadSendSMS);
@@ -51,16 +51,16 @@ public class TychronSMSAPIClient_Tests
 
     //Unit Test Tychron API Exception on non 200, 207 status codes
     [Test]
-    public void SendSMS_Fail_TychronAPINonSuccessHttpResponse()
+    public void SendSms_Fail_TychronAPINonSuccessHttpResponse()
     {
         //Arrange
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
             new HttpResponseMessage(HttpStatusCode.BadRequest),
             HttpMethod.Post);
-        var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
+        var tychronSMSAPIClient = new TychronSmsClient(httpClient);
 
         //Act
-        var result = Assert.ThrowsAsync<TychronAPIException>(async () => await tychronSMSAPIClient.SendSms(_validPayloadSendSMS));
+        var result = Assert.ThrowsAsync<TychronApiException>(async () => await tychronSMSAPIClient.SendSms(_validPayloadSendSMS));
 
         //Assert
         Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
@@ -68,7 +68,7 @@ public class TychronSMSAPIClient_Tests
 
     // Unit Test that PartiallySuccessful is true when 207 status code is returned
     [Test]
-    public async Task SendSMS_PartialFail_TychronAPI207HttpResponse()
+    public async Task SendSms_PartialFail_TychronAPI207HttpResponse()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -80,7 +80,7 @@ public class TychronSMSAPIClient_Tests
                 Content = new StringContent(responseString)
             },
             HttpMethod.Post);
-        var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
+        var tychronSMSAPIClient = new TychronSmsClient(httpClient);
 
         //Act
         var result = await tychronSMSAPIClient.SendSms(_validPayloadSendSMS);
@@ -90,15 +90,15 @@ public class TychronSMSAPIClient_Tests
     }
 
     [Test]
-    [TestCase(null, "123", "123", TychronSMSAPIClient.ToRequiredErrorCode)]
-    [TestCase("123", "123", null, TychronSMSAPIClient.BodyRequiredErrorCode)]
-    [TestCase("123", "123", "", TychronSMSAPIClient.BodyRequiredErrorCode)]
-    [TestCase("123", null, "123", TychronSMSAPIClient.FromRequiredErrorCode)]
-    [TestCase("123", "", "", TychronSMSAPIClient.FromRequiredErrorCode)]
-    public void SendSMS_Fail_Validation(string to, string from, string body, string errorMessageCode)
+    [TestCase(null, "123", "123", TychronSmsClient.ToRequiredErrorCode)]
+    [TestCase("123", "123", null, TychronSmsClient.BodyRequiredErrorCode)]
+    [TestCase("123", "123", "", TychronSmsClient.BodyRequiredErrorCode)]
+    [TestCase("123", null, "123", TychronSmsClient.FromRequiredErrorCode)]
+    [TestCase("123", "", "", TychronSmsClient.FromRequiredErrorCode)]
+    public void SendSms_Fail_Validation(string? to, string? from, string? body, string errorMessageCode)
     {
         //Arrange
-        var payload = new SendSMSRequest
+        var payload = new SendSmsRequest
         {
             Body = body,
             To = string.IsNullOrEmpty(to) ? null : [to],
@@ -108,7 +108,7 @@ public class TychronSMSAPIClient_Tests
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
             new HttpResponseMessage(HttpStatusCode.OK),
             HttpMethod.Post);
-        var tychronSMSAPIClient = new TychronSMSAPIClient(httpClient);
+        var tychronSMSAPIClient = new TychronSmsClient(httpClient);
 
         //Act
         var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronSMSAPIClient.SendSms(payload));

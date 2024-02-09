@@ -1,17 +1,17 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.MMS;
+namespace RKSoftware.Tychron.APIClient.Model.Mms;
 
 /// <summary>
-/// Send Mms response model
+/// Send MMS response model
 /// </summary>
-public class MMSMessageResponseModel
+public class MmsMessageResponse
 {
     /// <summary>
     /// An ID used to identify the HTTP request.
     /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#response-headers"/>
     /// </summary>
-    public string? XRequestID { get; set; }
+    public string? XRequestId { get; set; }
 
     /// <summary>
     /// An array of responses
