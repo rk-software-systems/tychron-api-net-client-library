@@ -22,7 +22,7 @@ public class TychronSmsClient_Tests
     }
 
     [Test]
-    public async Task TychronSMSAPIClient_SendSMS_OK_Deserialization()
+    public async Task SendSms_OK_Deserialization()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -51,7 +51,7 @@ public class TychronSmsClient_Tests
 
     //Unit Test Tychron API Exception on non 200, 207 status codes
     [Test]
-    public void SendSMS_Fail_TychronAPINonSuccessHttpResponse()
+    public void SendSms_Fail_TychronAPINonSuccessHttpResponse()
     {
         //Arrange
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
@@ -68,7 +68,7 @@ public class TychronSmsClient_Tests
 
     // Unit Test that PartiallySuccessful is true when 207 status code is returned
     [Test]
-    public async Task SendSMS_PartialFail_TychronAPI207HttpResponse()
+    public async Task SendSms_PartialFail_TychronAPI207HttpResponse()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -95,7 +95,7 @@ public class TychronSmsClient_Tests
     [TestCase("123", "123", "", TychronSmsClient.BodyRequiredErrorCode)]
     [TestCase("123", null, "123", TychronSmsClient.FromRequiredErrorCode)]
     [TestCase("123", "", "", TychronSmsClient.FromRequiredErrorCode)]
-    public void SendSMS_Fail_Validation(string to, string from, string body, string errorMessageCode)
+    public void SendSms_Fail_Validation(string? to, string? from, string? body, string errorMessageCode)
     {
         //Arrange
         var payload = new SendSmsRequest

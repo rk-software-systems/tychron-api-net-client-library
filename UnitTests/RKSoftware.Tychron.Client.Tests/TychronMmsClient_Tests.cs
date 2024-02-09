@@ -45,7 +45,7 @@ public class TychronMmsClient_Tests
     }
 
     [Test]
-    public async Task SendMMS_OK_Deserialization()
+    public async Task SendMms_OK_Deserialization()
     {
         //Arrange
         using var stream = File.OpenRead("Data/testMmsResponse.json");
@@ -75,7 +75,7 @@ public class TychronMmsClient_Tests
 
     //Unit Test Tychron API Exception on non 200, 207 status codes
     [Test]
-    public void SendMMS_Fail_TychronAPINonSuccessHttpResponse()
+    public void SendMms_Fail_TychronAPINonSuccessHttpResponse()
     {
         //Arrange
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
@@ -92,7 +92,7 @@ public class TychronMmsClient_Tests
     }
 
     [Test]
-    public void SendMMS_Fail_ValidationFromRequired()
+    public void SendMms_Fail_ValidationFromRequired()
     {
         //Arrange
         var payload = new SendMmsRequest
@@ -116,7 +116,7 @@ public class TychronMmsClient_Tests
     }
 
     [Test]
-    public void SendMMS_Fail_ValidationToRequired()
+    public void SendMms_Fail_ValidationToRequired()
     {
         //Arrange
         var payload = new SendMmsRequest
@@ -140,7 +140,7 @@ public class TychronMmsClient_Tests
     }
 
     [Test]
-    public void SendMMS_Fail_ValidationPartsRequired()
+    public void SendMms_Fail_ValidationPartsRequired()
     {
         //Arrange
         var payload = new SendMmsRequest

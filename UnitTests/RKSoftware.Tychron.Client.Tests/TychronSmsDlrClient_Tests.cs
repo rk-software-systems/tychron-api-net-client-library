@@ -21,7 +21,7 @@ namespace RKSoftware.Tychron.Tests
         }
 
         [Test]
-        public async Task SendSMSDLR_Deserialization_OK_Deserialization()
+        public async Task SendSmsDlr_Deserialization_OK_Deserialization()
         {
             //Arrange
             using var stream = File.OpenRead("Data/testSmsDlrResponse.json");
@@ -47,7 +47,7 @@ namespace RKSoftware.Tychron.Tests
 
         //Unit Test Tychron API Exception on non 200, 207 status codes
         [Test]
-        public void SendSMSDLR_Fail_TychronAPINonSuccessHttpResponse()
+        public void SendSmsDlr_Fail_TychronAPINonSuccessHttpResponse()
         {
             //Arrange
             var httpClient = HttpClientMockFactory.GetHttpClientMock(
@@ -65,7 +65,7 @@ namespace RKSoftware.Tychron.Tests
 
         // Unit Test that PartiallySuccessful is true when 207 status code is returned
         [Test]
-        public async Task SendSMSDLR_PartialFail_TychronAPI207HttpResponse()
+        public async Task SendSmsDlr_PartialFail_TychronAPI207HttpResponse()
         {
             //Arrange
             using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -92,7 +92,7 @@ namespace RKSoftware.Tychron.Tests
         [TestCase("", "123", TychronSmsDlrClient.FromRequiredErrorCode)]
         [TestCase("123", null, TychronSmsDlrClient.SmsIdRequiredErrorCode)]
         [TestCase("123", "", TychronSmsDlrClient.SmsIdRequiredErrorCode)]
-        public void SendSMSDLR_Fail_Validation(string from, string smsId, string errorMessageCode)
+        public void SendSmsDlr_Fail_Validation(string? from, string? smsId, string errorMessageCode)
         {
             //Arrange
             var payload = new SendSmsDlrRequest
