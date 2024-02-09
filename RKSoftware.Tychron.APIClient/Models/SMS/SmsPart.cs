@@ -1,16 +1,15 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.SMS
+namespace RKSoftware.Tychron.APIClient.Model.Sms;
+
+/// <summary>
+/// SMS Message part model
+/// </summary>
+public class SmsPart
 {
     /// <summary>
-    /// SMS Message part model
+    /// The ID supplied by the system to identify the segment.
     /// </summary>
-    public class SmsPart
-    {
-        /// <summary>
-        /// The ID supplied by the system to identify the segment.
-        /// </summary>
-        [JsonPropertyName("id")]
-        public string? Id { get; set; }
-    }
+    [JsonPropertyName("id")]
+    public string? Id { get; set; }
 }

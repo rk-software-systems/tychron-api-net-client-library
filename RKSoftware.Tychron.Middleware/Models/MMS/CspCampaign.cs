@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Model.MMS;
+namespace RKSoftware.Tychron.Middleware.Model.Mms;
 
 /// <summary>
 /// A map containing basic information on the Campaign associated with this message.

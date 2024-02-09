@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Model.MMS;
+namespace RKSoftware.Tychron.Middleware.Model.Mms;
 
 /// <summary>
 /// MMS has a recursive structure, in which the root Part may have more sub parts. Typically this will be a SMIL, Text and an Image, Audio, or Video part.
 /// </summary>
-public class MMSPart
+public class MmsPart
 {
     /// <summary>
     /// A map containing header pairs, keys are downcased for easy indexing.
@@ -38,5 +38,5 @@ public class MMSPart
     /// If this part has is_multipart set, then this field will be populated with the further sub parts of the message.
     /// </summary>
     [JsonPropertyName("parts")]
-    public List<MMSPart>? Parts { get; set; }
+    public List<MmsPart>? Parts { get; set; }
 }

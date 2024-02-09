@@ -1,19 +1,19 @@
 ﻿using RKSoftware.Tychron.APIClient;
 using RKSoftware.Tychron.APIClient.Error;
-using RKSoftware.Tychron.APIClient.Models.SMSDLR;
+using RKSoftware.Tychron.APIClient.Models.SmsDlr;
 using RKSoftware.Tychron.Tests.Factories;
 using System.Net;
 
 namespace RKSoftware.Tychron.Tests
 {
-    internal class TychronSMSDLRAPIClient_Tests
+    internal class TychronSmsDlrClient_Tests
     {
-        private SendSMSDLRRequest _validPayloadSendSMSDLR = null!;
+        private SendSmsDlrRequest _validPayloadSendSMSDLR = null!;
 
         [SetUp]
         public void Setup()
         {
-            _validPayloadSendSMSDLR = new SendSMSDLRRequest
+            _validPayloadSendSMSDLR = new SendSmsDlrRequest
             {
                 From = "123456789",
                 SmsId = "01GTFCEBFR5RJG3RWXCD8QRDZN"
@@ -21,7 +21,7 @@ namespace RKSoftware.Tychron.Tests
         }
 
         [Test]
-        public async Task SendSMSDLR_Deserialization_OK_Deserialization()
+        public async Task SendSmsDlr_Deserialization_OK_Deserialization()
         {
             //Arrange
             using var stream = File.OpenRead("Data/testSmsDlrResponse.json");
@@ -34,10 +34,10 @@ namespace RKSoftware.Tychron.Tests
                     Content = new StringContent(responseString)
                 },
                 HttpMethod.Post);
-            var tychronSMSDLRAPIClient = new TychronSMSDLRClient(httpClient);
+            var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = await tychronSMSDLRAPIClient.SendSMSDLR(_validPayloadSendSMSDLR);
+            var result = await tychronSMSDLRAPIClient.SendSmsDlr(_validPayloadSendSMSDLR);
 
             //Assert
             Assert.That(result.Messages?.Count, Is.EqualTo(1));
@@ -47,17 +47,17 @@ namespace RKSoftware.Tychron.Tests
 
         //Unit Test Tychron API Exception on non 200, 207 status codes
         [Test]
-        public void SendSMSDLR_Fail_TychronAPINonSuccessHttpResponse()
+        public void SendSmsDlr_Fail_TychronAPINonSuccessHttpResponse()
         {
             //Arrange
             var httpClient = HttpClientMockFactory.GetHttpClientMock(
                 new HttpResponseMessage(HttpStatusCode.BadRequest),
                 HttpMethod.Post);
 
-            var tychronSMSDLRAPIClient = new TychronSMSDLRClient(httpClient);
+            var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = Assert.ThrowsAsync<TychronAPIException>(async () => await tychronSMSDLRAPIClient.SendSMSDLR(_validPayloadSendSMSDLR));
+            var result = Assert.ThrowsAsync<TychronApiException>(async () => await tychronSMSDLRAPIClient.SendSmsDlr(_validPayloadSendSMSDLR));
 
             //Assert
             Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
@@ -65,7 +65,7 @@ namespace RKSoftware.Tychron.Tests
 
         // Unit Test that PartiallySuccessful is true when 207 status code is returned
         [Test]
-        public async Task SendSMSDLR_PartialFail_TychronAPI207HttpResponse()
+        public async Task SendSmsDlr_PartialFail_TychronAPI207HttpResponse()
         {
             //Arrange
             using var stream = File.OpenRead("Data/testSmsResponse.json");
@@ -78,24 +78,24 @@ namespace RKSoftware.Tychron.Tests
                 },
                 HttpMethod.Post);
 
-            var tychronSMSDLRAPIClient = new TychronSMSDLRClient(httpClient);
+            var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = await tychronSMSDLRAPIClient.SendSMSDLR(_validPayloadSendSMSDLR);
+            var result = await tychronSMSDLRAPIClient.SendSmsDlr(_validPayloadSendSMSDLR);
 
             //Assert
             Assert.That(result.PartialFailure, Is.True);
         }
 
         [Test]
-        [TestCase(null, "123", TychronSMSDLRClient.FromRequiredErrorCode)]
-        [TestCase("", "123", TychronSMSDLRClient.FromRequiredErrorCode)]
-        [TestCase("123", null, TychronSMSDLRClient.SmsIdRequiredErrorCode)]
-        [TestCase("123", "", TychronSMSDLRClient.SmsIdRequiredErrorCode)]
-        public void SendSMSDLR_Fail_Validation(string from, string smsId, string errorMessageCode)
+        [TestCase(null, "123", TychronSmsDlrClient.FromRequiredErrorCode)]
+        [TestCase("", "123", TychronSmsDlrClient.FromRequiredErrorCode)]
+        [TestCase("123", null, TychronSmsDlrClient.SmsIdRequiredErrorCode)]
+        [TestCase("123", "", TychronSmsDlrClient.SmsIdRequiredErrorCode)]
+        public void SendSmsDlr_Fail_Validation(string? from, string? smsId, string errorMessageCode)
         {
             //Arrange
-            var payload = new SendSMSDLRRequest
+            var payload = new SendSmsDlrRequest
             {
                 From = from,
                 SmsId = smsId
@@ -105,10 +105,10 @@ namespace RKSoftware.Tychron.Tests
                 new HttpResponseMessage(HttpStatusCode.OK),
                 HttpMethod.Post);
 
-            var tychronSMSDLRAPIClient = new TychronSMSDLRClient(httpClient);
+            var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronSMSDLRAPIClient.SendSMSDLR(payload));
+            var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronSMSDLRAPIClient.SendSmsDlr(payload));
 
             //Assert
             Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == errorMessageCode), Is.EqualTo(true));

@@ -13,28 +13,28 @@ httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("
 httpClient.BaseAddress = baseUrl;
 
 // Create Tychron API Clients
-var smsDLRclient = new TychronSMSDLRClient(httpClient);
-var mmsDLRclient = new TychronMMSDLRClient(httpClient);
-var smsClient = new TychronSMSClient(httpClient);
+var smsDlrClient = new TychronSmsDlrClient(httpClient);
+var mmsClient = new TychronMmsClient(httpClient);
+var smsClient = new TychronSmsClient(httpClient);
 
 // Make requests
 ```
 - ASP.NET Core Dependency Injection
 ```
 // Register Tychron API Clients in Startup.cs
-services.RegisterTychronClients(bearerKey, baseUrl);
+services.RegisterTychronClients(baseUrl, bearerKey);
 
 // Inject Tychron API Clients in your controllers or services
 public class MyController : Controller
 {
-    private readonly ITychronSMSDLRClient _smsDLRclient;
-    private readonly ITychronMMSDLRClient _mmsDLRclient;
-    private readonly ITychronSMSClient _smsClient;
+    private readonly TychronSmsDlrClient _smsDlrClient;
+    private readonly TychronMmsClient _mmsClient;
+    private readonly TychronSmsClient _smsClient;
 
-    public MyController(ITychronSMSDLRClient smsDLRclient, ITychronMMSDLRClient mmsDLRclient, ITychronSMSClient smsClient)
+    public MyController(TychronSmsDlrClient smsDlrClient, TychronMmsClient mmsClient, TychronSmsClient smsClient)
     {
-        _smsDLRclient = smsDLRclient;
-        _mmsDLRclient = mmsDLRclient;
+        _smsDlrClient = smsDlrClient;
+        _mmsClient = mmsClient;
         _smsClient = smsClient;
     }
 

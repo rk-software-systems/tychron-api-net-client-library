@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Models.MMSDLR;
+namespace RKSoftware.Tychron.Middleware.Models.MmsDlr;
 
 /// <summary>
 /// A map containing only the ID of the respective MMS this DLR belongs to.

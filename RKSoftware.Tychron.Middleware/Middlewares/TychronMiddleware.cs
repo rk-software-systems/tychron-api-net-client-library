@@ -11,13 +11,17 @@ namespace RKSoftware.Tychron.Middlewares;
 /// This middleware is used to receive Tychron Webhook requests.
 /// </summary>
 /// <typeparam name="T">Type of requests that are being received.</typeparam>
-public class TychronMiddleware<T>
-    where T : IValidationSubject
+public class TychronMiddleware<T>  where T : IValidationSubject
 {
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
+
+    public TychronMiddleware(RequestDelegate _)
+    {        
+    }
+
     /// <summary>
     /// Execute Middleware
     /// </summary>
@@ -25,7 +29,7 @@ public class TychronMiddleware<T>
     /// <param name="handler">Object that is used to Process Incoming Webhook Request.</param>
     /// <param name="logger">Logger</param>
     /// <returns></returns>
-    public async Task InvokeAsync(HttpContext context, IWebhookHandler<T> handler, ILogger logger)
+    public async Task InvokeAsync(HttpContext context, IWebhookHandler<T> handler, ILogger<TychronMiddleware<T>> logger)
     {
         if (context.Request.Method != HttpMethods.Post)
         {
@@ -35,7 +39,7 @@ public class TychronMiddleware<T>
             return;
         }
 
-        var content = JsonSerializer.Deserialize<T>(context.Request.Body, _jsonSerializerOptions);
+        var content = await JsonSerializer.DeserializeAsync<T>(context.Request.Body, _jsonSerializerOptions);
 
         if (content == null)
         {
@@ -62,13 +66,13 @@ public class TychronMiddleware<T>
                 code = InvalidRequestBodyErrorCode,
                 message = errorMessage
             }));
-
             return;
         }
 
         await handler.Handle(content);
 
         context.Response.StatusCode = StatusCodes.Status204NoContent;
+        return;
     }
 
     /// <summary>
