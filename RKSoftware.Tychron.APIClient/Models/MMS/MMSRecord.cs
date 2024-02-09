@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.MMS;
+namespace RKSoftware.Tychron.APIClient.Model.Mms;
 
 /// <summary>
 /// Response Record model
@@ -14,7 +14,7 @@ public class MmsRecord
     public required string Id { get; set; }
 
     /// <summary>
-    /// The created message type which may be an <i>"sms"</i> or <i>"mms"</i> message based on account settings.
+    /// The created message type which may be an <i>"SMS"</i> or <i>"MMS"</i> message based on account settings.
     /// </summary>
     [JsonPropertyName("type")]
     public required string Type { get; set; }

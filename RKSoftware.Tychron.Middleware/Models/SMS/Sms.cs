@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Model.SMS;
+namespace RKSoftware.Tychron.Middleware.Model.Sms;
 
 /// <summary>
 /// An object containing limited information on the SMS that the DLR belongs to

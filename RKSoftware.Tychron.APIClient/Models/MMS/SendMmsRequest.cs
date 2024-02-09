@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.MMS;
+namespace RKSoftware.Tychron.APIClient.Model.Mms;
 
 /// <summary>
-/// Send Mms request model <br/>
+/// Send MMS request model <br/>
 /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#request-parameters"/>
 /// </summary>
-public class SendMMSRequest
+public class SendMmsRequest
 {
     /// <summary>
     /// The ID used to identify the message.

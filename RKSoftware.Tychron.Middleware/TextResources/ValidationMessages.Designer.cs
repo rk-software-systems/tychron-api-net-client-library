@@ -160,7 +160,7 @@ namespace RKSoftware.Tychron.Middleware.TextResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to MMS the Id is required..
         /// </summary>
         internal static string ReceiveMmsIdRequired {
             get {

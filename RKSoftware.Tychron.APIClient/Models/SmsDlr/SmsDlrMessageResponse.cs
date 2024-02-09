@@ -1,12 +1,12 @@
-﻿using RKSoftware.Tychron.APIClient.Model.SMS;
+﻿using RKSoftware.Tychron.APIClient.Model.Sms;
 using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Models.SMSDLR;
+namespace RKSoftware.Tychron.APIClient.Models.SmsDlr;
 
 /// <summary>
 /// This object represents single SMS DLR delivered response from Tychron API.
 /// </summary>
-public class SMSDLRMessageResponseModel
+public class SmsDlrMessageResponse
 {
     /// <summary>
     /// The ID supplied by the system to identify the message.

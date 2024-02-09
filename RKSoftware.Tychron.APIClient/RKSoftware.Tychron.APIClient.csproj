@@ -6,6 +6,13 @@
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
+
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+  
 	<PropertyGroup>
 		<PackageId>RKSoftware.Tychron.APIClient</PackageId>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
@@ -48,8 +55,13 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<None Include="C:\Projects\RK\tychron-api-net-client-library\RKSoftware.Tychron.APIClient\.editorconfig" />
 		<None Include="README.md" Pack="true" PackagePath="\" />
 		<None Include="LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\Projects\RK\tychron-api-net-client-library\RKSoftware.Tychron.APIClient\.editorconfig" />
 	</ItemGroup>
 
 </Project>

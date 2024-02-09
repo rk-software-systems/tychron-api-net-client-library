@@ -117,28 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SendSMSBodyRequired" xml:space="preserve">
+  <data name="SendSmsBodyRequired" xml:space="preserve">
     <value>SMS Message Body is required.</value>
   </data>
-  <data name="SendSMSFromRequired" xml:space="preserve">
+  <data name="SendSmsFromRequired" xml:space="preserve">
     <value>SMS Message From is required.</value>
   </data>
-  <data name="SendSMSToRequired" xml:space="preserve">
+  <data name="SendSmsToRequired" xml:space="preserve">
     <value>At least one SMS message recipient is required.</value>
   </data>
-  <data name="SendSMSFromDlrRequired" xml:space="preserve">
+  <data name="SendSmsFromDlrRequired" xml:space="preserve">
     <value>SMS DLR Message From is required.</value>
   </data>
-  <data name="SendSMSSmsIdRequired" xml:space="preserve">
+  <data name="SendSmsSmsIdRequired" xml:space="preserve">
     <value>SMS DLR SmsId is required.</value>
   </data>
-  <data name="SendMMSToRequired" xml:space="preserve">
+  <data name="SendMmsToRequired" xml:space="preserve">
     <value>At least one MMS message recipient is required.</value>
   </data>
-  <data name="SendMMSFromRequired" xml:space="preserve">
+  <data name="SendMmsFromRequired" xml:space="preserve">
     <value>MMS Message From is required.</value>
   </data>
-  <data name="SendMMSPartRequired" xml:space="preserve">
+  <data name="SendMmsPartRequired" xml:space="preserve">
     <value>At least one part of the MMS message is required.</value>
   </data>
 </root>

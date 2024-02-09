@@ -11,13 +11,13 @@ namespace RKSoftware.Tychron.Middlewares;
 /// This middleware is used to receive Tychron Webhook requests.
 /// </summary>
 /// <typeparam name="T">Type of requests that are being received.</typeparam>
-public class TychronMiddleware<T>
-    where T : IValidationSubject
+public class TychronMiddleware<T>  where T : IValidationSubject
 {
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
+
     /// <summary>
     /// Execute Middleware
     /// </summary>

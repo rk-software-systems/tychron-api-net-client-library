@@ -1,13 +1,13 @@
 ﻿using RKSoftware.Tychron.Middleware.Error;
-using RKSoftware.Tychron.Middleware.Model.SMS;
+using RKSoftware.Tychron.Middleware.Model.Sms;
 using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Models.SMSDLR;
+namespace RKSoftware.Tychron.Middleware.Models.SmsDlr;
 
 /// <summary>
 /// Webhooks message request model
 /// </summary>
-public class SMSDLRWebhookModel : IValidationSubject
+public class SmsDlrWebhookModel : IValidationSubject
 {
     /// <summary>
     /// The ID used to identify the DLR.
@@ -120,17 +120,12 @@ public class SMSDLRWebhookModel : IValidationSubject
         var result = new List<TychronMiddlewareValidationError>();
         if (string.IsNullOrEmpty(Id))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = IdRequiredErrorCode,
-                FieldName = nameof(Id),
-                Message = "Id is required."
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Id), IdRequiredErrorCode, "Id is required."));
         }
 
         if (string.IsNullOrEmpty(Type))
         {
-            result.Add(new TychronMiddlewareValidationError
+            result.Add(new TychronMiddlewareValidationError());
             {
                 ErrorCode = TypeRequiredErrorCode,
                 FieldName = nameof(Type),

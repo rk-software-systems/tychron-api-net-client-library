@@ -3,7 +3,7 @@ using RKSoftware.Tychron.Middleware.Models;
 using RKSoftware.Tychron.Middleware.TextResources;
 using RKSoftware.Tychron.Middleware.Error;
 
-namespace RKSoftware.Tychron.Middleware.Model.SMS;
+namespace RKSoftware.Tychron.Middleware.Model.Sms;
 
 /// <summary>
 /// Sms Webhook Model
@@ -208,102 +208,52 @@ public class SmsWebhookModel : IValidationSubject
 
         if (string.IsNullOrEmpty(Id))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = IdRequiredErrorCode,
-                FieldName = nameof(Id),
-                Message = ValidationMessages.ReceiveSMSIdRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Id), IdRequiredErrorCode, ValidationMessages.ReceiveSMSIdRequired));
         }
 
         if (string.IsNullOrEmpty(Type))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = TypeRequiredErrorCode,
-                FieldName = nameof(Type),
-                Message = ValidationMessages.ReceiveSMSTypeRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Type), TypeRequiredErrorCode, ValidationMessages.ReceiveSMSTypeRequired));
         }
 
         if (string.IsNullOrEmpty(From))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = FromRequiredErrorCode,
-                FieldName = nameof(From),
-                Message = ValidationMessages.ReceiveSMSFromRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(From), FromRequiredErrorCode, ValidationMessages.ReceiveSMSFromRequired));
         }
 
         if (string.IsNullOrEmpty(To))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = ToRequiredErrorCode,
-                FieldName = nameof(To),
-                Message = ValidationMessages.ReceiveSMSToRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(To), ToRequiredErrorCode, ValidationMessages.ReceiveSMSToRequired));
         }
 
         if (string.IsNullOrEmpty(Body))
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = BodyRequiredErrorCode,
-                FieldName = nameof(Body),
-                Message = ValidationMessages.ReceiveSMSBodyRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Body), BodyRequiredErrorCode, ValidationMessages.ReceiveSMSBodyRequired));
         }
 
         if (Priority == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = PriorityRequiredErrorCode,
-                FieldName = nameof(Priority),
-                Message = ValidationMessages.ReceiveSMSPriorityRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(Priority), PriorityRequiredErrorCode, ValidationMessages.ReceiveSMSPriorityRequired));
         }
 
         if (SmsEncoding == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = SmsEncodingRequiredErrorCode,
-                FieldName = nameof(SmsEncoding),
-                Message = ValidationMessages.ReceiveSMSEncodingRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(SmsEncoding), SmsEncodingRequiredErrorCode, ValidationMessages.ReceiveSMSEncodingRequired));
         }
 
         if (InsertedAt == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = InsertedAtRequiredErrorCode,
-                FieldName = nameof(InsertedAt),
-                Message = ValidationMessages.ReceiveSMSInsertedAtRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(InsertedAt), InsertedAtRequiredErrorCode, ValidationMessages.ReceiveSMSInsertedAtRequired));
         }
 
         if (UpdatedAt == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = UpdatedAtRequiredErrorCode,
-                FieldName = nameof(UpdatedAt),
-                Message = ValidationMessages.ReceiveSMSUpdatedAtRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(UpdatedAt), UpdatedAtRequiredErrorCode, ValidationMessages.ReceiveSMSUpdatedAtRequired));
         }
 
         if (ProcessedAt == null)
         {
-            result.Add(new TychronMiddlewareValidationError
-            {
-                ErrorCode = ProcessedAtRequiredErrorCode,
-                FieldName = nameof(ProcessedAt),
-                Message = ValidationMessages.ReceiveSMSProcessedAtRequired
-            });
+            result.Add(new TychronMiddlewareValidationError(nameof(ProcessedAt), ProcessedAtRequiredErrorCode, ValidationMessages.ReceiveSMSProcessedAtRequired));
         }
 
         return result;
@@ -311,16 +261,16 @@ public class SmsWebhookModel : IValidationSubject
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-    public const string IdRequiredErrorCode = "ReceiveSMS_Id_Required";
-    public const string TypeRequiredErrorCode = "ReceiveSMS_Type_Required";
-    public const string FromRequiredErrorCode = "ReceiveSMS_From_Required";
-    public const string ToRequiredErrorCode = "ReceiveSMS_To_Required";
-    public const string BodyRequiredErrorCode = "ReceiveSMS_Body_Required";
-    public const string PriorityRequiredErrorCode = "ReceiveSMS_Priority_Required";
-    public const string SmsEncodingRequiredErrorCode = "ReceiveSMS_SmsEncoding_Required";
-    public const string InsertedAtRequiredErrorCode = "ReceiveSMS_InsertedAt_Required";
-    public const string UpdatedAtRequiredErrorCode = "ReceiveSMS_UpdatedAt_Required";
-    public const string ProcessedAtRequiredErrorCode = "ReceiveSMS_IProcessedAt_Required";
+    public const string IdRequiredErrorCode = "ReceiveSms_Id_Required";
+    public const string TypeRequiredErrorCode = "ReceiveSms_Type_Required";
+    public const string FromRequiredErrorCode = "ReceiveSms_From_Required";
+    public const string ToRequiredErrorCode = "ReceiveSms_To_Required";
+    public const string BodyRequiredErrorCode = "ReceiveSms_Body_Required";
+    public const string PriorityRequiredErrorCode = "ReceiveSms_Priority_Required";
+    public const string SmsEncodingRequiredErrorCode = "ReceiveSms_SmsEncoding_Required";
+    public const string InsertedAtRequiredErrorCode = "ReceiveSms_InsertedAt_Required";
+    public const string UpdatedAtRequiredErrorCode = "ReceiveSms_UpdatedAt_Required";
+    public const string ProcessedAtRequiredErrorCode = "ReceiveSms_IProcessedAt_Required";
 
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

@@ -151,7 +151,7 @@
     <value>MMS the From is required.</value>
   </data>
   <data name="ReceiveMmsIdRequired" xml:space="preserve">
-    <value />
+    <value>MMS the Id is required.</value>
   </data>
   <data name="ReceiveMmsIdRequired1" xml:space="preserve">
     <value>MMS the Id is required.</value>
@@ -209,19 +209,19 @@
   </data>
   <data name="ReceiveSMSFromRequired" xml:space="preserve">
     <value>Receive SMS From is required.</value>
-  </data> 
+  </data>
   <data name="ReceiveSMSToRequired" xml:space="preserve">
     <value>Receive SMS To is required.</value>
-  </data>  
+  </data>
   <data name="ReceiveSMSBodyRequired" xml:space="preserve">
     <value>Receive SMS Body is required.</value>
   </data>
   <data name="ReceiveSMSPriorityRequired" xml:space="preserve">
     <value>Receive SMS Priority is required.</value>
   </data>
-   <data name="ReceiveSMSEncodingRequired" xml:space="preserve">
+  <data name="ReceiveSMSEncodingRequired" xml:space="preserve">
     <value>Receive SMS Encoding is required.</value>
-  </data> 
+  </data>
   <data name="ReceiveSMSInsertedAtRequired" xml:space="preserve">
     <value>Receive SMS InsertedAt is required.</value>
   </data>

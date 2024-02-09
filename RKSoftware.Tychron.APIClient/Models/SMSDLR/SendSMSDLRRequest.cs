@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Models.SMSDLR;
+namespace RKSoftware.Tychron.APIClient.Models.SmsDlr;
 
 /// <summary>
 /// Request SMS DLR via HTTP
 /// </summary>
-public class SendSMSDLRRequest
+public class SendSmsDlrRequest
 {
     /// <summary>
     /// The ID used to identify the message.

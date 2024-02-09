@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.SMS;
+namespace RKSoftware.Tychron.APIClient.Model.Sms;
 
 /// <summary>
 /// This object represents single SMS delivered response from Tychron API.
 /// </summary>
-public class SMSMessageResponseModel
+public class SmsMessageResponse
 {
     /// <summary>
     /// The ID supplied by the system to identify the message.
@@ -62,7 +62,7 @@ public class SMSMessageResponseModel
     public int Priority { get; set; }
 
     /// <summary>
-    /// A list of sms messages that make up the complete request.
+    /// A list of SMS messages that make up the complete request.
     /// </summary>
     [JsonPropertyName("parts")]
     public List<SmsPart>? Parts { get; set; }
@@ -121,7 +121,7 @@ public class SMSMessageResponseModel
 
     /// <summary>
     /// Denotes when the message was delivered.
-    /// Will always be nil upon return from an sms request.
+    /// Will always be nil upon return from an SMS request.
     /// <example>
     /// <code>"2020-04-18T11:30:00Z"</code>
     /// </example>
