@@ -37,7 +37,7 @@ namespace RKSoftware.Tychron.Tests
             var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = await tychronSMSDLRAPIClient.SendSMSDLR(_validPayloadSendSMSDLR);
+            var result = await tychronSMSDLRAPIClient.SendSmsDlr(_validPayloadSendSMSDLR);
 
             //Assert
             Assert.That(result.Messages?.Count, Is.EqualTo(1));
@@ -57,7 +57,7 @@ namespace RKSoftware.Tychron.Tests
             var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = Assert.ThrowsAsync<TychronApiException>(async () => await tychronSMSDLRAPIClient.SendSMSDLR(_validPayloadSendSMSDLR));
+            var result = Assert.ThrowsAsync<TychronApiException>(async () => await tychronSMSDLRAPIClient.SendSmsDlr(_validPayloadSendSMSDLR));
 
             //Assert
             Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
@@ -81,7 +81,7 @@ namespace RKSoftware.Tychron.Tests
             var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = await tychronSMSDLRAPIClient.SendSMSDLR(_validPayloadSendSMSDLR);
+            var result = await tychronSMSDLRAPIClient.SendSmsDlr(_validPayloadSendSMSDLR);
 
             //Assert
             Assert.That(result.PartialFailure, Is.True);
@@ -108,7 +108,7 @@ namespace RKSoftware.Tychron.Tests
             var tychronSMSDLRAPIClient = new TychronSmsDlrClient(httpClient);
 
             //Act
-            var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronSMSDLRAPIClient.SendSMSDLR(payload));
+            var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronSMSDLRAPIClient.SendSmsDlr(payload));
 
             //Assert
             Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == errorMessageCode), Is.EqualTo(true));

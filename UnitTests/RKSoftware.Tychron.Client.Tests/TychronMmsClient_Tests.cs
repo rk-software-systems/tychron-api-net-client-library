@@ -62,7 +62,7 @@ public class TychronMmsClient_Tests
         var tychronSMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
-        var result = await tychronSMSAPIClient.SendMMS(_validPayloadSendMMS);
+        var result = await tychronSMSAPIClient.SendMms(_validPayloadSendMMS);
 
         //Assert
         Assert.That(result?.Records?.Count, Is.EqualTo(1));
@@ -85,7 +85,7 @@ public class TychronMmsClient_Tests
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
-        var result = Assert.ThrowsAsync<TychronApiException>(async () => await tychronMMSAPIClient.SendMMS(_validPayloadSendMMS));
+        var result = Assert.ThrowsAsync<TychronApiException>(async () => await tychronMMSAPIClient.SendMms(_validPayloadSendMMS));
 
         //Assert
         Assert.That(result!.StatusCode, Is.EqualTo((int)HttpStatusCode.BadRequest));
@@ -109,7 +109,7 @@ public class TychronMmsClient_Tests
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
-        var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMMS(payload));
+        var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMms(payload));
 
         //Assert
         Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMmsClient.FromRequiredErrorCode), Is.EqualTo(true));
@@ -133,7 +133,7 @@ public class TychronMmsClient_Tests
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
-        var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMMS(payload));
+        var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMms(payload));
 
         //Assert
         Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMmsClient.ToRequiredErrorCode), Is.EqualTo(true));
@@ -157,7 +157,7 @@ public class TychronMmsClient_Tests
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);
 
         //Act
-        var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMMS(payload));
+        var result = Assert.ThrowsAsync<TychronValidationException>(async () => await tychronMMSAPIClient.SendMms(payload));
 
         //Assert
         Assert.That(result!.ValidationErrors.Any(x => x.ErrorCode == TychronMmsClient.PartRequiredErrorCode), Is.EqualTo(true));

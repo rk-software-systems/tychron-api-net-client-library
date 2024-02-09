@@ -32,7 +32,7 @@ public static class TychronMiddlewareExtensions
             {
                 authenticationConfigurator?.Invoke(appBuilder);
 
-                appBuilder.UseMiddleware<TychronMiddleware<T>>(path);
+                appBuilder.UseMiddleware<TychronMiddleware<T>>();
             });
     }
 
