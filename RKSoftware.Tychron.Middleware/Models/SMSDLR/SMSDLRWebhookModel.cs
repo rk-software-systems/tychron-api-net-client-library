@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace RKSoftware.Tychron.Middleware.Models.SmsDlr;
 
 /// <summary>
-/// Webhooks message request model
+/// SMS DLR Webhook model
 /// </summary>
 public class SmsDlrWebhookModel : IValidationSubject
 {
@@ -86,13 +86,13 @@ public class SmsDlrWebhookModel : IValidationSubject
     /// An ISO 8601 formatted timestamp that represents when the message was received by the API.
     /// </summary>
     [JsonPropertyName("inserted_at")]
-    public DateTime InsertedAt { get; set; }
+    public DateTime? InsertedAt { get; set; }
 
     /// <summary>
     /// An ISO 8601 formatted timestamp that represents when the message was last updated by the API.
     /// </summary>
     [JsonPropertyName("updated_at")]
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     /// <summary>
     /// An ISO 8601 formatted timestamp that represents when the message was considered delivered.
@@ -159,6 +159,16 @@ public class SmsDlrWebhookModel : IValidationSubject
             result.Add(new TychronMiddlewareValidationError(nameof(DeliveryErrorCode), DeliveryErrorCodeRequiredErrorCode, ValidationMessages.ReceiveSmsDlrDeliveryErrorCodeRequired));
         }
 
+        if (!InsertedAt.HasValue)
+        {
+            result.Add(new TychronMiddlewareValidationError(nameof(InsertedAt), InsertedAtRequiredErrorCode, ValidationMessages.ReceiveSmsDlrInsertedAtRequired));
+        }
+
+        if (!UpdatedAt.HasValue)
+        {
+            result.Add(new TychronMiddlewareValidationError(nameof(UpdatedAt), UpdatedAtRequiredErrorCode, ValidationMessages.ReceiveSmsDlrUpdatedAtRequired));
+        }
+
         return result;
     }
 
@@ -207,4 +217,14 @@ public class SmsDlrWebhookModel : IValidationSubject
     /// Validation Error <see cref="DeliveryErrorCode"/> is required.
     /// </summary>
     public const string DeliveryErrorCodeRequiredErrorCode = "ReceiveSms_Dlr_DeliveryErrorCode_Required";
+
+    /// <summary>
+    /// Validation Error <see cref="InsertedAt"/> is required.
+    /// </summary>
+    public const string InsertedAtRequiredErrorCode = "ReceiveSms_Dlr_InsertedAt_Required";
+
+    /// <summary>
+    /// Validation Error <see cref="UpdatedAt"/> is required.
+    /// </summary>
+    public const string UpdatedAtRequiredErrorCode = "ReceiveSms_Dlr_UpdatedAt_Required";
 }

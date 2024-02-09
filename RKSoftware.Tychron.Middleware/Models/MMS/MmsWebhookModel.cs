@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace RKSoftware.Tychron.Middleware.Model.Mms;
 
 /// <summary>
-/// Mms Webhook Model
+/// MMS Webhook Model
 /// </summary>
 public class MmsWebhookModel : IValidationSubject
 {

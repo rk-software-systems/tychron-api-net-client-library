@@ -277,6 +277,15 @@ namespace RKSoftware.Tychron.Middleware.TextResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR InsertedAt is required..
+        /// </summary>
+        internal static string ReceiveSmsDlrInsertedAtRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSmsDlrInsertedAtRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receive SMS DLR Status is required..
         /// </summary>
         internal static string ReceiveSmsDlrStatusRequired {
@@ -309,6 +318,15 @@ namespace RKSoftware.Tychron.Middleware.TextResources {
         internal static string ReceiveSmsDlrUpdatedAtCodeRequired {
             get {
                 return ResourceManager.GetString("ReceiveSmsDlrUpdatedAtCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive SMS DLR UpdatedAt is required..
+        /// </summary>
+        internal static string ReceiveSmsDlrUpdatedAtRequired {
+            get {
+                return ResourceManager.GetString("ReceiveSmsDlrUpdatedAtRequired", resourceCulture);
             }
         }
         

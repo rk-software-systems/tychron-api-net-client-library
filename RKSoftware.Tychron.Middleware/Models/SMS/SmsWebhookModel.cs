@@ -6,7 +6,7 @@ using RKSoftware.Tychron.Middleware.Error;
 namespace RKSoftware.Tychron.Middleware.Model.Sms;
 
 /// <summary>
-/// Sms Webhook Model
+/// SMS Webhook Model
 /// </summary>
 public class SmsWebhookModel : IValidationSubject
 {
@@ -174,7 +174,7 @@ public class SmsWebhookModel : IValidationSubject
     /// </para>
     /// </summary>
     [JsonPropertyName("delivered_at")]
-    public DateTime DeliveredAt { get; set; }
+    public DateTime? DeliveredAt { get; set; }
 
     /// <summary>
     /// An ISO 8601 formatted timestamp that represents when the message was scheduled for delivery.
@@ -184,7 +184,7 @@ public class SmsWebhookModel : IValidationSubject
     /// </para>
     /// </summary>
     [JsonPropertyName("scheduled_at")]
-    public DateTime ScheduledAt { get; set; }
+    public DateTime? ScheduledAt { get; set; }
 
     /// <summary>
     /// An ISO 8601 formatted timestamp that represents when the message will be considered expired.
@@ -194,7 +194,7 @@ public class SmsWebhookModel : IValidationSubject
     /// </para>
     /// </summary>
     [JsonPropertyName("expires_at")]
-    public DateTime ExpiresAt { get; set; }
+    public DateTime? ExpiresAt { get; set; }
 
     /// <summary>
     /// Validation Errors

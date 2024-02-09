@@ -36,7 +36,7 @@ app.UseTychronMiddleware<MmsDlrWebhookModel>("/tychron/mms-dlr", (appBuilder) =>
 });
 
 // Register Tychron Middleware for SMS DLR
-app.UseTychronMiddleware<SMSDLRWebhookModel>("/tychron/sms-dlr", (appBuilder) =>
+app.UseTychronMiddleware<SmsDlrWebhookModel>("/tychron/sms-dlr", (appBuilder) =>
 {
     // Use Basic Auth for Tychron requests
     appBuilder.UseTychronBasicAuth("username", "password");
@@ -65,4 +65,4 @@ To Be able to handle Tychron Webhook requests you need to create a class that im
 - `SmsWebhookModel` - Incoming SMS Webhook Model
 - `MmsWebhookModel` - Incoming MMS Webhook Model
 - `MmsDlrWebhookModel` - Incoming MMS DLR Webhook Model
-- `SMSDLRWebhookModel` - Incoming SMS DLR Webhook Model
+- `SmsDlrWebhookModel` - Incoming SMS DLR Webhook Model

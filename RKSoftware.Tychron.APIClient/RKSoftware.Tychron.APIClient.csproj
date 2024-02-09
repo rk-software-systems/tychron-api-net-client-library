@@ -55,7 +55,6 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
-		<None Include="C:\Projects\RK\tychron-api-net-client-library\RKSoftware.Tychron.APIClient\.editorconfig" />
 		<None Include="README.md" Pack="true" PackagePath="\" />
 		<None Include="LICENSE" Pack="true" PackagePath="\" />
 	</ItemGroup>

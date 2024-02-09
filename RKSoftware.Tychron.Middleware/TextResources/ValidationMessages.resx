@@ -228,4 +228,10 @@
   <data name="ReceiveSmsProcessedAtRequired" xml:space="preserve">
     <value>Receive SMS  ProcessedAt is required.</value>
   </data>
+  <data name="ReceiveSmsDlrInsertedAtRequired" xml:space="preserve">
+    <value>Receive SMS DLR InsertedAt is required.</value>
+  </data>
+  <data name="ReceiveSmsDlrUpdatedAtRequired" xml:space="preserve">
+    <value>Receive SMS DLR UpdatedAt is required.</value>
+  </data>
 </root>
