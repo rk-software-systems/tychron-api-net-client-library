@@ -59,7 +59,7 @@ public class SmsMessageResponse
     /// </list>
     /// </summary>
     [JsonPropertyName("priority")]
-    public int Priority { get; set; }
+    public int? Priority { get; set; }
 
     /// <summary>
     /// A list of SMS messages that make up the complete request.
@@ -78,7 +78,7 @@ public class SmsMessageResponse
     /// Note that messages will always return in UTF-8, the encoding is provided for informational purposes when diagnosing issues with upstream message delivery.
     /// </summary>
     [JsonPropertyName("encoding")]
-    public int Encoding { get; set; }
+    public int? Encoding { get; set; }
 
     /// <summary>
     /// Denotes under what conditions a delivery report be sent back for the message.
@@ -99,7 +99,7 @@ public class SmsMessageResponse
     /// </example>
     /// </summary>
     [JsonPropertyName("inserted_at")]
-    public DateTime InsertedAt { get; set; }
+    public DateTime? InsertedAt { get; set; }
 
     /// <summary>
     /// Denotes when the message's status was last modified.
@@ -108,7 +108,7 @@ public class SmsMessageResponse
     /// </example>
     /// </summary>
     [JsonPropertyName("updated_at")]
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     /// <summary>
     /// Denotes when the message's status was last Processed.
@@ -117,7 +117,7 @@ public class SmsMessageResponse
     /// </example>
     /// </summary>
     [JsonPropertyName("processed_at")]
-    public DateTime ProcessedAt { get; set; }
+    public DateTime? ProcessedAt { get; set; }
 
     /// <summary>
     /// Denotes when the message was delivered.
@@ -127,7 +127,7 @@ public class SmsMessageResponse
     /// </example>
     /// </summary>
     [JsonPropertyName("delivered_at")]
-    public DateTime DeliveredAt { get; set; }
+    public DateTime? DeliveredAt { get; set; }
 
     /// <summary>
     /// The expected time that the message will actually attempt to be sent to the ecosystem.
@@ -136,7 +136,7 @@ public class SmsMessageResponse
     /// </example>
     /// </summary>
     [JsonPropertyName("scheduled_at")]
-    public DateTime ScheduledAt { get; set; }
+    public DateTime? ScheduledAt { get; set; }
 
     /// <summary>
     /// Denotes the time the message expires.
@@ -145,7 +145,7 @@ public class SmsMessageResponse
     /// </example>
     /// </summary>
     [JsonPropertyName("expires_at")]
-    public DateTime ExpiresAt { get; set; }
+    public DateTime? ExpiresAt { get; set; }
 
     /// <summary>
     /// The name of the service provider.
@@ -189,7 +189,7 @@ public class SmsMessageResponse
     /// If the remote_number is messaging enabled, may be nil if indeterminate
     /// </summary>
     [JsonPropertyName("remote_messaging_enabled")]
-    public bool RemoteMessagingEnabled { get; set; }
+    public bool? RemoteMessagingEnabled { get; set; }
 
     /// <summary>
     /// An object containing the Campaign information of the request, if available.

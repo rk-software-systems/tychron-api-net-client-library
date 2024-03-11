@@ -21,5 +21,5 @@ public class BaseSmsResponse<T>
     /// This flag is set to true when we obtain the following response from Tychron API (HTTP Status Code 207)
     /// <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#response-codes"/>
     /// </summary>
-    public bool PartialFailure { get; init; }
+    public bool? PartialFailure { get; init; }
 }

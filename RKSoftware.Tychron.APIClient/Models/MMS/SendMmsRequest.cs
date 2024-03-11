@@ -25,7 +25,7 @@ public class SendMmsRequest
     /// The parameter for sending MMS messages is"mms_forward_request"
     /// </summary>
     [JsonPropertyName("type")]
-    public const string Type = "mms_forward_request";
+    public string Type => "mms_forward_request";
 
     /// <summary>
     /// The sender number, should be formatted in E.164 format<br/>

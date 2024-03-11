@@ -60,13 +60,14 @@ public sealed class TychronMmsClient
 
         ValidateMmsRequestModel(request);
 
-        using var content = new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json);
+        var jsonContent = JsonSerializer.Serialize(request);
+        using var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, MediaTypeNames.Application.Json);
         var response = await _httpClient.PostAsync(smsPath, content);
 
         response.Headers.TryGetValues(TychronConstants.XRequestHeaderName, out IEnumerable<string>? xRequestIds);
         var xRequestId = xRequestIds?.FirstOrDefault();
 
-        if (response.StatusCode != HttpStatusCode.OK)
+        if (!response.IsSuccessStatusCode)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
             throw new TychronApiException(xRequestId, (int)response.StatusCode, responseContent);
