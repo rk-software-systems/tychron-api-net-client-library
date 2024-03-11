@@ -75,8 +75,7 @@ public sealed class TychronSmsClient
         response.Headers.TryGetValues(TychronConstants.XCdrHeaderName, out IEnumerable<string>? xcdrids);
         var xcdrid = xcdrids?.FirstOrDefault();
 
-        if (response.StatusCode != HttpStatusCode.OK && 
-            response.StatusCode != HttpStatusCode.MultiStatus)
+        if (!response.IsSuccessStatusCode)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
             throw new TychronApiException(xcdrid, (int)response.StatusCode, responseContent);

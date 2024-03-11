@@ -8,32 +8,22 @@ namespace RKSoftware.Tychron.APIClient.Extensions;
 /// </summary>
 public static class TychronClientsRegistrationExtensions
 {
+
+
     /// <summary>
-    /// Register SMS, MMS and SMSDLR clients in DI container
+    /// Register SMS, MMS or SMS DLR clients in DI container
     /// </summary>
-    /// <param name="services">
-    /// Service collection of DI container.
-    ///
-    /// </param>
-    /// <param name="baseUrl">
-    /// Base Tychron API URL
+    /// <typeparam name="TClient"></typeparam>
+    /// <param name="services">Service collection of DI container</param>
+    /// <param name="baseUrl">Base Tychron API URL
     /// <example>
-    /// Default value: <code>https://sms.tychron.online/</code>
+    /// Default value for SMS: <code>https://sms.tychron.online/</code>
+    /// Default value for MMS: <code>https://mms.tychron.online/</code>
     /// </example>
     /// </param>
-    /// <param name="bearerKey">Security Key that is used as Bearer Tychron API Authentication Token.</param>
+    /// <param name="bearerKey"></param>
     /// <returns></returns>
-    public static IServiceCollection RegisterTychronClients(this IServiceCollection services,
-        Uri baseUrl,
-        string bearerKey)
-    {
-        services.RegisterTychronClient<TychronSmsClient>(baseUrl, bearerKey);
-        services.RegisterTychronClient<TychronMmsClient>(baseUrl, bearerKey);
-        services.RegisterTychronClient<TychronSmsDlrClient>(baseUrl, bearerKey);
-        return services;
-    }
-
-    private static IServiceCollection RegisterTychronClient<TClient>(this IServiceCollection services,
+    public static IServiceCollection RegisterTychronClient<TClient>(this IServiceCollection services,
         Uri baseUrl,
         string bearerKey) where TClient : class
     {
