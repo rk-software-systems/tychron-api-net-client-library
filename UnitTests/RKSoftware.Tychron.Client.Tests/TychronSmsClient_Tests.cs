@@ -1,6 +1,7 @@
 using RKSoftware.Tychron.APIClient;
 using RKSoftware.Tychron.APIClient.Error;
 using RKSoftware.Tychron.APIClient.Model.Sms;
+using RKSoftware.Tychron.APIClient.Models;
 using RKSoftware.Tychron.Tests.Factories;
 using System.Net;
 
@@ -13,12 +14,7 @@ public class TychronSmsClient_Tests
     [SetUp]
     public void Setup()
     {
-        _validPayloadSendSMS = new SendSmsRequest
-        {
-            Body = "Sample body",
-            To = ["123456777", "123456788", "123456799"],
-            From = "123456789"
-        };
+        _validPayloadSendSMS = new SendSmsRequest("Sample body", "123456789", new CustomList<string>(["123456777", "123456788", "123456799"]));
     }
 
     [Test]
@@ -98,12 +94,7 @@ public class TychronSmsClient_Tests
     public void SendSms_Fail_Validation(string? to, string? from, string? body, string errorMessageCode)
     {
         //Arrange
-        var payload = new SendSmsRequest
-        {
-            Body = body,
-            To = string.IsNullOrEmpty(to) ? null : [to],
-            From = from,
-        };
+        var payload = new SendSmsRequest(body, from, string.IsNullOrEmpty(to) ? [] : new CustomList<string>([to]));
 
         var httpClient = HttpClientMockFactory.GetHttpClientMock(
             new HttpResponseMessage(HttpStatusCode.OK),

@@ -1,27 +1,25 @@
 ﻿using System.Text.Json.Serialization;
+using RKSoftware.Tychron.APIClient.Models;
 
 namespace RKSoftware.Tychron.APIClient.Model.Mms;
 
 /// <summary>
 /// Send MMS response model
 /// </summary>
-public class MmsMessageResponse
+/// <param name="Records">
+/// An array of responses
+/// </param>
+/// <param name="Errors">
+///  Error data
+/// </param>
+public record class MmsMessageResponse(
+    [property:JsonPropertyName("records")] CustomList<MmsRecord>? Records,
+    [property:JsonPropertyName("errors")] CustomList<object>? Errors
+    )
 {
     /// <summary>
     /// An ID used to identify the HTTP request.
     /// <see href="https://docs.tychron.info/mms-api/sending-mms-via-http/#response-headers"/>
     /// </summary>
     public string? XRequestId { get; set; }
-
-    /// <summary>
-    /// An array of responses
-    /// </summary>
-    [JsonPropertyName("records")]
-    public List<MmsRecord>? Records { get; set; }
-
-    /// <summary>
-    /// Error data
-    /// </summary>
-    [JsonPropertyName("errors")]
-    public List<object>? Errors { get; set; }
 }

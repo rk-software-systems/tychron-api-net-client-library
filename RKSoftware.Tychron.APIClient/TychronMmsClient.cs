@@ -1,7 +1,7 @@
 ﻿using RKSoftware.Tychron.APIClient.Error;
+using RKSoftware.Tychron.APIClient.Extensions;
 using RKSoftware.Tychron.APIClient.Model.Mms;
 using RKSoftware.Tychron.APIClient.TextResources;
-using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -11,7 +11,18 @@ namespace RKSoftware.Tychron.APIClient;
 /// <summary>
 /// Tychron MMS client
 /// </summary>
-public sealed class TychronMmsClient
+/// <remarks>
+/// Initializes a new instance of the <see cref="TychronMmsClient"/> class.
+/// </remarks>
+/// <param name="httpClient">Http client that is going to be used to submit Tychron API request (please add Authorization to it.
+/// Use <see cref="TychronClientsRegistrationExtensions.RegisterTychronClient{TychronMmsClient}"/> to register client with configured authentication.
+/// <example>
+/// <code>
+/// builder.Services.RegisterTychronClient{TychronMmsClient}(baseUrl, bearerKey);
+/// </code>
+/// </example>
+/// </param>
+public sealed class TychronMmsClient(HttpClient httpClient)
 {
     #region constants
 
@@ -21,21 +32,7 @@ public sealed class TychronMmsClient
 
     #region fields
 
-    private readonly HttpClient _httpClient;
-
-    #endregion
-
-    #region ctors
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TychronMmsClient"/> class.
-    /// </summary>
-    /// <param name="httpClient">Http client that is going to be used to submit Tychron API request (please add Authorization to it.
-    /// Use <see cref="Extensions.TychronClientsRegistrationExtensions.RegisterTychronClients"/> to register client with configured authentication.</param>
-    public TychronMmsClient(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
+    private readonly HttpClient _httpClient = httpClient;
 
     #endregion
 
@@ -54,7 +51,7 @@ public sealed class TychronMmsClient
     /// Exception that is thrown on incoming model validation error.
     /// Available codes: <see cref="ToRequiredErrorCode"/>
     /// </exception>"
-    public async Task<MmsMessageResponse?> SendMms(SendMmsRequest request)
+    public async Task<MmsMessageResponse> SendMms(SendMmsRequest request)
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
@@ -79,22 +76,9 @@ public sealed class TychronMmsClient
             PropertyNameCaseInsensitive = false
         }) ?? new JsonObject();
 
-        var result = GetMmsMessageResponse<MmsMessageResponse>(document);
-        if (result != null)
-        {
-            result.XRequestId = xRequestId;
-        }
-
+        var result = document.Deserialize<MmsMessageResponse>() ?? new MmsMessageResponse(null, null);        
+        result.XRequestId = xRequestId;
         return result;
-    }
-
-    #endregion
-
-    #region helpers
-
-    private static T? GetMmsMessageResponse<T>(JsonNode document)
-    {
-        return document.Deserialize<T>();
     }
 
     #endregion

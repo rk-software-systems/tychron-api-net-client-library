@@ -19,6 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Factories\**" />
+    <EmbeddedResource Remove="Factories\**" />
+    <None Remove="Factories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="NUnit" Version="4.1.0" />
@@ -35,10 +41,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\RKSoftware.Tychron.Middleware\RKSoftware.Tychron.Middleware.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>
