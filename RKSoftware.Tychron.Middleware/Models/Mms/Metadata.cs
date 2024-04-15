@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Models;
+namespace RKSoftware.Tychron.Middleware.Models.Mms;
 
 /// <summary>
 /// A map containing miscellaneous information about the request.

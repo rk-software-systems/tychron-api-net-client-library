@@ -6,23 +6,27 @@ There are to ways to use Tychron Clients.
 
 - Create a new instance of API Clients directly in code and use them.
 ```
-// create Http Client (it is better to obtain if rom HttpClientFactory)
+// create Http Client (it is better to obtain it from HttpClientFactory)
 var httpClient = new HttpClient();
 
 // Set Tychron API related data (Authorization header and base url)
 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerKey);
-httpClient.BaseAddress = baseUrl;
+httpClient.BaseAddress = baseSmsUrl;
+// for MMS
+// httpClient.BaseAddress = baseMmsUrl
 
 // Create Tychron API Clients
-var mmsClient = new TychronMmsClient(httpClient);
-var smsClient = new TychronSmsClient(httpClient);
+var smsClient = new TychronSmsClient(httpClient); 
+// for MMS
+// var mmsClient = new TychronMmsClient(httpClient);
 
 // Make requests
 ```
 - ASP.NET Core Dependency Injection
 ```
 // Register Tychron API Clients in Startup.cs
-services.RegisterTychronClients(baseUrl, bearerKey);
+services.RegisterTychronClient<TychronSmsClient>(baseSmsUrl, bearerKey);
+services.RegisterTychronClient<TychronMmsClient>(baseMmsUrl, bearerKey)
 
 // Inject Tychron API Clients in your controllers or services
 public class MyController : Controller

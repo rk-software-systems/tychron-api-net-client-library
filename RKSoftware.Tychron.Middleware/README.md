@@ -38,12 +38,10 @@ To Be able to handle Tychron Webhook requests you need to create a class that im
 `T` -  Incoming Webhook Model. It can be one of the following:
 - `SmsWebhookModel` - Incoming SMS Webhook Model
 - `MmsWebhookModel` - Incoming MMS Webhook Model
-- `MmsDlrWebhookModel` - Incoming MMS DLR Webhook Model
-- `SmsDlrWebhookModel` - Incoming SMS DLR Webhook Model
+- `DlrWebhookModel` - Incoming SMS and MMS DLR Webhook Model
 
 ```
 services.AddScoped<IWebhookHandler<SmsWebhookModel>, SmsWebhookHandler>();
-services.AddScoped<IWebhookHandler<SmsDlrWebhookModel>, SmsDlrWebhookHandler>();
 services.AddScoped<IWebhookHandler<MmsWebhookModel>, MmsWebhookHandler>();
-services.AddScoped<IWebhookHandler<MmsDlrWebhookModel>, MmsDlrWebhookHandler>();
+services.AddScoped<IWebhookHandler<DlrWebhookModel>, DlrWebhookHandler>();
 ```

@@ -3,7 +3,7 @@ using Moq.Protected;
 
 namespace RKSoftware.Tychron.Tests.Factories;
 
-internal class HttpClientMockFactory
+internal sealed class HttpClientMockFactory
 {
     internal static HttpClient GetHttpClientMock(HttpResponseMessage response, HttpMethod methodToMock)
     {
@@ -14,8 +14,10 @@ internal class HttpClientMockFactory
             ItExpr.IsAny<CancellationToken>())
         .ReturnsAsync(response);
 
-        var httpClient = new HttpClient(httpClientHandler.Object);
-        httpClient.BaseAddress = new Uri("http://google.com/");
+        var httpClient = new HttpClient(httpClientHandler.Object)
+        {
+            BaseAddress = new Uri("http://google.com/")
+        };
         return httpClient;
     }
 }
