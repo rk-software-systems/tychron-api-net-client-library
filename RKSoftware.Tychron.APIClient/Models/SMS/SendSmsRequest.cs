@@ -1,11 +1,33 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.Sms;
+namespace RKSoftware.Tychron.APIClient.Models.Sms;
 
 /// <summary>
 /// Request SMS via HTTP
 /// </summary>
-public class SendSmsRequest
+/// <param name="Body">
+/// The message body that will be sent to the recipient. (Maximum of 2048 characters)
+/// <example>
+/// <code>"Hello World"</code>
+/// </example>
+/// </param>
+/// <param name="From">
+/// The sending number that will appear in the message. The number must be formatted in <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#e164-format">E164 format</see>,  e.g. (+12003004000).
+/// <example>
+/// <code>"+12003004001"</code>
+/// </example>
+/// </param>
+/// <param name="To">
+/// The list of recipient number(s). Number(s) must be formatted in <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#e164-format">E164 format</see>, e.g. (+12003004000). A maximum of 500 numbers can be specified per request.
+/// <example>
+/// <code>["+12003004000"]</code>
+/// </example>
+/// </param>
+public record class SendSmsRequest(
+     [property: JsonPropertyName("body")] string Body,
+     [property: JsonPropertyName("from")] string From,
+     [property: JsonPropertyName("to")] CustomList<string> To
+    )
 {
     /// <summary>
     /// The ID used to identify the message.
@@ -13,32 +35,7 @@ public class SendSmsRequest
     [JsonPropertyName("id")]
     public string? Id { get; set; }
 
-    /// <summary>
-    /// The message body that will be sent to the recipient. (Maximum of 2048 characters)
-    /// <example>
-    /// <code>"Hello World"</code>
-    /// </example>
-    /// </summary>
-    [JsonPropertyName("body")]
-    public required string Body { get; init; }
 
-    /// <summary>
-    /// The sending number that will appear in the message. The number must be formatted in <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#e164-format">E164 format</see>,  e.g. (+12003004000).
-    /// <example>
-    /// <code>"+12003004001"</code>
-    /// </example>
-    /// </summary>
-    [JsonPropertyName("from")]
-    public required string From { get; init; }
-
-    /// <summary>
-    /// The list of recipient number(s). Number(s) must be formatted in <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#e164-format">E164 format</see>, e.g. (+12003004000). A maximum of 500 numbers can be specified per request.
-    /// <example>
-    /// <code>["+12003004000"]</code>
-    /// </example>
-    /// </summary>
-    [JsonPropertyName("to")]
-    public required List<string> To { get; init; }
     /// <summary>
     /// Priority affects the urgency of a message during rate limiting. The higher the priority, the more urgent a message will be.
     /// Priorities range from 0 to 2:
@@ -118,4 +115,4 @@ public class SendSmsRequest
     /// </summary>
     [JsonPropertyName("request_mcl")]
     public bool? RequestMcl { get; set; }
-}
+};

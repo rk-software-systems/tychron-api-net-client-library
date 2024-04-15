@@ -1,6 +1,7 @@
 ﻿using RKSoftware.Tychron.APIClient.Error;
 using RKSoftware.Tychron.APIClient.Extensions;
-using RKSoftware.Tychron.APIClient.Model.Sms;
+using RKSoftware.Tychron.APIClient.Models.Sms;
+using RKSoftware.Tychron.APIClient.Models;
 using RKSoftware.Tychron.APIClient.TextResources;
 using System.Net;
 using System.Net.Mime;
@@ -13,7 +14,19 @@ namespace RKSoftware.Tychron.APIClient;
 /// This is a client for Tychron SMS API.<br/>
 /// Please check documentation for details: <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/"/>
 /// </summary>
-public sealed class TychronSmsClient
+/// <remarks>
+/// Initializes a new instance of the <see cref="TychronSmsClient"/> class.
+/// </remarks>
+/// <param name="httpClient">Http Client that if going to be used to send requests to Tychron API.<br/>
+/// Please follow the <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#authorization"/> documentation page to get more information about how to configure HttpClient.
+/// You can also use Extension method <see cref="TychronClientsRegistrationExtensions.RegisterTychronClient{TychronSmsClient}"/> to register Tychron clients in DI container.
+/// <example>
+/// <code>
+/// builder.Services.RegisterTychronClient{TychronSmsClient}(baseUrl, bearerKey);
+/// </code>
+/// </example>
+/// </param>
+public sealed class TychronSmsClient(HttpClient httpClient)
 {
     #region constants
 
@@ -23,28 +36,7 @@ public sealed class TychronSmsClient
 
     #region fields
 
-    private readonly HttpClient _httpClient;
-
-    #endregion
-
-    #region ctors
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TychronSmsClient"/> class.
-    /// </summary>
-    /// <param name="httpClient">Http Client that if going to be used to send requests to Tychron API.<br/>
-    /// Please follow the <see href="https://docs.tychron.info/sms-api/sending-sms-via-http/#authorization"/> documentation page to get more information about how to configure HttpClient.
-    /// You can also use Extension method <see cref="TychronClientsRegistrationExtensions.RegisterTychronClient{TychronSMSAPIClient}"/> to register Tychron clients in DI container.
-    /// <example>
-    /// <code>
-    /// builder.Services.RegisterTychronClient{TychronSMSAPIClient}(baseUrl, bearerKey);
-    /// </code>
-    /// </example>
-    /// </param>
-    public TychronSmsClient(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
+    private readonly HttpClient _httpClient = httpClient;
 
     #endregion
 
@@ -72,13 +64,13 @@ public sealed class TychronSmsClient
         using var content = new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, MediaTypeNames.Application.Json);
         var response = await _httpClient.PostAsync(smsPath, content);
 
-        response.Headers.TryGetValues(TychronConstants.XCdrHeaderName, out IEnumerable<string>? xcdrids);
-        var xcdrid = xcdrids?.FirstOrDefault();
+        response.Headers.TryGetValues(TychronConstants.XRequestHeaderName, out IEnumerable<string>? requestIds);
+        var requestId = requestIds?.FirstOrDefault();
 
         if (!response.IsSuccessStatusCode)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
-            throw new TychronApiException(xcdrid, (int)response.StatusCode, responseContent);
+            throw new TychronApiException(requestId, (int)response.StatusCode, responseContent);
         }
 
         using var responseStream = await response.Content.ReadAsStreamAsync();
@@ -87,12 +79,10 @@ public sealed class TychronSmsClient
             PropertyNameCaseInsensitive = false
         }) ?? new JsonObject();
 
-        return new BaseSmsResponse<SmsMessageResponse>
-        {
-            XCdrId = xcdrid,
-            Messages = document.GetObjectsResponse<SmsMessageResponse>(),
-            PartialFailure = response.StatusCode == HttpStatusCode.MultiStatus
-        };
+        return new BaseSmsResponse<SmsMessageResponse>(
+            requestId, 
+            new CustomList<SmsMessageResponse>(document.GetObjectsResponse<SmsMessageResponse>()),
+            response.StatusCode == HttpStatusCode.MultiStatus);
     }   
 
     #endregion

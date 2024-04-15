@@ -1,57 +1,25 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.Mms;
+namespace RKSoftware.Tychron.APIClient.Models.Mms;
 
 /// <summary>
 /// Response Record model
 /// </summary>
-public class MmsRecord
-{
-    /// <summary>
-    /// The ID supplied by the system to identify the message.
-    /// </summary>
-    [JsonPropertyName("id")]
-    public required string Id { get; set; }
-
-    /// <summary>
-    /// The created message type which may be an <i>"SMS"</i> or <i>"MMS"</i> message based on account settings.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public required string Type { get; set; }
-
-    /// <summary>
-    /// The ID originally supplied in the requests.
-    /// </summary>
-    [JsonPropertyName("reference_id")]
-    public string? ReferenceId { get; set; }
-
-    /// <summary>
-    /// Denotes when the message's status was last modified.
-    /// </summary>
-    [JsonPropertyName("inserted_at")]
-    public DateTime InsertedAt { get; set; }
-
-    /// <summary>
-    /// The sender number.
-    /// </summary>
-    [JsonPropertyName("from")]
-    public required string From { get; set; }
-
-    /// <summary>
-    /// The recipient number, which is identical to the key.
-    /// </summary>
-    [JsonPropertyName("to")]
-    public required List<string> To { get; set; }
-
-    /// <summary>
-    /// Denotes under what conditions a delivery report be sent back for the message.
-    /// </summary>
-    [JsonPropertyName("request_delivery_report")]
-    public bool RequestDeliveryReport { get; set; }
-
-    /// <summary>
-    /// Denotes under what conditions a read-reply report be sent back for the message.
-    /// </summary>
-    [JsonPropertyName("request_read_reply_report")]
-    public bool RequestReadReplyReport { get; set; }
-}
+/// <param name="Id">The ID supplied by the system to identify the message.</param>
+/// <param name="Type">The created message type which may be an <i>"SMS"</i> or <i>"MMS"</i> message based on account settings.</param>
+/// <param name="ReferenceId">The ID originally supplied in the requests.</param>
+/// <param name="InsertedAt">Denotes when the message's status was last modified.</param>
+/// <param name="From">The sender number.</param>
+/// <param name="To">The recipient number, which is identical to the key.</param>
+/// <param name="RequestDeliveryReport">Denotes under what conditions a delivery report be sent back for the message.</param>
+/// <param name="RequestReadReplyReport">Denotes under what conditions a read-reply report be sent back for the message.</param>
+public record class MmsRecord(
+    [property:JsonPropertyName("id")] string Id,
+    [property:JsonPropertyName("type")] string Type,
+    [property:JsonPropertyName("reference_id")] string? ReferenceId,
+    [property:JsonPropertyName("inserted_at")] DateTime InsertedAt,
+    [property:JsonPropertyName("from")] string From,
+    [property:JsonPropertyName("to")] CustomList<string> To,
+    [property:JsonPropertyName("request_delivery_report")] bool? RequestDeliveryReport,
+    [property:JsonPropertyName("request_read_reply_report")] bool? RequestReadReplyReport
+    );

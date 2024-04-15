@@ -3,40 +3,14 @@ This package contains Middlewares that can serve as Webhooks for Tychron SMS and
 These endpoints can also be used to Receive SMS / MMS / SMS DLR / MMS DLR messages from Tychron API.
 
 ### How To Use
+- Register services in Startup.cs or Program.cs
+```
+services.RegisterTychronServices();
+```
 - Register Middleware in Startup.cs or Program.cs
 ```
 // Register Tychron Middleware for SMS
-app.UseTychronMiddleware<SmsWebhookModel>("/tychron/sms", (appBuilder) =>
-{
-    // Use Basic Auth for Tychron requests
-    appBuilder.UseTychronBasicAuth("username", "password");
-
-    // Use Bearer Auth for Tychron requests
-    // appBuilder.UseTychronBearerAuth("token");
-});
-
-// Register Tychron Middleware for MMS
-app.UseTychronMiddleware<MmsWebhookModel>("/tychron/mms", (appBuilder) =>
-{
-    // Use Basic Auth for Tychron requests
-    appBuilder.UseTychronBasicAuth("username", "password");
-
-    // Use Bearer Auth for Tychron requests
-    // appBuilder.UseTychronBearerAuth("token");
-});
-
-// Register Tychron Middleware for MMS DLR
-app.UseTychronMiddleware<MmsDlrWebhookModel>("/tychron/mms-dlr", (appBuilder) =>
-{
-    // Use Basic Auth for Tychron requests
-    appBuilder.UseTychronBasicAuth("username", "password");
-
-    // Use Bearer Auth for Tychron requests
-    // appBuilder.UseTychronBearerAuth("token");
-});
-
-// Register Tychron Middleware for SMS DLR
-app.UseTychronMiddleware<SmsDlrWebhookModel>("/tychron/sms-dlr", (appBuilder) =>
+app.UseTychronMiddleware("/tychron/handler", (appBuilder) =>
 {
     // Use Basic Auth for Tychron requests
     appBuilder.UseTychronBasicAuth("username", "password");
@@ -66,3 +40,10 @@ To Be able to handle Tychron Webhook requests you need to create a class that im
 - `MmsWebhookModel` - Incoming MMS Webhook Model
 - `MmsDlrWebhookModel` - Incoming MMS DLR Webhook Model
 - `SmsDlrWebhookModel` - Incoming SMS DLR Webhook Model
+
+```
+services.AddScoped<IWebhookHandler<SmsWebhookModel>, SmsWebhookHandler>();
+services.AddScoped<IWebhookHandler<SmsDlrWebhookModel>, SmsDlrWebhookHandler>();
+services.AddScoped<IWebhookHandler<MmsWebhookModel>, MmsWebhookHandler>();
+services.AddScoped<IWebhookHandler<MmsDlrWebhookModel>, MmsDlrWebhookHandler>();
+```

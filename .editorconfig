@@ -2,3 +2,17 @@
 
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+
+# CA1054: URI parameters should not be strings
+dotnet_diagnostic.CA1054.severity = none
+
+# CA1055: URI return values should not be strings
+dotnet_diagnostic.CA1055.severity = none
+
+# CA1056: URI properties should not be strings
+dotnet_diagnostic.CA1056.severity = none
+
+# CA2234: Pass System.Uri objects instead of strings
+dotnet_diagnostic.CA2234.severity = none
+
+vsspell_ignored_words_7c96fdaf1b6247398b8f206b0699cba2 = Sms|Mms|Mcl|Deserialization|Middleware|Auth|Webhook|Dlr|Csp|Metadata|Configurator

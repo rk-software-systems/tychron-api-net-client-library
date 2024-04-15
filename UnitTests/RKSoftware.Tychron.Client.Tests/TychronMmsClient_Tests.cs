@@ -1,6 +1,7 @@
 ﻿using RKSoftware.Tychron.APIClient;
 using RKSoftware.Tychron.APIClient.Error;
-using RKSoftware.Tychron.APIClient.Model.Mms;
+using RKSoftware.Tychron.APIClient.Models.Mms;
+using RKSoftware.Tychron.APIClient.Models;
 using RKSoftware.Tychron.Tests.Factories;
 using System.Net;
 
@@ -13,34 +14,29 @@ public class TychronMmsClient_Tests
     [SetUp]
     public void Setup()
     {
-        _validPayloadSendMMS = new SendMmsRequest
+        _validPayloadSendMMS = new SendMmsRequest("+12003004000", new CustomList<string>(["+12003004001", "+12003004002", "+12003004003"]))
         {
             Id = "my_message_id",
             TransactionId = "my_message_request@example.com",
-            To = ["+12003004001", "+12003004002", "+12003004003"],
             RequestDeliveryReport = true,
             RequestReadReplyReport = false,
             Subject = null,
             Parts =
             [
-                new MmsPart
+                new MmsPart("This is text", null)
                 {
                     Id = "text-part",
-                    Body = "This is text"
                 },
-                new MmsPart
+                new MmsPart(null, "https://www.pngall.com/wp-content/uploads/2016/03/Tree-Free-PNG-Image.png")
                 {
-                    Id = "text-part",
-                    Uri = "https://www.pngall.com/wp-content/uploads/2016/03/Tree-Free-PNG-Image.png",
+                    Id = "text-part"
                 },
-                new MmsPart
+                new MmsPart("BASE64DIGEST", null)
                 {
                     Id = "embedded-content-part",
-                    Body = "BASE64DIGEST",
                     TransferEncoding = "base64"
                 },
-            ],
-            From = "+12003004000"
+            ] 
         };
     }
 
@@ -95,10 +91,8 @@ public class TychronMmsClient_Tests
     public void SendMms_Fail_ValidationFromRequired()
     {
         //Arrange
-        var payload = new SendMmsRequest
+        var payload = new SendMmsRequest("", new CustomList<string>(["+12003004001", "+12003004002", "+12003004003"]))
         {
-            To = ["+12003004001", "+12003004002", "+12003004003"],
-            From = "",
             Parts = []
         };
 
@@ -119,10 +113,8 @@ public class TychronMmsClient_Tests
     public void SendMms_Fail_ValidationToRequired()
     {
         //Arrange
-        var payload = new SendMmsRequest
+        var payload = new SendMmsRequest("+12003004000", [])
         {
-            To = [],
-            From = "+12003004000",
             Parts = []
         };
 
@@ -143,10 +135,8 @@ public class TychronMmsClient_Tests
     public void SendMms_Fail_ValidationPartsRequired()
     {
         //Arrange
-        var payload = new SendMmsRequest
+        var payload = new SendMmsRequest("+12003004000", new CustomList<string>(["1231"]))
         {
-            To = ["1231"],
-            From = "+12003004000",
             Parts = []
         };
 

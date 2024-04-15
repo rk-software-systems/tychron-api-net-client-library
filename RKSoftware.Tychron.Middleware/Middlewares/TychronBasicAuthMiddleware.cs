@@ -33,30 +33,28 @@ public class TychronBasicAuthMiddleware
     /// <returns></returns>
     public async Task InvokeAsync(HttpContext context)
     {
-        if (!context.Request.Headers.ContainsKey("Authorization"))
+        ArgumentNullException.ThrowIfNull(context, nameof(context));
+
+        if (!context.Request.Headers.TryGetValue("Authorization", out var authHeader))
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            context.Response.Headers.Add("WWW-Authenticate", "Basic realm=\"Tychron Webhook\"");
-            await context.Response.WriteAsync("Authorization header not found.");
+            context.Response.Headers.Append("WWW-Authenticate", "Basic realm=\"Tychron Webhook\"");
             return;
         }
 
-        var authHeader = context.Request.Headers["Authorization"].ToString();
-        var authHeaderSplit = authHeader.Split(' ');
-        if (authHeaderSplit.Length != 2 || authHeaderSplit[0] != "Basic")
+        var authHeaderSplit = authHeader.ToString().Split(' ');
+        if (authHeaderSplit.Length != 2 || !"Basic".Equals(authHeaderSplit[0], StringComparison.Ordinal))
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            context.Response.Headers.Add("WWW-Authenticate", "Basic realm=\"Tychron Webhook\"");
-            await context.Response.WriteAsync("Invalid Authorization header.");
+            context.Response.Headers.Append("WWW-Authenticate", "Basic realm=\"Tychron Webhook\"");
             return;
         }
 
         var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeaderSplit[1])).Split(':', 2);
-        if (credentials.Length != 2 || credentials[0] != _username || credentials[1] != _password)
+        if (credentials.Length != 2 || !_username.Equals(credentials[0], StringComparison.Ordinal)  || !_password.Equals(credentials[1], StringComparison.Ordinal))
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            context.Response.Headers.Add("WWW-Authenticate", "Basic realm=\"Tychron Webhook\"");
-            await context.Response.WriteAsync("Invalid username or password.");
+            context.Response.Headers.Append("WWW-Authenticate", "Basic realm=\"Tychron Webhook\"");
             return;
         }
 

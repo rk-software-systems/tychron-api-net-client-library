@@ -45,4 +45,12 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Projects\RK\tychron-api-net-client-library\UnitTests\RKSoftware.Tychron.Client.Tests\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Projects\RK\tychron-api-net-client-library\UnitTests\RKSoftware.Tychron.Client.Tests\.editorconfig" />
+  </ItemGroup>
+
 </Project>

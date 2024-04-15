@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using RKSoftware.Tychron.Middleware.Models;
+using Microsoft.Extensions.DependencyInjection;
+using RKSoftware.Tychron.Middleware.WebhookHandlers;
 using RKSoftware.Tychron.Middlewares;
 
 namespace RKSoftware.Tychron.Middleware.Extensions;
@@ -21,18 +22,17 @@ public static class TychronMiddlewareExtensions
     /// </param>
     /// <param name="authenticationConfigurator">Action that can be used to Configure Tychron Authorization (Basic or Bearer)</param>
     /// <returns></returns>
-    public static IApplicationBuilder UseTychronMiddleware<T>(
+    public static IApplicationBuilder UseTychronMiddleware(
         this IApplicationBuilder builder,
         string path,
         Action<IApplicationBuilder>? authenticationConfigurator)
-        where T : IValidationSubject
     {
         return builder.MapWhen(context => context.Request.Path.Value?.StartsWith(path, StringComparison.OrdinalIgnoreCase) ?? false,
             appBuilder =>
             {
                 authenticationConfigurator?.Invoke(appBuilder);
 
-                appBuilder.UseMiddleware<TychronMiddleware<T>>();
+                appBuilder.UseMiddleware<TychronMiddleware>();
             });
     }
 
@@ -66,5 +66,17 @@ public static class TychronMiddlewareExtensions
         string token)
     {
         return builder.UseMiddleware<TychronBearerAuthMiddleware>(token);
+    }
+
+    /// <summary>
+    /// Register Middleware services in DI container
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection RegisterTychronServices(this IServiceCollection services)
+    {
+        services.AddScoped<IWebhookHandlerService, WebhookHandlerService>();
+
+        return services;
     }
 }
