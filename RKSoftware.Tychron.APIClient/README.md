@@ -8,12 +8,12 @@ There are to ways to use Tychron Clients.
 ```
 // create Http Client (it is better to obtain if rom HttpClientFactory)
 var httpClient = new HttpClient();
+
 // Set Tychron API related data (Authorization header and base url)
 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerKey);
 httpClient.BaseAddress = baseUrl;
 
 // Create Tychron API Clients
-var smsDlrClient = new TychronSmsDlrClient(httpClient);
 var mmsClient = new TychronMmsClient(httpClient);
 var smsClient = new TychronSmsClient(httpClient);
 
@@ -26,14 +26,12 @@ services.RegisterTychronClients(baseUrl, bearerKey);
 
 // Inject Tychron API Clients in your controllers or services
 public class MyController : Controller
-{
-    private readonly TychronSmsDlrClient _smsDlrClient;
+{    
     private readonly TychronMmsClient _mmsClient;
     private readonly TychronSmsClient _smsClient;
 
-    public MyController(TychronSmsDlrClient smsDlrClient, TychronMmsClient mmsClient, TychronSmsClient smsClient)
+    public MyController(TychronMmsClient mmsClient, TychronSmsClient smsClient)
     {
-        _smsDlrClient = smsDlrClient;
         _mmsClient = mmsClient;
         _smsClient = smsClient;
     }
