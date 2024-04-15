@@ -2,9 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RKSoftware.Tychron.Middleware.Models.Mms;
-using RKSoftware.Tychron.Middleware.Models.MmsDlr;
 using RKSoftware.Tychron.Middleware.Models.Sms;
-using RKSoftware.Tychron.Middleware.Models.SmsDlr;
+using RKSoftware.Tychron.Middleware.Models.Dlr;
 
 namespace RKSoftware.Tychron.Middleware.WebhookHandlers;
 
@@ -46,11 +45,10 @@ public class WebhookHandlerService(IServiceProvider serviceProvider, ILogger<Web
             if ("sms".Equals(type.GetString(), StringComparison.Ordinal))
             {
                 await Handle<SmsWebhookModel>(jsonStr);
-            }
-            // check if it is SMS DLR report
-            else if ("sms_dlr".Equals(type.GetString(), StringComparison.Ordinal))
+            } 
+            else if ("cdr".Equals(type.GetString(), StringComparison.Ordinal))
             {
-                await Handle<SmsDlrWebhookModel>(jsonStr);
+                await Handle<DlrWebhookModel>(jsonStr);
             }
         }
         else if (json.RootElement.TryGetProperty("kind", out var kind))
@@ -59,11 +57,6 @@ public class WebhookHandlerService(IServiceProvider serviceProvider, ILogger<Web
             if ("mms_forward_req".Equals(kind.GetString(), StringComparison.Ordinal))
             {
                 await Handle<MmsWebhookModel>(jsonStr);
-            }
-            // check if it is SMS DLR report
-            else if ("mms_delivery_report_req".Equals(kind.GetString(), StringComparison.Ordinal))
-            {
-                await Handle<MmsDlrWebhookModel>(jsonStr);
             }
         }
     }

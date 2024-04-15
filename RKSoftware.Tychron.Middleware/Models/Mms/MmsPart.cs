@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.Middleware.Models;
+namespace RKSoftware.Tychron.Middleware.Models.Mms;
 
 /// <summary>
 /// MMS has a recursive structure, in which the root Part may have more sub parts. Typically this will be a SMIL, Text and an Image, Audio, or Video part.

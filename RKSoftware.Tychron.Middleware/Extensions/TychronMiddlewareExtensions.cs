@@ -13,7 +13,6 @@ public static class TychronMiddlewareExtensions
     /// <summary>
     /// Registers Tychron Middleware that can be used to receive Tychron requests.
     /// </summary>
-    /// <typeparam name="T">Type of Tychron requests to be received</typeparam>
     /// <param name="builder">Application builder</param>
     /// <param name="path">Request path that need to match for the app to run this middleware
     /// <example>
@@ -39,7 +38,7 @@ public static class TychronMiddlewareExtensions
     /// <summary>
     /// Register Basic Auth for Tychron.
     /// In case you apply this middleware for the Entire application all requests will be authenticated with the provided credentials.
-    /// If you want to enable it only for Tychron requests use <see cref="UseTychronMiddleware{T}(IApplicationBuilder, string, Action{IApplicationBuilder}?)"/> authenticationConfigurator parameter
+    /// If you want to enable it only for Tychron requests use <see cref="UseTychronMiddleware(IApplicationBuilder, string, Action{IApplicationBuilder}?)"/> authenticationConfigurator parameter
     /// </summary>
     /// <param name="builder">Application Builder.</param>
     /// <param name="username">Basic Authentication username</param>
@@ -56,7 +55,7 @@ public static class TychronMiddlewareExtensions
     /// <summary>
     /// Register Bearer Auth for Tychron.
     /// In case you apply this middleware for the Entire application all requests will be authenticated with the provided credentials.
-    /// If you want to enable it only for Tychron requests use <see cref="UseTychronMiddleware{T}(IApplicationBuilder, string, Action{IApplicationBuilder}?)"/> authenticationConfigurator parameter
+    /// If you want to enable it only for Tychron requests use <see cref="UseTychronMiddleware(IApplicationBuilder, string, Action{IApplicationBuilder}?)"/> authenticationConfigurator parameter
     /// </summary>
     /// <param name="builder">Application Builder.</param>
     /// <param name="token">Bearer token that tychron is going to send you webhook endpoint.</param>
