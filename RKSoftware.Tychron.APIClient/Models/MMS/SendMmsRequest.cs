@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Text.Json.Serialization;
-using RKSoftware.Tychron.APIClient.Models;
+﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.Mms;
+namespace RKSoftware.Tychron.APIClient.Models.Mms;
 
 /// <summary>
 /// Send MMS request model <br/>

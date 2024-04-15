@@ -1,6 +1,6 @@
 ﻿using RKSoftware.Tychron.APIClient.Error;
 using RKSoftware.Tychron.APIClient.Extensions;
-using RKSoftware.Tychron.APIClient.Model.Mms;
+using RKSoftware.Tychron.APIClient.Models.Mms;
 using RKSoftware.Tychron.APIClient.TextResources;
 using System.Net.Mime;
 using System.Text.Json;

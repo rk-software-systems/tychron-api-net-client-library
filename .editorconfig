@@ -15,4 +15,4 @@ dotnet_diagnostic.CA1056.severity = none
 # CA2234: Pass System.Uri objects instead of strings
 dotnet_diagnostic.CA2234.severity = none
 
-vsspell_ignored_words_7c96fdaf1b6247398b8f206b0699cba2 = Sms|sms|Mms|mms|Mcl|Deserialization|Middleware|Auth
+vsspell_ignored_words_7c96fdaf1b6247398b8f206b0699cba2 = Sms|Mms|Mcl|Deserialization|Middleware|Auth|Webhook|Dlr|Csp|Metadata|Configurator

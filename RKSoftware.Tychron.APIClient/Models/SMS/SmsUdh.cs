@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.Sms;
+namespace RKSoftware.Tychron.APIClient.Models.Sms;
 
 /// <summary>
 /// An object containing the UDH information of the request if it was split into multiple messages.

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Text;
 
-namespace RKSoftware.Tychron.APIClient.Models;
+namespace RKSoftware.Tychron.Middleware.Models;
 
 /// <summary>
 /// Custom list
@@ -12,7 +12,7 @@ public class CustomList<T> : List<T>
     /// <summary>
     /// Create empty list
     /// </summary>
-    public CustomList(): base() { }
+    public CustomList() : base() { }
 
     /// <summary>
     /// Create a list based on collection
@@ -47,3 +47,4 @@ public class CustomList<T> : List<T>
         return builder.ToString();
     }
 }
+

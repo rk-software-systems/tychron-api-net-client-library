@@ -1,6 +1,4 @@
-﻿using RKSoftware.Tychron.APIClient.Models;
-
-namespace RKSoftware.Tychron.APIClient.Model.Sms;
+﻿namespace RKSoftware.Tychron.APIClient.Models.Sms;
 
 /// <summary>
 /// This object represents SMS message Tychron API response.

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RKSoftware.Tychron.APIClient.Model.Sms;
+namespace RKSoftware.Tychron.APIClient.Models.Sms;
 
 /// <summary>
 /// SMS Message part model

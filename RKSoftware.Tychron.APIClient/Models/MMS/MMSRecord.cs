@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
-using RKSoftware.Tychron.APIClient.Models;
 
-namespace RKSoftware.Tychron.APIClient.Model.Mms;
+namespace RKSoftware.Tychron.APIClient.Models.Mms;
 
 /// <summary>
 /// Response Record model

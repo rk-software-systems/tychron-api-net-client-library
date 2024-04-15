@@ -1,6 +1,6 @@
 using RKSoftware.Tychron.APIClient;
 using RKSoftware.Tychron.APIClient.Error;
-using RKSoftware.Tychron.APIClient.Model.Sms;
+using RKSoftware.Tychron.APIClient.Models.Sms;
 using RKSoftware.Tychron.APIClient.Models;
 using RKSoftware.Tychron.Tests.Factories;
 using System.Net;

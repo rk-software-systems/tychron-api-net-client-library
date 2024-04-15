@@ -1,62 +1,92 @@
 ﻿using System.Text.Json.Serialization;
-using RKSoftware.Tychron.Middleware.Models;
-using RKSoftware.Tychron.Middleware.TextResources;
-using RKSoftware.Tychron.Middleware.Error;
 
-namespace RKSoftware.Tychron.Middleware.Model.Sms;
+namespace RKSoftware.Tychron.Middleware.Models.Sms;
 
 /// <summary>
 /// SMS Webhook Model
 /// </summary>
-public class SmsWebhookModel : IValidationSubject
+/// <param name="Id">
+/// The ID used to identify the message.
+/// <para>
+/// Example:
+/// <code> "01E7NBVFJA6GQTEEV0YAQP9EMT" </code>
+/// </para>
+/// </param>
+/// <param name="Type">
+/// Parameter used to specify whether the message is a SMS message or SMS Delivery Receipt.
+/// <para>
+/// Example:
+/// <code> "sms" </code>
+/// </para>
+/// </param>
+/// <param name="From">
+/// The sending number that will appear in the message.
+/// The number must be formatted in a plain format, e.g (12003004000).
+/// <para>
+/// Example:
+/// <code> "12003004000" </code>
+/// </para>
+/// </param>
+/// <param name="To">
+/// The recipient number of the message.The number must be formatted in a plain format,
+/// e.g (12003004000).
+/// <para>
+/// Example:
+/// <code> "12003004001" </code>
+/// </para>
+/// </param>
+/// <param name="Body">
+/// The body of the message that was received, the body will always be encoded in UTF-8,
+/// it is not necessary to decode using the sms_encoding.
+/// <para>
+/// Example:
+/// <code> "Hello World" </code>
+/// </para>
+/// </param>
+/// <param name="Priority">
+/// The original priority of the message
+/// <para>
+/// Example:
+/// <code> 1 </code>
+/// </para>
+/// </param>
+/// <param name="SmsEncoding">
+/// The original encoding of the message, this field is only provided for reference and
+/// should not be acted upon to decode the body.
+/// <para>
+/// Example:
+/// <code> 3 </code>
+/// </para>
+/// </param>
+/// <param name="InsertedAt">
+/// An ISO 8601 formatted timestamp that represents when the message was received by the API.
+/// <para>
+/// Example:
+/// <code> "2020-04-18T11:30:00.000000Z" </code>
+/// </para>
+/// </param>
+public record class SmsWebhookModel(
+    [property:JsonPropertyName("id")] string? Id,
+    [property:JsonPropertyName("type")] string? Type,
+    [property:JsonPropertyName("from")] string? From,
+    [property:JsonPropertyName("to")] string? To,
+    [property:JsonPropertyName("body")] string? Body,
+    [property:JsonPropertyName("priority")] int? Priority,
+    [property:JsonPropertyName("sms_encoding")] int? SmsEncoding,
+    [property: JsonPropertyName("inserted_at")] DateTime? InsertedAt
+    ) 
 {
     /// <summary>
-    /// The ID used to identify the message.
+    /// Used to specify if a delivery receipt is required and when it should be
+    /// sent based on the request.
+    /// This parameter can be specified as either "no", "always", "on_success", and "on_error".
     /// <para>
     /// Example:
-    /// <code> "01E7NBVFJA6GQTEEV0YAQP9EMT" </code>
+    /// <code> "no" </code>
     /// </para>
     /// </summary>
-    [JsonPropertyName("id")]
-    public string? Id { get; set; }
-
-    /// <summary>
-    /// Parameter used to specify whether the message is a SMS message or SMS Delivery Receipt.
-    /// <para>
-    /// Example:
-    /// <code> "sms" </code>
-    /// </para>
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string? Type { get; set; }
-
-    /// <summary>
-    /// The sending number that will appear in the message.
-    /// The number must be formatted in a plain format, e.g (12003004000).
-    /// <para>
-    /// Example:
-    /// <code> "12003004000" </code>
-    /// </para>
-    /// </summary>
-    [JsonPropertyName("from")]
-    public string? From { get; set; }
-
-    /// <summary>
-    /// The recipient number of the message.The number must be formatted in a plain format,
-    /// e.g (12003004000).
-    /// <para>
-    /// Example:
-    /// <code> "12003004001" </code>
-    /// </para>
-    /// </summary>
-    [JsonPropertyName("to")]
-    public string? To { get; set; }
-
-    /// <summary>
-    /// A map containing basic information on the Campaign associated with this message.
-    /// </summary>
-    [JsonPropertyName("csp_campaign")]
-    public SmsCspCampaign? CspCampaign { get; set; }
+    [JsonPropertyName("request_delivery_report")]
+    public string? RequestDeliveryReport { get; set; }
 
     /// <summary>
     /// The carrier or service provider of the remote_number.
@@ -79,71 +109,23 @@ public class SmsWebhookModel : IValidationSubject
     public string? RemoteReferenceId { get; set; }
 
     /// <summary>
-    /// An array containing the ids for each part in a multipart message.
-    /// This parameter may be empty if the message is not a multipart message.
-    /// </summary>
-    [JsonPropertyName("parts")]
-    public List<SmsPart>? Parts { get; set; }
-
-    /// <summary>
-    /// The body of the message that was received, the body will always be encoded in UTF-8,
-    /// it is not necessary to decode using the sms_encoding.
-    /// <para>
-    /// Example:
-    /// <code> "Hello World" </code>
-    /// </para>
-    /// </summary>
-    [JsonPropertyName("body")]
-    public string? Body { get; set; }
-
-    /// <summary>
-    /// The original encoding of the message, this field is only provided for reference and
-    /// should not be acted upon to decode the body.
-    /// <para>
-    /// Example:
-    /// <code> 3 </code>
-    /// </para>
-    /// </summary>
-    [JsonPropertyName("sms_encoding")]
-    public int? SmsEncoding { get; set; }
-
-    /// <summary>
-    /// The original priority of the message
-    /// <para>
-    /// Example:
-    /// <code> 1 </code>
-    /// </para>
-    /// </summary>
-    [JsonPropertyName("priority")]
-    public int? Priority { get; set; }
-
-    /// <summary>
-    /// Used to specify if a delivery receipt is required and when it should be
-    /// sent based on the request.
-    /// This parameter can be specified as either "no", "always", "on_success", and "on_error".
-    /// <para>
-    /// Example:
-    /// <code> "no" </code>
-    /// </para>
-    /// </summary>
-    [JsonPropertyName("request_delivery_report")]
-    public string? RequestDeliveryReport { get; set; }
-
-    /// <summary>
     /// A map containing the user data header (UDH) information of a message.
     /// </summary>
     [JsonPropertyName("udh")]
     public SmsUdh? Udh { get; set; }
 
     /// <summary>
-    /// An ISO 8601 formatted timestamp that represents when the message was received by the API.
-    /// <para>
-    /// Example:
-    /// <code> "2020-04-18T11:30:00.000000Z" </code>
-    /// </para>
+    /// An array containing the ids for each part in a multipart message.
+    /// This parameter may be empty if the message is not a multipart message.
     /// </summary>
-    [JsonPropertyName("inserted_at")]
-    public DateTime? InsertedAt { get; set; }
+    [JsonPropertyName("parts")]
+    public CustomList<SmsPart>? Parts { get; set; }
+
+    /// <summary>
+    /// A map containing basic information on the Campaign associated with this message.
+    /// </summary>
+    [JsonPropertyName("csp_campaign")]
+    public CspCampaign? CspCampaign { get; set; }
 
     /// <summary>
     /// An ISO 8601 formatted timestamp that represents when the message was last updated by the API.
@@ -195,82 +177,4 @@ public class SmsWebhookModel : IValidationSubject
     /// </summary>
     [JsonPropertyName("expires_at")]
     public DateTime? ExpiresAt { get; set; }
-
-    /// <summary>
-    /// Validation Errors
-    /// </summary>
-    /// <returns></returns>
-    public List<TychronMiddlewareValidationError> Validate()
-    {
-        // Validate: id, type, from, to, body, priority, sms_encoding, inserted_at,
-        // updated_at,  processed_at
-        var result = new List<TychronMiddlewareValidationError>();
-
-        if (string.IsNullOrEmpty(Id))
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(Id), IdRequiredErrorCode, ValidationMessages.ReceiveSmsIdRequired));
-        }
-
-        if (string.IsNullOrEmpty(Type))
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(Type), TypeRequiredErrorCode, ValidationMessages.ReceiveSmsTypeRequired));
-        }
-
-        if (string.IsNullOrEmpty(From))
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(From), FromRequiredErrorCode, ValidationMessages.ReceiveSmsFromRequired));
-        }
-
-        if (string.IsNullOrEmpty(To))
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(To), ToRequiredErrorCode, ValidationMessages.ReceiveSmsToRequired));
-        }
-
-        if (string.IsNullOrEmpty(Body))
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(Body), BodyRequiredErrorCode, ValidationMessages.ReceiveSmsBodyRequired));
-        }
-
-        if (Priority == null)
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(Priority), PriorityRequiredErrorCode, ValidationMessages.ReceiveSmsPriorityRequired));
-        }
-
-        if (SmsEncoding == null)
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(SmsEncoding), SmsEncodingRequiredErrorCode, ValidationMessages.ReceiveSmsEncodingRequired));
-        }
-
-        if (InsertedAt == null)
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(InsertedAt), InsertedAtRequiredErrorCode, ValidationMessages.ReceiveSmsInsertedAtRequired));
-        }
-
-        if (UpdatedAt == null)
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(UpdatedAt), UpdatedAtRequiredErrorCode, ValidationMessages.ReceiveSmsUpdatedAtRequired));
-        }
-
-        if (ProcessedAt == null)
-        {
-            result.Add(new TychronMiddlewareValidationError(nameof(ProcessedAt), ProcessedAtRequiredErrorCode, ValidationMessages.ReceiveSmsProcessedAtRequired));
-        }
-
-        return result;
-    }
-
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
-    public const string IdRequiredErrorCode = "ReceiveSms_Id_Required";
-    public const string TypeRequiredErrorCode = "ReceiveSms_Type_Required";
-    public const string FromRequiredErrorCode = "ReceiveSms_From_Required";
-    public const string ToRequiredErrorCode = "ReceiveSms_To_Required";
-    public const string BodyRequiredErrorCode = "ReceiveSms_Body_Required";
-    public const string PriorityRequiredErrorCode = "ReceiveSms_Priority_Required";
-    public const string SmsEncodingRequiredErrorCode = "ReceiveSms_SmsEncoding_Required";
-    public const string InsertedAtRequiredErrorCode = "ReceiveSms_InsertedAt_Required";
-    public const string UpdatedAtRequiredErrorCode = "ReceiveSms_UpdatedAt_Required";
-    public const string ProcessedAtRequiredErrorCode = "ReceiveSms_IProcessedAt_Required";
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
