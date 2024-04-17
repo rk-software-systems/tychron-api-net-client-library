@@ -17,13 +17,27 @@ public static class StringExtension
     {
         ArgumentNullException.ThrowIfNull(json, nameof(json));
 
-        return JsonSerializer.Deserialize<ErrorResponse>(json);
+        try
+        {
+            return JsonSerializer.Deserialize<ErrorResponse>(json);
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
     }
 
     internal static Dictionary<string, ErrorItem>? ToErrorItemDictionary(this string json)
     {
         ArgumentNullException.ThrowIfNull(json, nameof(json));
 
-        return JsonSerializer.Deserialize<Dictionary<string, ErrorItem>>(json);
+        try
+        {
+            return JsonSerializer.Deserialize<Dictionary<string, ErrorItem>>(json);
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
     }
 }
