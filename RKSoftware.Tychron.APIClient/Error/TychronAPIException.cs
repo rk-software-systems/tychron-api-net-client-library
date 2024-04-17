@@ -1,4 +1,6 @@
-﻿namespace RKSoftware.Tychron.APIClient.Error;
+﻿using RKSoftware.Tychron.APIClient.Models;
+
+namespace RKSoftware.Tychron.APIClient.Error;
 
 /// <summary>
 /// Response Codes
@@ -7,13 +9,24 @@
 /// <remarks>
 /// Initializes a new instance of the <see cref="TychronApiException"/> class.
 /// </remarks>
-/// <param name="requestId">An ID used to identify the HTTP request.</param>
 /// <param name="statusCode">Response HTTP Status Code.</param>
 /// <param name="message">Error message.</param>
-public class TychronApiException(string? requestId, int statusCode, string message) : Exception(message)
+/// <param name="requestId">An ID used to identify the HTTP request.</param>
+/// <param name="errorResponse">Response HTTP Error model</param>
+public class TychronApiException( 
+    int statusCode, 
+    string message,
+    string? requestId,
+    ErrorResponse? errorResponse) : Exception(message)
 {
     private readonly string? _requestId = requestId;
     private readonly int _statusCode = statusCode;
+    private readonly ErrorResponse? _errorResponse = errorResponse;
+        
+    /// <summary>
+    /// Response HTTP Status Code
+    /// </summary>
+    public int StatusCode => _statusCode;
 
     /// <summary>
     /// An ID used to identify the HTTP request.
@@ -21,7 +34,7 @@ public class TychronApiException(string? requestId, int statusCode, string messa
     public string? RequestId => _requestId;
 
     /// <summary>
-    /// Response HTTP Status Code
+    /// Response HTTP Error model
     /// </summary>
-    public int StatusCode => _statusCode;
+    public ErrorResponse? ErrorResponse => _errorResponse;
 }
