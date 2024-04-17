@@ -67,7 +67,8 @@ public sealed class TychronMmsClient(HttpClient httpClient)
         if (!response.IsSuccessStatusCode)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
-            throw new TychronApiException(xRequestId, (int)response.StatusCode, responseContent);
+            var error = responseContent.ToErrorResponse();
+            throw new TychronApiException((int)response.StatusCode, responseContent, xRequestId, error);
         }
 
         using var responseStream = await response.Content.ReadAsStreamAsync();

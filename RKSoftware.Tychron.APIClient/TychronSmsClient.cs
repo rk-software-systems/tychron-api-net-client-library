@@ -67,10 +67,23 @@ public sealed class TychronSmsClient(HttpClient httpClient)
         response.Headers.TryGetValues(TychronConstants.XRequestHeaderName, out IEnumerable<string>? requestIds);
         var requestId = requestIds?.FirstOrDefault();
 
-        if (!response.IsSuccessStatusCode)
+        if (response.StatusCode != HttpStatusCode.OK)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
-            throw new TychronApiException(requestId, (int)response.StatusCode, responseContent);
+            var errorItems = responseContent.ToErrorItemDictionary()?.Select(x =>
+            {
+                var item = x.Value;
+                if (x.Value == null) 
+                {
+                    item = new ErrorItem(null, null, null, null, null);
+                    
+                }
+                item.To = x.Key;
+                return item;
+            });
+            
+            var error = new ErrorResponse(errorItems != null ? new CustomList<ErrorItem>(errorItems) : null);
+            throw new TychronApiException((int)response.StatusCode, responseContent, requestId, error);
         }
 
         using var responseStream = await response.Content.ReadAsStreamAsync();
