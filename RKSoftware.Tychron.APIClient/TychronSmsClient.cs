@@ -70,20 +70,29 @@ public sealed class TychronSmsClient(HttpClient httpClient)
         if (response.StatusCode != HttpStatusCode.OK)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
-            var errorItems = responseContent.ToErrorItemDictionary()?.Select(x =>
+            ErrorResponse? errorResponse;
+            if (response.StatusCode == HttpStatusCode.MultiStatus)
             {
-                var item = x.Value;
-                if (x.Value == null) 
+                
+                var errorItems = responseContent.ToErrorItemDictionary()?.Select(x =>
                 {
-                    item = new ErrorItem(null, null, null, null, null);
-                    
-                }
-                item.To = x.Key;
-                return item;
-            });
-            
-            var error = new ErrorResponse(errorItems != null ? new CustomList<ErrorItem>(errorItems) : null);
-            throw new TychronApiException((int)response.StatusCode, responseContent, requestId, error);
+                    var item = x.Value;
+                    if (x.Value == null)
+                    {
+                        item = new ErrorItem(null, null, null, null, null);
+
+                    }
+                    item.To = x.Key;
+                    return item;
+                });
+
+                errorResponse = new ErrorResponse(errorItems != null ? new CustomList<ErrorItem>(errorItems) : null);
+            }
+            else
+            {
+                errorResponse = responseContent.ToErrorResponse();
+            }
+            throw new TychronApiException((int)response.StatusCode, responseContent, requestId, errorResponse);
         }
 
         using var responseStream = await response.Content.ReadAsStreamAsync();
