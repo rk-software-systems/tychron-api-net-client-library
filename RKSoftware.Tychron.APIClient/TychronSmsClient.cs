@@ -1,4 +1,4 @@
-﻿using RKSoftware.Tychron.APIClient.Error;
+﻿using RKSoftware.Tychron.APIClient.Errors;
 using RKSoftware.Tychron.APIClient.Extensions;
 using RKSoftware.Tychron.APIClient.Models.Sms;
 using RKSoftware.Tychron.APIClient.Models;

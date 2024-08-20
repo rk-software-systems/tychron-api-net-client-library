@@ -1,5 +1,5 @@
 ﻿using RKSoftware.Tychron.APIClient;
-using RKSoftware.Tychron.APIClient.Error;
+using RKSoftware.Tychron.APIClient.Errors;
 using RKSoftware.Tychron.APIClient.Models.Mms;
 using RKSoftware.Tychron.APIClient.Models;
 using RKSoftware.Tychron.Tests.Factories;
@@ -45,14 +45,15 @@ public class TychronMmsClient_Tests
     {
         //Arrange
         using var stream = File.OpenRead("Data/testMmsResponse.json");
-        var responseString = await new StreamReader(stream).ReadToEndAsync();
+        using var reader = new StreamReader(stream);
+        var responseString = await reader.ReadToEndAsync();
+        using var response = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(responseString)
+        };
 
-
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(responseString)
-            },
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            response,
             HttpMethod.Post);
 
         var tychronSMSAPIClient = new TychronMmsClient(httpClient);
@@ -73,9 +74,11 @@ public class TychronMmsClient_Tests
     [Test]
     public void SendMms_Fail_TychronAPINonSuccessHttpResponse()
     {
+        using var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+
         //Arrange
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.BadRequest),
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            response,
             HttpMethod.Post);
 
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);
@@ -96,8 +99,9 @@ public class TychronMmsClient_Tests
             Parts = []
         };
 
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.OK),
+        using var response = new HttpResponseMessage(HttpStatusCode.OK);
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            response,
             HttpMethod.Post);
         
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);
@@ -117,9 +121,9 @@ public class TychronMmsClient_Tests
         {
             Parts = []
         };
-
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.OK),
+        using var response = new HttpResponseMessage(HttpStatusCode.OK);
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            response,
             HttpMethod.Post);
 
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);
@@ -140,8 +144,9 @@ public class TychronMmsClient_Tests
             Parts = []
         };
 
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.OK),
+        using var response = new HttpResponseMessage(HttpStatusCode.OK);
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            response,
             HttpMethod.Post);
 
         var tychronMMSAPIClient = new TychronMmsClient(httpClient);

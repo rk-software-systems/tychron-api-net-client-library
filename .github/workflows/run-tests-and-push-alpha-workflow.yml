@@ -22,7 +22,7 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build UnitTests/RKSoftware.Tychron.Client.Tests/RKSoftware.Tychron.Client.Tests.csproj --configuration Release
+      run: dotnet build UnitTests/RKSoftware.Tychron.Client.Tests/RKSoftware.Tychron.Client.Tests.csproj --configuration Release -warnaserror
 
     - name: Run tests
       run: dotnet test UnitTests/RKSoftware.Tychron.Client.Tests/RKSoftware.Tychron.Client.Tests.csproj --configuration Release --no-build --collect "XPlat Code Coverage"
@@ -88,7 +88,7 @@ jobs:
         run: dotnet restore RKSoftware.Tychron.APIClient
 
       - name: Build RKSoftware.Tychron.APIClient package
-        run: dotnet build RKSoftware.Tychron.APIClient --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+        run: dotnet build RKSoftware.Tychron.APIClient --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}} -warnaserror
 
       - name: Push generated RKSoftware.Tychron.APIClient to NuGet repository
         run: dotnet nuget push ./RKSoftware.Tychron.APIClient/bin/Release/*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
@@ -97,7 +97,7 @@ jobs:
         run: dotnet restore RKSoftware.Tychron.Middleware
 
       - name: Build RKSoftware.Tychron.Middleware package
-        run: dotnet build RKSoftware.Tychron.Middleware --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}}
+        run: dotnet build RKSoftware.Tychron.Middleware --configuration Release --no-restore -p:Version=${{steps.increment_version.outputs.NEXT_VERSION}} -warnaserror
 
       - name: Push generated RKSoftware.Tychron.Middleware to NuGet repository
         run: dotnet nuget push ./RKSoftware.Tychron.Middleware/bin/Release/*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json

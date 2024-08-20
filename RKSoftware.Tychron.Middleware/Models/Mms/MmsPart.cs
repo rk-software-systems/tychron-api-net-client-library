@@ -16,16 +16,13 @@ namespace RKSoftware.Tychron.Middleware.Models.Mms;
 /// <param name="IsMultipart">
 /// Denotes whether the message contains more than one part, typically MMS messages will always be multipart, 
 /// but in some rare instances they may just be a large text blob.</param>
+/// <param name="Parts">
+/// If this part has is_multipart set, then this field will be populated with the further sub parts of the message.
+/// </param>
 public record class MmsPart(
-    [property: JsonPropertyName("headers")] dynamic? Headers,
+    [property: JsonPropertyName("headers")] Dictionary<string, string>? Headers,
     [property: JsonPropertyName("encoding")] string? Encoding,
     [property: JsonPropertyName("body")] string? Body,
-    [property: JsonPropertyName("is_multipart")] bool? IsMultipart
-    )
-{
-    /// <summary>
-    /// If this part has is_multipart set, then this field will be populated with the further sub parts of the message.
-    /// </summary>
-    [JsonPropertyName("parts")]
-    public CustomList<MmsPart>? Parts { get; set; }
-}
+    [property: JsonPropertyName("is_multipart")] bool? IsMultipart,
+    [property: JsonPropertyName("parts")] CustomList<MmsPart>? Parts    
+    );
