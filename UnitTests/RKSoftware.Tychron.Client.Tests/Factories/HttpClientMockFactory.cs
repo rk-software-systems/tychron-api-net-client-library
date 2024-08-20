@@ -3,7 +3,7 @@ using Moq.Protected;
 
 namespace RKSoftware.Tychron.Tests.Factories;
 
-internal sealed class HttpClientMockFactory
+internal static class HttpClientMockFactory
 {
     internal static HttpClient GetHttpClientMock(HttpResponseMessage response, HttpMethod methodToMock)
     {

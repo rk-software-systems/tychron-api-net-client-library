@@ -65,6 +65,10 @@ namespace RKSoftware.Tychron.Middleware.Models.Sms;
 /// <code> "2020-04-18T11:30:00.000000Z" </code>
 /// </para>
 /// </param>
+/// <param name="Parts">
+/// An array containing the ids for each part in a multipart message.
+/// This parameter may be empty if the message is not a multipart message.
+/// </param>
 public record class SmsWebhookModel(
     [property:JsonPropertyName("id")] string? Id,
     [property:JsonPropertyName("type")] string? Type,
@@ -73,7 +77,8 @@ public record class SmsWebhookModel(
     [property:JsonPropertyName("body")] string? Body,
     [property:JsonPropertyName("priority")] int? Priority,
     [property:JsonPropertyName("sms_encoding")] int? SmsEncoding,
-    [property: JsonPropertyName("inserted_at")] DateTime? InsertedAt
+    [property: JsonPropertyName("inserted_at")] DateTime? InsertedAt,
+    [property: JsonPropertyName("parts")] CustomList<SmsPart>? Parts
     ) 
 {
     /// <summary>
@@ -113,13 +118,6 @@ public record class SmsWebhookModel(
     /// </summary>
     [JsonPropertyName("udh")]
     public SmsUdh? Udh { get; set; }
-
-    /// <summary>
-    /// An array containing the ids for each part in a multipart message.
-    /// This parameter may be empty if the message is not a multipart message.
-    /// </summary>
-    [JsonPropertyName("parts")]
-    public CustomList<SmsPart>? Parts { get; set; }
 
     /// <summary>
     /// A map containing basic information on the Campaign associated with this message.
@@ -177,4 +175,10 @@ public record class SmsWebhookModel(
     /// </summary>
     [JsonPropertyName("expires_at")]
     public DateTime? ExpiresAt { get; set; }
+
+    /// <summary>
+    /// Status
+    /// </summary>
+    [JsonPropertyName("status")]
+    public string? Status { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿namespace RKSoftware.Tychron.APIClient.Error;
+﻿namespace RKSoftware.Tychron.APIClient.Errors;
 
 /// <summary>
 /// Represents Validation Error of oncoming Tychron request.

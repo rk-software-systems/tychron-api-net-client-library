@@ -35,7 +35,9 @@ public record class SendMmsRequest(
     /// The parameter for sending MMS messages is"mms_forward_request"
     /// </summary>
     [JsonPropertyName("type")]
+#pragma warning disable CA1822 // Mark members as static
     public string Type => "mms_forward_request";
+#pragma warning restore CA1822 // Mark members as static
 
     /// <summary>
     /// Used to specify if a delivery report is required.

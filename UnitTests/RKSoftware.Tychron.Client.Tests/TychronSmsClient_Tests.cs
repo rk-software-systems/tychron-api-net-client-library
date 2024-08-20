@@ -1,5 +1,5 @@
 using RKSoftware.Tychron.APIClient;
-using RKSoftware.Tychron.APIClient.Error;
+using RKSoftware.Tychron.APIClient.Errors;
 using RKSoftware.Tychron.APIClient.Models.Sms;
 using RKSoftware.Tychron.APIClient.Models;
 using RKSoftware.Tychron.Tests.Factories;
@@ -22,14 +22,16 @@ public class TychronSmsClient_Tests
     {
         //Arrange
         using var stream = File.OpenRead("Data/testSmsResponse.json");
-        var responseString = await new StreamReader(stream).ReadToEndAsync();
+        using var reader = new StreamReader(stream);
+        var responseString = await reader.ReadToEndAsync();
+        using var response = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(responseString)
+        };
 
 
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(responseString)
-            },
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            response,
             HttpMethod.Post);
         var tychronSMSAPIClient = new TychronSmsClient(httpClient);
 
@@ -49,9 +51,10 @@ public class TychronSmsClient_Tests
     [Test]
     public void SendSms_Fail_TychronAPINonSuccessHttpResponse()
     {
+        using var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
         //Arrange
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.BadRequest),
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+            response,
             HttpMethod.Post);
         var tychronSMSAPIClient = new TychronSmsClient(httpClient);
 
@@ -70,12 +73,14 @@ public class TychronSmsClient_Tests
     [TestCase("123", "", "", TychronSmsClient.FromRequiredErrorCode)]
     public void SendSms_Fail_Validation(string? to, string? from, string? body, string errorMessageCode)
     {
+#pragma warning disable CS8604 // Possible null reference argument for parameter.
         //Arrange
         var payload = new SendSmsRequest(body, from, string.IsNullOrEmpty(to) ? [] : new CustomList<string>([to]));
-
-        var httpClient = HttpClientMockFactory.GetHttpClientMock(
-            new HttpResponseMessage(HttpStatusCode.OK),
-            HttpMethod.Post);
+#pragma warning restore CS8604 // Possible null reference argument for parameter.
+        using var response = new HttpResponseMessage(HttpStatusCode.OK);
+        using var httpClient = HttpClientMockFactory.GetHttpClientMock(
+           response,
+           HttpMethod.Post);
         var tychronSMSAPIClient = new TychronSmsClient(httpClient);
 
         //Act
