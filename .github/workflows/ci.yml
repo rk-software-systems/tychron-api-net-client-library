@@ -35,7 +35,7 @@ jobs:
         fi
 
     - name: Upload code coverage results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: coverage-results
         path: |
