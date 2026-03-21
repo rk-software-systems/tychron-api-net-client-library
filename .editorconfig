@@ -9,6 +9,9 @@ dotnet_diagnostic.CA1055.severity = none
 # CA1056: URI properties should not be strings
 dotnet_diagnostic.CA1056.severity = none
 
+# CA1515: Consider making public types internal
+dotnet_diagnostic.CA1515.severity = none
+
 # CA1724: Type names should not match namespaces
 dotnet_diagnostic.CA1724.severity = none
 
