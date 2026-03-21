@@ -1,9 +1,9 @@
 # Tychron API Wrapper packages for .NET
 
-| Package  |  Current version and Downloads
-|---|---|
-|  RKSoftware.Tychron.APIClient  | [![NuGet Badge](https://buildstats.info/nuget/RKSoftware.Tychron.APIClient)](https://www.nuget.org/packages/RKSoftware.Tychron.APIClient/)
-|  RKSoftware.Tychron.Middleware |  [![NuGet Badge](https://buildstats.info/nuget/RKSoftware.Tychron.Middleware)](https://www.nuget.org/packages/RKSoftware.Tychron.Middleware/)
+| Package  | Version | Information
+|----------|---------|--------------
+|  RKSoftware.Tychron.APIClient  | ![NuGet](https://img.shields.io/nuget/v/RKSoftware.Tychron.APIClient) | [![CI](https://github.com/rk-software-systems/tychron-api-net-client-library/actions/workflows/ci.yml/badge.svg)](https://github.com/rk-software-systems/tychron-api-net-client-library/actions/workflows/ci.yml)
+|  RKSoftware.Tychron.Middleware | ![NuGet](https://img.shields.io/nuget/v/RKSoftware.Tychron.Middleware)| [![CI](https://github.com/rk-software-systems/tychron-api-net-client-library/actions/workflows/ci.yml/badge.svg)](https://github.com/rk-software-systems/tychron-api-net-client-library/actions/workflows/ci.yml)
 
 ## RKSoftware.Tychron.APIClient
 
